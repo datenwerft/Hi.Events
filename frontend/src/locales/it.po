@@ -10469,6 +10469,9 @@ msgstr "CAP / Codice Postale"
 msgid "Zip or Postal Code"
 msgstr "CAP o Codice Postale"
 
+msgid "Printed ticket number"
+msgstr "Numero del biglietto stampato"
+
 #: src/components/routes/product-widget/CollectInformation/index.tsx:550
 msgid "ZIP or Postal Code"
 msgstr "CAP o Codice Postale"

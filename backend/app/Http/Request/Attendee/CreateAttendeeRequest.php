@@ -23,6 +23,20 @@ class CreateAttendeeRequest extends BaseRequest
             'taxes_and_fees.*.tax_or_fee_id' => ['required', 'int'],
             'taxes_and_fees.*.amount' => ['required', ...RulesHelper::MONEY],
             'locale' => ['required', Rule::in(Locale::getSupportedLocales())],
+            'printed_ticket_number' => [
+                'nullable',
+                'string',
+                'max:100',
+                Rule::unique('attendees')->where('event_id', $this->route('event_id')),
+            ],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'printed_ticket_number.max' => __('Printed ticket number must be less than 100 characters'),
+            'printed_ticket_number.unique' => __('This printed ticket number is already assigned to an attendee'),
         ];
     }
 }

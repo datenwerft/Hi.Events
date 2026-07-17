@@ -84,6 +84,7 @@ class EditAttendeeHandler
             'product_id' => $editAttendeeDTO->product_id,
             'product_price_id' => $editAttendeeDTO->product_price_id,
             'notes' => $editAttendeeDTO->notes,
+            'printed_ticket_number' => $editAttendeeDTO->printed_ticket_number,
         ], [
             'event_id' => $editAttendeeDTO->event_id,
         ]);

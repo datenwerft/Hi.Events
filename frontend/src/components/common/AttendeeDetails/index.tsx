@@ -33,6 +33,16 @@ export const AttendeeDetails = ({attendee}: { attendee: Attendee }) => {
                     {getAttendeeProductTitle(attendee, attendee.product as Product)}
                 </div>
             </div>
+            {attendee.printed_ticket_number && (
+                <div className={classes.block}>
+                    <div className={classes.title}>
+                        {t`Printed ticket number`}
+                    </div>
+                    <div className={classes.amount}>
+                        {attendee.printed_ticket_number}
+                    </div>
+                </div>
+            )}
             <div className={classes.block}>
                 <div className={classes.title}>
                     {t`Language`}

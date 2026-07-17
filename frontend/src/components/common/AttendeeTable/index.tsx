@@ -236,6 +236,18 @@ export const AttendeeTable = ({attendees, openCreateModal}: AttendeeTableProps) 
                     },
                 },
                 {
+                    id: 'printedTicketNumber',
+                    header: t`Printed ticket number`,
+                    accessorKey: 'printed_ticket_number',
+                    enableHiding: true,
+                    cell: (info: CellContext<Attendee, unknown>) => (
+                        <Truncate
+                            text={info.row.original.printed_ticket_number || '-'}
+                            length={24}
+                        />
+                    ),
+                },
+                {
                     id: 'orderAndTicket',
                     header: t`Order & Ticket`,
                     enableHiding: true,

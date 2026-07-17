@@ -9,6 +9,7 @@ export interface EditAttendeeRequest {
     last_name: string;
     email: string;
     notes?: string;
+    printed_ticket_number?: string;
     product_id?: IdParam;
     product_price_id?: IdParam;
     status?: string;

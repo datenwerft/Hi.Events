@@ -91,6 +91,11 @@ export const AttendeeList = ({
                             <div>
                                 <span>{attendee.public_id}</span>
                             </div>
+                            {attendee.printed_ticket_number && (
+                                <div>
+                                    <span>{t`Printed ticket number`}: {attendee.printed_ticket_number}</span>
+                                </div>
+                            )}
                             <div className={classes.product}>
                                 <IconTicket
                                     size={15}/> {products.find(product => product.id === attendee.product_id)?.title}

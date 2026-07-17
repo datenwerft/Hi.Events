@@ -584,6 +584,7 @@ export interface Attendee {
     last_name: string;
     email: string;
     notes?: string;
+    printed_ticket_number?: string;
     order?: Order;
     public_id: string;
     short_id: string;

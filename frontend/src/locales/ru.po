@@ -1,5 +1,8 @@
 msgid ""
 msgstr ""
+
+msgid "Printed ticket number"
+msgstr "Номер печатного билета"
 "POT-Creation-Date: 2023-11-17 13:53-0800\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"

@@ -10469,6 +10469,9 @@ msgstr "mã zip / bưu điện"
 msgid "Zip or Postal Code"
 msgstr "mã zip hoặc bưu điện"
 
+msgid "Printed ticket number"
+msgstr "Số vé in"
+
 #: src/components/routes/product-widget/CollectInformation/index.tsx:550
 msgid "ZIP or Postal Code"
 msgstr "mã zip hoặc bưu điện"

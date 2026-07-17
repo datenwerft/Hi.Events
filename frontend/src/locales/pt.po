@@ -10472,3 +10472,6 @@ msgstr "CEP ou Código postal"
 #: src/components/routes/product-widget/CollectInformation/index.tsx:550
 msgid "ZIP or Postal Code"
 msgstr "CEP ou Código Postal"
+
+msgid "Printed ticket number"
+msgstr "Número do bilhete impresso"

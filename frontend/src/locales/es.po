@@ -10463,6 +10463,9 @@ msgstr "YouTube"
 msgid "ZIP / Postal Code"
 msgstr "Código postal"
 
+msgid "Printed ticket number"
+msgstr "Número del ticket impreso"
+
 #: src/components/common/CheckoutQuestion/index.tsx:170
 #: src/components/routes/event/Settings/Sections/LocationSettings/index.tsx:146
 #: src/components/routes/organizer/Settings/Sections/AddressSettings/index.tsx:104

@@ -20,6 +20,7 @@ class AttendeeWithCheckInPublicResourceTest extends TestCase
             ->setFirstName('Jane')
             ->setLastName('Attendee')
             ->setPublicId('A-12345')
+            ->setPrintedTicketNumber('PRINT-4711')
             ->setStatus('ACTIVE');
 
         $resource = (new AttendeeWithCheckInPublicResource($attendee))->toArray(Request::create('/'));
@@ -28,6 +29,7 @@ class AttendeeWithCheckInPublicResourceTest extends TestCase
         $this->assertSame('Jane', $resource['first_name']);
         $this->assertSame('Attendee', $resource['last_name']);
         $this->assertSame('A-12345', $resource['public_id']);
+        $this->assertSame('PRINT-4711', $resource['printed_ticket_number']);
         $this->assertSame(10, $resource['order_id']);
     }
 }

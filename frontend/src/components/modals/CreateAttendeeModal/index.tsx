@@ -37,6 +37,7 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
             email: '',
             first_name: '',
             last_name: '',
+            printed_ticket_number: '',
             amount_paid: 0.00,
             send_confirmation_email: true,
             taxes_and_fees: [],
@@ -143,6 +144,12 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
                     label={t`Email address`}
                     placeholder={t`patrick@acme.com`}
                     required
+                />
+
+                <TextInput
+                    {...form.getInputProps('printed_ticket_number')}
+                    label={t`Printed ticket number`}
+                    maxLength={100}
                 />
 
                 <Select

@@ -46,6 +46,7 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
             last_name: "",
             email: "",
             notes: "",
+            printed_ticket_number: "",
             product_id: "",
             product_price_id: "",
         },
@@ -60,6 +61,7 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
                 last_name: attendee.last_name,
                 email: attendee.email,
                 notes: attendee.notes || "",
+                printed_ticket_number: attendee.printed_ticket_number || "",
                 product_id: String(attendee.product_id),
                 product_price_id: attendee.product_price_id ? String(attendee.product_price_id) : "",
             });
@@ -134,6 +136,11 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
                 minRows={3}
                 maxRows={6}
                 autosize
+            />
+            <TextInput
+                {...form.getInputProps("printed_ticket_number")}
+                label={t`Printed ticket number`}
+                maxLength={100}
             />
         </div>
     );
