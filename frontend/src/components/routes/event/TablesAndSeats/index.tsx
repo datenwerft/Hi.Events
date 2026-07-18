@@ -7,6 +7,7 @@ import {
     Modal,
     Paper,
     Select,
+    SegmentedControl,
     SimpleGrid,
     Slider,
     Stack,
@@ -88,6 +89,7 @@ const TablesAndSeats = () => {
     const [draggingTable, setDraggingTable] = useState<number>();
     const [zoom, setZoom] = useState(100);
     const [blueprintBusy, setBlueprintBusy] = useState(false);
+    const [viewMode, setViewMode] = useState<'blueprint' | 'tables'>('blueprint');
     const canvasRef = useRef<HTMLDivElement>(null);
     const layoutMutation = useUpdateEventSeatingLayout();
     const assignmentMutation = useAssignEventSeat();
@@ -260,7 +262,20 @@ const TablesAndSeats = () => {
                             </Group>
                         </Paper>
 
-                        {seating.blueprint ? (
+                        {seating.blueprint && (
+                            <Group justify="flex-end" mt="md">
+                                <SegmentedControl
+                                    value={viewMode}
+                                    onChange={value => setViewMode(value as 'blueprint' | 'tables')}
+                                    data={[
+                                        {label: t`Room blueprint`, value: 'blueprint'},
+                                        {label: t`Table overview`, value: 'tables'},
+                                    ]}
+                                />
+                            </Group>
+                        )}
+
+                        {seating.blueprint && viewMode === 'blueprint' ? (
                             <Paper className={classes.roomPlanner} withBorder radius="md">
                                 <Group justify="space-between" mb="md">
                                     <Group gap="sm">
@@ -323,7 +338,9 @@ const TablesAndSeats = () => {
                             </Paper>
                         ) : (
                             <>
-                                <Alert icon={<IconPhoto/>} color="blue" mt="lg">{t`Upload a room blueprint to place the tables in their real locations. You can already assign attendees by clicking any green chair below.`}</Alert>
+                                {!seating.blueprint && (
+                                    <Alert icon={<IconPhoto/>} color="blue" mt="lg">{t`Upload a room blueprint to place the tables in their real locations. You can already assign attendees by clicking any green chair below.`}</Alert>
+                                )}
                                 <SimpleGrid className={classes.tableGrid} cols={{base: 1, sm: 2, lg: 3, xl: 4}}>
                                     {Array.from({length: seating.table_count}, (_, index) => {
                                         const tableNumber = index + 1;
