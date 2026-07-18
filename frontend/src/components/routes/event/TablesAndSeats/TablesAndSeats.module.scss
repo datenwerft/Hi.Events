@@ -93,12 +93,102 @@
 
 .open {
   background: var(--mantine-color-green-6);
-  cursor: default;
+  cursor: pointer;
   opacity: 1;
+}
+
+.roomPlanner {
+  margin-top: 20px;
+  padding: 16px;
+}
+
+.zoomControl {
+  min-width: 230px;
+
+  > div:nth-child(2) {
+    flex: 1;
+  }
+}
+
+.roomViewport {
+  background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-7));
+  border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  border-radius: var(--mantine-radius-sm);
+  max-height: 72vh;
+  overflow: auto;
+}
+
+.roomCanvas {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 100%;
+  position: relative;
+  touch-action: none;
+}
+
+.roomTable {
+  height: 110px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 110px;
+}
+
+.roomTableTop {
+  align-items: center;
+  background: light-dark(rgba(255, 255, 255, 0.92), rgba(37, 38, 43, 0.92));
+  border: 2px solid light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-2));
+  border-radius: 50%;
+  cursor: grab;
+  display: flex;
+  font-size: 11px;
+  font-weight: 700;
+  height: 62px;
+  justify-content: center;
+  left: 24px;
+  position: absolute;
+  top: 24px;
+  user-select: none;
+  width: 62px;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.roomSeat {
+  align-items: center;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  font-size: 9px;
+  font-weight: 700;
+  height: 25px;
+  justify-content: center;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 25px;
+  z-index: 2;
+
+  &:hover,
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.85);
+    transform: translate(-50%, -50%) scale(1.12);
+  }
 }
 
 @media (max-width: 48em) {
   .summary > div {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .zoomControl {
+    min-width: 170px;
+  }
+
+  .roomPlanner > div:first-child {
     align-items: flex-start;
     flex-direction: column;
   }

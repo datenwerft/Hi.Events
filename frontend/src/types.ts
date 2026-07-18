@@ -182,7 +182,7 @@ export interface Image {
     lqip_base64?: string | null;
 }
 
-export type ImageType = 'EVENT_COVER' | 'EDITOR_IMAGE' | 'ORGANIZER_LOGO' | 'ORGANIZER_COVER' | 'ORGANIZER_IMAGE' | 'TICKET_LOGO';
+export type ImageType = 'EVENT_COVER' | 'EDITOR_IMAGE' | 'ORGANIZER_LOGO' | 'ORGANIZER_COVER' | 'ORGANIZER_IMAGE' | 'TICKET_LOGO' | 'ROOM_BLUEPRINT';
 
 export type PaymentProvider = 'STRIPE' | 'OFFLINE';
 
@@ -606,15 +606,34 @@ export interface EventSeatingSettings {
     total_seats: number;
     assigned_seats: number;
     assignments: EventSeatAssignment[];
+    available_attendees: EventSeatingAttendee[];
+    blueprint: EventSeatingBlueprint | null;
+    table_positions: EventTablePosition[];
 }
 
-export interface EventSeatAssignment {
+export interface EventSeatingAttendee {
     attendee_id: IdParam;
     first_name: string;
     last_name: string;
     email: string;
+}
+
+export interface EventSeatAssignment extends EventSeatingAttendee {
     table_number: number;
     seat_number: number;
+}
+
+export interface EventSeatingBlueprint {
+    id: IdParam;
+    url: string;
+    width: number | null;
+    height: number | null;
+}
+
+export interface EventTablePosition {
+    table_number: number;
+    x: number;
+    y: number;
 }
 
 export type PublicCheckIn = Pick<AttendeeCheckIn, 'id' | 'order_id' | 'attendee_id' | 'check_in_list_id' | 'product_id' | 'event_id'>;
