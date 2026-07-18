@@ -116,6 +116,12 @@ export const AttendeeTicket = ({
                             {attendee.first_name} {attendee.last_name}
                         </div>
                         <div className={classes.attendeeEmail}>{attendee.email}</div>
+                        {attendee.printed_ticket_number && (
+                            <div className={classes.printedTicketNumber}>
+                                <span>{t`Printed Ticket Number`}</span>
+                                <strong>{attendee.printed_ticket_number}</strong>
+                            </div>
+                        )}
                     </div>
 
                 </div>

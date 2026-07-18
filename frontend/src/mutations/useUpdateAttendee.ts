@@ -3,6 +3,7 @@ import {attendeesClient, EditAttendeeRequest} from "../api/attendee.client.ts";
 import {IdParam} from "../types.ts";
 import {GET_ATTENDEES_QUERY_KEY} from "../queries/useGetAttendees.ts";
 import {GET_ATTENDEE_QUERY_KEY} from "../queries/useGetAttendee.ts";
+import {GET_EVENT_SEATING_QUERY_KEY} from "../queries/useGetEventSeating.ts";
 
 export const useUpdateAttendee = () => {
     const queryClient = useQueryClient();
@@ -17,6 +18,9 @@ export const useUpdateAttendee = () => {
         onSuccess: (_data, variables) => {
             return Promise.all([
                 queryClient.invalidateQueries({queryKey: [GET_ATTENDEES_QUERY_KEY]}),
+                queryClient.invalidateQueries({
+                    queryKey: [GET_EVENT_SEATING_QUERY_KEY, variables.eventId]
+                }),
                 queryClient.invalidateQueries({
                     queryKey: [GET_ATTENDEE_QUERY_KEY, variables.eventId, variables.attendeeId]
                 })

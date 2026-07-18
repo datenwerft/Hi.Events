@@ -380,6 +380,13 @@ export const router: RouteObject[] = [
                 }
             },
             {
+                path: "tables-seats",
+                async lazy() {
+                    const TablesAndSeats = await import("./components/routes/event/TablesAndSeats");
+                    return { Component: TablesAndSeats.default };
+                }
+            },
+            {
                 path: "questions",
                 async lazy() {
                     const Questions = await import("./components/routes/event/questions");
@@ -624,4 +631,3 @@ export const router: RouteObject[] = [
         errorElement: <ErrorPage />,
     }
 ];
-

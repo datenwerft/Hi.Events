@@ -16,6 +16,8 @@ class EditAttendeeDTO extends BaseDTO
         public int     $attendee_id,
         public ?string $notes = null,
         public ?string $printed_ticket_number = null,
+        public ?int    $table_number = null,
+        public ?int    $seat_number = null,
     )
     {
     }

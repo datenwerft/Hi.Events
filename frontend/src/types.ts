@@ -584,7 +584,10 @@ export interface Attendee {
     last_name: string;
     email: string;
     notes?: string;
-    printed_ticket_number?: string;
+    printed_ticket_number?: string | null;
+    table_number?: number | null;
+    seat_number?: number | null;
+    order_attendee_count?: number;
     order?: Order;
     public_id: string;
     short_id: string;
@@ -595,6 +598,23 @@ export interface Attendee {
     locale?: SupportedLocales;
     check_in?: AttendeeCheckIn; // Use in contexts where a single check is expected, like dealing with a check-in list
     check_ins?: AttendeeCheckIn[];
+}
+
+export interface EventSeatingSettings {
+    table_count: number;
+    seats_per_table: number;
+    total_seats: number;
+    assigned_seats: number;
+    assignments: EventSeatAssignment[];
+}
+
+export interface EventSeatAssignment {
+    attendee_id: IdParam;
+    first_name: string;
+    last_name: string;
+    email: string;
+    table_number: number;
+    seat_number: number;
 }
 
 export type PublicCheckIn = Pick<AttendeeCheckIn, 'id' | 'order_id' | 'attendee_id' | 'check_in_list_id' | 'product_id' | 'event_id'>;

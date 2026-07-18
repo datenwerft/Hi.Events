@@ -21,12 +21,14 @@ import {
 } from "../../../locales.ts";
 import {ProductSelector} from "../../common/ProductSelector";
 import {getProductsFromEvent} from "../../../utilites/helpers.ts";
+import {useGetEventSeating} from "../../../queries/useGetEventSeating.ts";
 
 export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
     const {eventId} = useParams();
     const errorHandler = useFormErrorResponseHandler();
     const {data: event, isFetched: isEventFetched} = useGetEvent(eventId);
     const mutation = useCreateAttendee();
+    const {data: seating} = useGetEventSeating(eventId);
     const navigate = useNavigate();
     const eventProducts = getProductsFromEvent(event);
     const eventHasProducts = eventProducts && eventProducts?.length > 0;
@@ -38,6 +40,8 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
             first_name: '',
             last_name: '',
             printed_ticket_number: '',
+            table_number: null,
+            seat_number: null,
             amount_paid: 0.00,
             send_confirmation_email: true,
             taxes_and_fees: [],
@@ -146,9 +150,29 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
                     required
                 />
 
+                {seating && seating.table_count > 0 && (
+                    <InputGroup>
+                        <NumberInput
+                            {...form.getInputProps('table_number')}
+                            label={t`Table number`}
+                            min={1}
+                            max={seating.table_count}
+                            allowDecimal={false}
+                        />
+                        <NumberInput
+                            {...form.getInputProps('seat_number')}
+                            label={t`Seat number`}
+                            min={1}
+                            max={seating.seats_per_table}
+                            allowDecimal={false}
+                        />
+                    </InputGroup>
+                )}
+
                 <TextInput
                     {...form.getInputProps('printed_ticket_number')}
-                    label={t`Printed ticket number`}
+                    label={t`Printed Ticket Number`}
+                    description={t`Optional number shown on the attendee ticket.`}
                     maxLength={100}
                 />
 

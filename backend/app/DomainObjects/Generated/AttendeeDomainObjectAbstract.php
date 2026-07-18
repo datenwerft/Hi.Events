@@ -30,6 +30,8 @@ abstract class AttendeeDomainObjectAbstract extends \HiEvents\DomainObjects\Abst
     final public const LOCALE = 'locale';
     final public const NOTES = 'notes';
     final public const PRINTED_TICKET_NUMBER = 'printed_ticket_number';
+    final public const TABLE_NUMBER = 'table_number';
+    final public const SEAT_NUMBER = 'seat_number';
 
     protected int $id;
     protected int $order_id;
@@ -51,6 +53,8 @@ abstract class AttendeeDomainObjectAbstract extends \HiEvents\DomainObjects\Abst
     protected string $locale = 'en';
     protected ?string $notes = null;
     protected ?string $printed_ticket_number = null;
+    protected ?int $table_number = null;
+    protected ?int $seat_number = null;
 
     public function toArray(): array
     {
@@ -75,6 +79,8 @@ abstract class AttendeeDomainObjectAbstract extends \HiEvents\DomainObjects\Abst
                     'locale' => $this->locale ?? null,
                     'notes' => $this->notes ?? null,
                     'printed_ticket_number' => $this->printed_ticket_number ?? null,
+                    'table_number' => $this->table_number ?? null,
+                    'seat_number' => $this->seat_number ?? null,
                 ];
     }
 
@@ -296,5 +302,27 @@ abstract class AttendeeDomainObjectAbstract extends \HiEvents\DomainObjects\Abst
     public function getPrintedTicketNumber(): ?string
     {
         return $this->printed_ticket_number;
+    }
+
+    public function setTableNumber(?int $table_number): self
+    {
+        $this->table_number = $table_number;
+        return $this;
+    }
+
+    public function getTableNumber(): ?int
+    {
+        return $this->table_number;
+    }
+
+    public function setSeatNumber(?int $seat_number): self
+    {
+        $this->seat_number = $seat_number;
+        return $this;
+    }
+
+    public function getSeatNumber(): ?int
+    {
+        return $this->seat_number;
     }
 }

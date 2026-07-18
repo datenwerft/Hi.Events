@@ -77,6 +77,8 @@ use HiEvents\Http\Actions\EmailTemplates\PreviewEventEmailTemplateAction;
 use HiEvents\Http\Actions\EmailTemplates\GetAvailableTokensAction;
 use HiEvents\Http\Actions\EmailTemplates\GetDefaultEmailTemplateAction;
 use HiEvents\Http\Actions\EventSettings\PartialEditEventSettingsAction;
+use HiEvents\Http\Actions\EventSeating\GetEventSeatingAction;
+use HiEvents\Http\Actions\EventSeating\UpdateEventSeatingAction;
 use HiEvents\Http\Actions\Images\CreateImageAction;
 use HiEvents\Http\Actions\Images\DeleteImageAction;
 use HiEvents\Http\Actions\Messages\CancelMessageAction;
@@ -409,6 +411,10 @@ $router->middleware(['auth:api'])->group(
         $router->put('/events/{event_id}/settings', EditEventSettingsAction::class);
         $router->patch('/events/{event_id}/settings', PartialEditEventSettingsAction::class);
         $router->get('/events/{event_id}/settings/platform-fee-preview', GetPlatformFeePreviewAction::class);
+
+        // Event Seating
+        $router->get('/events/{event_id}/seating', GetEventSeatingAction::class);
+        $router->put('/events/{event_id}/seating', UpdateEventSeatingAction::class);
 
         // Capacity Assignments
         $router->post('/events/{event_id}/capacity-assignments', CreateCapacityAssignmentAction::class);

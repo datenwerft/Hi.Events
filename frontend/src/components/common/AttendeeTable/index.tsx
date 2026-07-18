@@ -228,24 +228,27 @@ export const AttendeeTable = ({attendees, openCreateModal}: AttendeeTableProps) 
                                         )}
                                     </div>
                                 </div>
+                                {info.row.original.printed_ticket_number && (
+                                    <div className={classes.printedTicketNumber}>
+                                        {t`Printed Ticket Number`}: {info.row.original.printed_ticket_number}
+                                    </div>
+                                )}
+                                {info.row.original.table_number && info.row.original.seat_number && (
+                                    <div className={classes.printedTicketNumber}>
+                                        {t`Table`} {info.row.original.table_number} · {t`Seat`} {info.row.original.seat_number}
+                                    </div>
+                                )}
+                                {(info.row.original.order_attendee_count || 0) > 1 && (
+                                    <div className={classes.printedTicketNumber}>
+                                        {t`${info.row.original.order_attendee_count} tickets in this order — keep at the same table.`}
+                                    </div>
+                                )}
                             </div>
                         </Group>
                     ),
                     meta: {
                         headerStyle: {minWidth: 300},
                     },
-                },
-                {
-                    id: 'printedTicketNumber',
-                    header: t`Printed ticket number`,
-                    accessorKey: 'printed_ticket_number',
-                    enableHiding: true,
-                    cell: (info: CellContext<Attendee, unknown>) => (
-                        <Truncate
-                            text={info.row.original.printed_ticket_number || '-'}
-                            length={24}
-                        />
-                    ),
                 },
                 {
                     id: 'orderAndTicket',

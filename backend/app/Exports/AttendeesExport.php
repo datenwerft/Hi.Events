@@ -61,10 +61,12 @@ class AttendeesExport implements FromCollection, WithHeadings, WithMapping, With
             __('Event ID'),
             __('Public ID'),
             __('Short ID'),
-            __('Printed Ticket Number'),
             __('Created Date'),
             __('Last Updated Date'),
             __('Notes'),
+            __('Printed Ticket Number'),
+            __('Table Number'),
+            __('Seat Number'),
         ], $productQuestionTitles, $orderQuestionsTitles);
     }
 
@@ -132,10 +134,12 @@ class AttendeesExport implements FromCollection, WithHeadings, WithMapping, With
             $attendee->getEventId(),
             $attendee->getPublicId(),
             $attendee->getShortId(),
-            $attendee->getPrintedTicketNumber(),
             Carbon::parse($attendee->getCreatedAt())->format('Y-m-d H:i:s'),
             Carbon::parse($attendee->getUpdatedAt())->format('Y-m-d H:i:s'),
             $attendee->getNotes(),
+            $attendee->getPrintedTicketNumber(),
+            $attendee->getTableNumber(),
+            $attendee->getSeatNumber(),
         ], $productAnswers->toArray(), $orderAnswers->toArray());
     }
 

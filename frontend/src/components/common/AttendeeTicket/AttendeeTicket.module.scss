@@ -257,6 +257,27 @@
   }
 }
 
+.printedTicketNumber {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #64748b;
+
+  strong {
+    color: #334155;
+  }
+
+  @media print {
+    font-size: 13px;
+    color: #666666;
+
+    strong {
+      color: #333333;
+    }
+  }
+}
+
 // Footer Text
 .footerText {
   font-size: 14px;

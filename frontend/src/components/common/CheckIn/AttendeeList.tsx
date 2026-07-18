@@ -93,7 +93,18 @@ export const AttendeeList = ({
                             </div>
                             {attendee.printed_ticket_number && (
                                 <div>
-                                    <span>{t`Printed ticket number`}: {attendee.printed_ticket_number}</span>
+                                    <span>{t`Printed Ticket Number`}: {attendee.printed_ticket_number}</span>
+                                </div>
+                            )}
+                            {attendee.table_number && attendee.seat_number && (
+                                <div>
+                                    <strong>{t`Table`} {attendee.table_number}</strong>
+                                    <span> · {t`Seat`} {attendee.seat_number}</span>
+                                </div>
+                            )}
+                            {(attendee.order_attendee_count || 0) > 1 && (
+                                <div>
+                                    <span>{t`${attendee.order_attendee_count} tickets in this order — same-table seating.`}</span>
                                 </div>
                             )}
                             <div className={classes.product}>

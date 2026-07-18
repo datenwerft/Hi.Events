@@ -4,20 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::table('attendees', function (Blueprint $table) {
-            $table->string('printed_ticket_number', 100)->nullable()->after('short_id');
-            $table->unique(['event_id', 'printed_ticket_number']);
+            $table->string('printed_ticket_number', 100)->nullable();
         });
     }
 
     public function down(): void
     {
         Schema::table('attendees', function (Blueprint $table) {
-            $table->dropUnique(['event_id', 'printed_ticket_number']);
             $table->dropColumn('printed_ticket_number');
         });
     }

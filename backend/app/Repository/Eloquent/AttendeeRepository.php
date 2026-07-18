@@ -79,6 +79,12 @@ class AttendeeRepository extends BaseRepository implements AttendeeRepositoryInt
         }
 
         $this->model = $this->model->select('attendees.*')
+            ->addSelect([
+                'order_attendee_count' => DB::table('attendees as order_attendees')
+                    ->selectRaw('COUNT(*)')
+                    ->whereColumn('order_attendees.order_id', 'attendees.order_id')
+                    ->whereNull('order_attendees.deleted_at'),
+            ])
             ->join('orders', 'orders.id', '=', 'attendees.order_id')
             ->whereIn('orders.status', [OrderStatus::COMPLETED->name, OrderStatus::CANCELLED->name, OrderStatus::AWAITING_OFFLINE_PAYMENT->name]);
 
@@ -127,6 +133,12 @@ class AttendeeRepository extends BaseRepository implements AttendeeRepositoryInt
         }
 
         $this->model = $this->model->select('attendees.*')
+            ->addSelect([
+                'order_attendee_count' => DB::table('attendees as order_attendees')
+                    ->selectRaw('COUNT(*)')
+                    ->whereColumn('order_attendees.order_id', 'attendees.order_id')
+                    ->whereNull('order_attendees.deleted_at'),
+            ])
             ->join('orders', 'orders.id', '=', 'attendees.order_id')
             ->join('product_check_in_lists', 'product_check_in_lists.product_id', '=', 'attendees.product_id')
             ->join('check_in_lists', 'check_in_lists.id', '=', 'product_check_in_lists.check_in_list_id')

@@ -11,6 +11,7 @@ use HiEvents\Http\ResponseCodes;
 use HiEvents\Resources\Attendee\AttendeeResource;
 use HiEvents\Services\Application\Handlers\Attendee\CreateAttendeeHandler;
 use HiEvents\Services\Application\Handlers\Attendee\DTO\CreateAttendeeDTO;
+use HiEvents\Services\Domain\Attendee\SeatingAssignmentValidationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Throwable;
@@ -19,7 +20,10 @@ class CreateAttendeeAction extends BaseAction
 {
     private CreateAttendeeHandler $createAttendeeHandler;
 
-    public function __construct(CreateAttendeeHandler $createAttendeeHandler)
+    public function __construct(
+        CreateAttendeeHandler $createAttendeeHandler,
+        private readonly SeatingAssignmentValidationService $seatingAssignmentValidator,
+    )
     {
         $this->createAttendeeHandler = $createAttendeeHandler;
     }
@@ -31,10 +35,19 @@ class CreateAttendeeAction extends BaseAction
     {
         $this->isActionAuthorized($eventId, EventDomainObject::class);
 
+        $tableNumber = $request->filled('table_number') ? (int)$request->input('table_number') : null;
+        $seatNumber = $request->filled('seat_number') ? (int)$request->input('seat_number') : null;
+        $this->seatingAssignmentValidator->validate($eventId, $tableNumber, $seatNumber);
+
         try {
             $attendee = $this->createAttendeeHandler->handle(CreateAttendeeDTO::fromArray(
                 array_merge($request->validationData(), [
                     'event_id' => $eventId,
+                    'printed_ticket_number' => $request->filled('printed_ticket_number')
+                        ? $request->input('printed_ticket_number')
+                        : null,
+                    'table_number' => $tableNumber,
+                    'seat_number' => $seatNumber,
                 ])
             ));
         } catch (NoTicketsAvailableException $exception) {

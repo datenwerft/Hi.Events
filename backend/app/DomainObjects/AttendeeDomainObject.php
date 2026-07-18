@@ -20,6 +20,8 @@ class AttendeeDomainObject extends Generated\AttendeeDomainObjectAbstract implem
 
     public ?AttendeeCheckInDomainObject $checkIn = null;
 
+    private int $orderAttendeeCount = 1;
+
     /** @var Collection<AttendeeCheckInDomainObject>|null */
     private ?Collection $checkIns = null;
 
@@ -137,5 +139,16 @@ class AttendeeDomainObject extends Generated\AttendeeDomainObjectAbstract implem
     public function getCheckIns(): ?Collection
     {
         return $this->checkIns;
+    }
+
+    public function setOrderAttendeeCount(int $orderAttendeeCount): self
+    {
+        $this->orderAttendeeCount = $orderAttendeeCount;
+        return $this;
+    }
+
+    public function getOrderAttendeeCount(): int
+    {
+        return $this->orderAttendeeCount;
     }
 }

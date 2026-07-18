@@ -4,7 +4,6 @@ namespace HiEvents\Http\Request\Attendee;
 
 use HiEvents\Http\Request\BaseRequest;
 use HiEvents\Validators\Rules\RulesHelper;
-use Illuminate\Validation\Rule;
 
 class EditAttendeeRequest extends BaseRequest
 {
@@ -17,14 +16,9 @@ class EditAttendeeRequest extends BaseRequest
             'product_id' => RulesHelper::REQUIRED_NUMERIC,
             'product_price_id' => RulesHelper::REQUIRED_NUMERIC,
             'notes' => RulesHelper::OPTIONAL_TEXT_MEDIUM_LENGTH,
-            'printed_ticket_number' => [
-                'nullable',
-                'string',
-                'max:100',
-                Rule::unique('attendees')
-                    ->where('event_id', $this->route('event_id'))
-                    ->ignore($this->route('attendee_id')),
-            ],
+            'printed_ticket_number' => ['nullable', 'string', 'max:100'],
+            'table_number' => ['nullable', 'integer', 'min:1', 'max:500', 'required_with:seat_number'],
+            'seat_number' => ['nullable', 'integer', 'min:1', 'max:500', 'required_with:table_number'],
         ];
     }
 
@@ -40,8 +34,6 @@ class EditAttendeeRequest extends BaseRequest
             'product_id.numeric' => '',
             'product_price_id.numeric' => '',
             'notes.max' => __('Notes must be less than 2000 characters'),
-            'printed_ticket_number.max' => __('Printed ticket number must be less than 100 characters'),
-            'printed_ticket_number.unique' => __('This printed ticket number is already assigned to an attendee'),
         ];
     }
 }

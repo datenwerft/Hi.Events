@@ -1,5 +1,6 @@
 import {
     IconArrowLeft,
+    IconArmchair,
     IconChartPie,
     IconChevronRight,
     IconDashboard,
@@ -116,6 +117,7 @@ const EventLayout = () => {
         // 4. GUESTS
         {label: t`Guest Management`},
         {link: 'attendees', label: t`Attendees`, icon: IconUsers, badge: eventStats?.total_attendees_registered},
+        {link: 'tables-seats', label: t`Tables & Seats`, icon: IconArmchair},
         {link: 'check-in', label: t`Check-In Lists`, icon: IconQrcode},
         {link: 'messages', label: t`Messages`, icon: IconSend},
         {link: 'sold-out-waitlist', label: t`Waitlist`, icon: IconListCheck},

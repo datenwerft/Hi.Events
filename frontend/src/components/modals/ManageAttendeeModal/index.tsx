@@ -7,7 +7,7 @@ import {useFormErrorResponseHandler} from "../../../hooks/useFormErrorResponseHa
 import {useForm} from "@mantine/form";
 import {Accordion} from "../../common/Accordion";
 import {Button} from "../../common/Button";
-import {Avatar, Box, Group, Stack, Tabs, Text, Textarea, TextInput} from "@mantine/core";
+import {Alert, Avatar, Box, Group, NumberInput, Stack, Tabs, Text, Textarea, TextInput} from "@mantine/core";
 import {IconEdit, IconNotebook, IconQuestionMark, IconReceipt, IconTicket, IconUser} from "@tabler/icons-react";
 import {LoadingMask} from "../../common/LoadingMask";
 import {AttendeeDetails} from "../../common/AttendeeDetails";
@@ -26,6 +26,7 @@ import {InputLabelWithHelp} from "../../common/InputLabelWithHelp";
 import {EditAttendeeRequest} from "../../../api/attendee.client.ts";
 import {AttendeeStatusBadge} from "../../common/AttendeeStatusBadge";
 import {SideDrawer} from "../../common/SideDrawer";
+import {useGetEventSeating} from "../../../queries/useGetEventSeating.ts";
 
 interface ManageAttendeeModalProps extends GenericModalProps {
     onClose: () => void;
@@ -37,16 +38,19 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
     const {data: attendee, refetch: refetchAttendee} = useGetAttendee(eventId, attendeeId);
     const {data: order} = useGetOrder(eventId, attendee?.order_id);
     const {data: event} = useGetEvent(eventId);
+    const {data: seating} = useGetEventSeating(eventId);
     const errorHandler = useFormErrorResponseHandler();
     const mutation = useUpdateAttendee();
 
-    const form = useForm({
+    const form = useForm<EditAttendeeRequest>({
         initialValues: {
             first_name: "",
             last_name: "",
             email: "",
             notes: "",
             printed_ticket_number: "",
+            table_number: null,
+            seat_number: null,
             product_id: "",
             product_price_id: "",
         },
@@ -62,6 +66,8 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
                 email: attendee.email,
                 notes: attendee.notes || "",
                 printed_ticket_number: attendee.printed_ticket_number || "",
+                table_number: attendee.table_number || null,
+                seat_number: attendee.seat_number || null,
                 product_id: String(attendee.product_id),
                 product_price_id: attendee.product_price_id ? String(attendee.product_price_id) : "",
             });
@@ -128,6 +134,37 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
                     />
                 )}
             </InputGroup>
+            <TextInput
+                {...form.getInputProps("printed_ticket_number")}
+                label={t`Printed Ticket Number`}
+                description={t`Optional number shown on the attendee ticket.`}
+                maxLength={100}
+            />
+            {seating && seating.table_count > 0 && (
+                <>
+                    <InputGroup>
+                        <NumberInput
+                            {...form.getInputProps('table_number')}
+                            label={t`Table number`}
+                            min={1}
+                            max={seating.table_count}
+                            allowDecimal={false}
+                        />
+                        <NumberInput
+                            {...form.getInputProps('seat_number')}
+                            label={t`Seat number`}
+                            min={1}
+                            max={seating.seats_per_table}
+                            allowDecimal={false}
+                        />
+                    </InputGroup>
+                    {(order.attendees?.length || 0) > 1 && (
+                        <Alert mb="md" variant="light">
+                            {t`${order.attendees?.length || 0} tickets belong to this order. Keep them at the same table.`}
+                        </Alert>
+                    )}
+                </>
+            )}
             <Textarea
                 label={<InputLabelWithHelp label={t`Notes`}
                                            helpText={t`Add any notes about the attendee. These will not be visible to the attendee.`}/>}
@@ -136,11 +173,6 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
                 minRows={3}
                 maxRows={6}
                 autosize
-            />
-            <TextInput
-                {...form.getInputProps("printed_ticket_number")}
-                label={t`Printed ticket number`}
-                maxLength={100}
             />
         </div>
     );

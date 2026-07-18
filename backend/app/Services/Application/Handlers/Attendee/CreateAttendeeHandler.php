@@ -232,8 +232,10 @@ class CreateAttendeeHandler
             AttendeeDomainObjectAbstract::ORDER_ID => $order->getId(),
             AttendeeDomainObjectAbstract::PUBLIC_ID => IdHelper::publicId(IdHelper::ATTENDEE_PREFIX),
             AttendeeDomainObjectAbstract::SHORT_ID => IdHelper::shortId(IdHelper::ATTENDEE_PREFIX),
-            AttendeeDomainObjectAbstract::PRINTED_TICKET_NUMBER => $attendeeDTO->printed_ticket_number,
             AttendeeDomainObjectAbstract::LOCALE => $attendeeDTO->locale,
+            AttendeeDomainObjectAbstract::PRINTED_TICKET_NUMBER => $attendeeDTO->printed_ticket_number,
+            AttendeeDomainObjectAbstract::TABLE_NUMBER => $attendeeDTO->table_number,
+            AttendeeDomainObjectAbstract::SEAT_NUMBER => $attendeeDTO->seat_number,
         ]);
     }
 
