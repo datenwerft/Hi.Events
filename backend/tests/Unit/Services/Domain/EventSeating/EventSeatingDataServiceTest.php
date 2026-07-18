@@ -19,7 +19,7 @@ class EventSeatingDataServiceTest extends TestCase
             'table_count' => 2,
             'seats_per_table' => 4,
             'blueprint_image_id' => null,
-            'table_positions' => '[{"table_number":1,"x":25,"y":50}]',
+            'table_positions' => '[{"table_number":1,"x":25,"y":50,"size":125}]',
         ]);
 
         $attendeesQuery = Mockery::mock(Builder::class);
@@ -89,7 +89,7 @@ class EventSeatingDataServiceTest extends TestCase
             'email' => 'open@example.com',
         ], $result['available_attendees'][0]);
         $this->assertSame([
-            ['table_number' => 1, 'x' => 25, 'y' => 50],
+            ['table_number' => 1, 'x' => 25, 'y' => 50, 'size' => 125],
         ], $result['table_positions']);
         $this->assertNull($result['blueprint']);
     }

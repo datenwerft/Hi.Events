@@ -14,6 +14,7 @@ class UpdateEventSeatingLayoutRequest extends BaseRequest
             'table_positions.*.table_number' => ['required', 'integer', 'min:1', 'distinct'],
             'table_positions.*.x' => ['required', 'numeric', 'min:0', 'max:100'],
             'table_positions.*.y' => ['required', 'numeric', 'min:0', 'max:100'],
+            'table_positions.*.size' => ['sometimes', 'numeric', 'min:50', 'max:200'],
         ];
     }
 }

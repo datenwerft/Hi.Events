@@ -102,11 +102,23 @@
   padding: 16px;
 }
 
-.zoomControl {
-  min-width: 230px;
+.layoutSliders {
+  flex: 1;
+  justify-content: flex-end;
+}
 
-  > div:nth-child(2) {
+.zoomControl,
+.sizeControl {
+  min-width: 190px;
+
+  > div:last-child {
     flex: 1;
+  }
+
+  p {
+    align-items: center;
+    display: flex;
+    gap: 4px;
   }
 }
 
@@ -130,8 +142,13 @@
 .roomTable {
   height: 110px;
   position: absolute;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(var(--table-scale, 1));
   width: 110px;
+}
+
+.roomTableSelected .roomTableTop {
+  border-color: var(--mantine-color-blue-6);
+  box-shadow: 0 0 0 3px rgba(34, 139, 230, 0.28);
 }
 
 .roomTableTop {
@@ -184,11 +201,19 @@
     flex-direction: column;
   }
 
-  .zoomControl {
-    min-width: 170px;
+  .layoutSliders {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
   }
 
-  .roomPlanner > div:first-child {
+  .zoomControl,
+  .sizeControl {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .plannerControls {
     align-items: flex-start;
     flex-direction: column;
   }

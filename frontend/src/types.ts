@@ -634,6 +634,7 @@ export interface EventTablePosition {
     table_number: number;
     x: number;
     y: number;
+    size?: number;
 }
 
 export type PublicCheckIn = Pick<AttendeeCheckIn, 'id' | 'order_id' | 'attendee_id' | 'check_in_list_id' | 'product_id' | 'event_id'>;

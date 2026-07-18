@@ -16,7 +16,7 @@ import {
 } from '@mantine/core';
 import {t} from '@lingui/macro';
 import {IconArmchair, IconPhoto, IconSettings, IconTrash, IconZoomIn} from '@tabler/icons-react';
-import {PointerEvent as ReactPointerEvent, useEffect, useMemo, useRef, useState} from 'react';
+import {CSSProperties, PointerEvent as ReactPointerEvent, useEffect, useMemo, useRef, useState} from 'react';
 import {useParams} from 'react-router';
 import {useDisclosure} from '@mantine/hooks';
 import {EventSeatAssignment, EventTablePosition, IdParam} from '../../../../types';
@@ -87,9 +87,11 @@ const TablesAndSeats = () => {
     const [attendeeToAssign, setAttendeeToAssign] = useState<string | null>(null);
     const [positions, setPositions] = useState<EventTablePosition[]>([]);
     const [draggingTable, setDraggingTable] = useState<number>();
+    const [activeTable, setActiveTable] = useState(1);
     const [zoom, setZoom] = useState(100);
     const [blueprintBusy, setBlueprintBusy] = useState(false);
     const [viewMode, setViewMode] = useState<'blueprint' | 'tables'>('blueprint');
+    const [preferencesEventId, setPreferencesEventId] = useState<string>();
     const canvasRef = useRef<HTMLDivElement>(null);
     const layoutMutation = useUpdateEventSeatingLayout();
     const assignmentMutation = useAssignEventSeat();
@@ -111,13 +113,37 @@ const TablesAndSeats = () => {
             const tableNumber = index + 1;
             const columns = Math.ceil(Math.sqrt(seating.table_count));
             const rows = Math.ceil(seating.table_count / columns);
-            return saved.get(tableNumber) || {
+            const savedPosition = saved.get(tableNumber);
+            return savedPosition ? {...savedPosition, size: savedPosition.size || 100} : {
                 table_number: tableNumber,
                 x: ((index % columns) + 0.5) * (100 / columns),
                 y: (Math.floor(index / columns) + 0.5) * (100 / rows),
+                size: 100,
             };
         }));
+        setActiveTable(current => Math.min(current, seating.table_count));
     }, [seating?.table_count, seating?.table_positions]);
+
+    useEffect(() => {
+        if (!eventId || typeof window === 'undefined') return;
+        try {
+            const savedPreferences = JSON.parse(localStorage.getItem(`event-seating-view:${eventId}`) || '{}');
+            if (savedPreferences.viewMode === 'blueprint' || savedPreferences.viewMode === 'tables') {
+                setViewMode(savedPreferences.viewMode);
+            }
+            if (typeof savedPreferences.zoom === 'number' && savedPreferences.zoom >= 60 && savedPreferences.zoom <= 180) {
+                setZoom(savedPreferences.zoom);
+            }
+        } catch {
+            // Ignore malformed preferences and use the defaults.
+        }
+        setPreferencesEventId(eventId);
+    }, [eventId]);
+
+    useEffect(() => {
+        if (!eventId || preferencesEventId !== eventId || typeof window === 'undefined') return;
+        localStorage.setItem(`event-seating-view:${eventId}`, JSON.stringify({viewMode, zoom}));
+    }, [eventId, preferencesEventId, viewMode, zoom]);
 
     useEffect(() => {
         if (!draggingTable) return;
@@ -149,6 +175,13 @@ const TablesAndSeats = () => {
     }));
     const selectedTableNumber = selectedSeat?.tableNumber;
     const selectedSeatNumber = selectedSeat?.seatNumber;
+    const activeTableSize = positions.find(position => position.table_number === activeTable)?.size || 100;
+
+    const resizeActiveTable = (size: number) => {
+        setPositions(current => current.map(position => position.table_number === activeTable
+            ? {...position, size}
+            : position));
+    };
 
     const saveLayout = (blueprintImageId: IdParam | null = seating?.blueprint?.id || null) => {
         if (!eventId) return;
@@ -277,16 +310,23 @@ const TablesAndSeats = () => {
 
                         {seating.blueprint && viewMode === 'blueprint' ? (
                             <Paper className={classes.roomPlanner} withBorder radius="md">
-                                <Group justify="space-between" mb="md">
+                                <Group justify="space-between" align="flex-end" mb="md" className={classes.plannerControls}>
                                     <Group gap="sm">
-                                        <Button onClick={() => saveLayout()} loading={layoutMutation.isPending}>{t`Save table positions`}</Button>
+                                        <Button onClick={() => saveLayout()} loading={layoutMutation.isPending}>{t`Save table layout`}</Button>
                                         <Button variant="subtle" color="red" leftSection={<IconTrash size={16}/>} onClick={removeBlueprint} loading={blueprintBusy}>{t`Remove blueprint`}</Button>
                                     </Group>
-                                    <Group className={classes.zoomControl} gap="xs">
-                                        <IconZoomIn size={18}/><Slider min={60} max={180} value={zoom} onChange={setZoom}/><Text size="xs">{zoom}%</Text>
+                                    <Group gap="lg" className={classes.layoutSliders}>
+                                        <Stack gap={2} className={classes.sizeControl}>
+                                            <Text size="xs">{t`Table ${activeTable} size`} · {activeTableSize}%</Text>
+                                            <Slider min={50} max={200} value={activeTableSize} onChange={resizeActiveTable}/>
+                                        </Stack>
+                                        <Stack gap={2} className={classes.zoomControl}>
+                                            <Text size="xs"><IconZoomIn size={14}/> {t`Blueprint zoom`} · {zoom}%</Text>
+                                            <Slider min={60} max={180} value={zoom} onChange={setZoom}/>
+                                        </Stack>
                                     </Group>
                                 </Group>
-                                <Text size="sm" c="dimmed" mb="sm">{t`Drag each table to its location, then save the table positions.`}</Text>
+                                <Text size="sm" c="dimmed" mb="sm">{t`Drag tables into place. Select a table to resize it, then save the table layout.`}</Text>
                                 <div className={classes.roomViewport}>
                                     <div
                                         ref={canvasRef}
@@ -303,12 +343,21 @@ const TablesAndSeats = () => {
                                             const tableAssignments = assignmentsByTable.get(position.table_number) || new Map();
                                             const tableNumber = position.table_number;
                                             return (
-                                                <div key={position.table_number} className={classes.roomTable} style={{left: `${position.x}%`, top: `${position.y}%`}}>
+                                                <div
+                                                    key={position.table_number}
+                                                    className={`${classes.roomTable} ${activeTable === position.table_number ? classes.roomTableSelected : ''}`}
+                                                    style={{
+                                                        left: `${position.x}%`,
+                                                        top: `${position.y}%`,
+                                                        '--table-scale': (position.size || 100) / 100,
+                                                    } as CSSProperties}
+                                                >
                                                     <button
                                                         type="button"
                                                         className={classes.roomTableTop}
                                                         onPointerDown={(event: ReactPointerEvent) => {
                                                             event.preventDefault();
+                                                            setActiveTable(position.table_number);
                                                             setDraggingTable(position.table_number);
                                                         }}
                                                     >
