@@ -146,11 +146,6 @@
   width: 110px;
 }
 
-.roomTableSelected .roomTableTop {
-  border-color: var(--mantine-color-blue-6);
-  box-shadow: 0 0 0 3px rgba(34, 139, 230, 0.28);
-}
-
 .roomTableTop {
   align-items: center;
   background: light-dark(rgba(255, 255, 255, 0.92), rgba(37, 38, 43, 0.92));

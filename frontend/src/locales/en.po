@@ -1049,7 +1049,7 @@ msgstr "Ask once per order"
 msgid "Ask once per product"
 msgstr "Ask once per product"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:417
+#: src/components/routes/event/TablesAndSeats/index.tsx:413
 msgid "Assign attendee to this seat"
 msgstr "Assign attendee to this seat"
 
@@ -1076,12 +1076,12 @@ msgstr "Attendance and check-in rates across all events"
 
 #: src/components/common/AttendeeTicket/index.tsx:114
 #: src/components/common/QuestionsTable/index.tsx:461
-#: src/components/routes/event/TablesAndSeats/index.tsx:416
+#: src/components/routes/event/TablesAndSeats/index.tsx:412
 #: src/components/routes/product-widget/CollectInformation/index.tsx:655
 msgid "Attendee"
 msgstr "Attendee"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:236
+#: src/components/routes/event/TablesAndSeats/index.tsx:233
 msgid "Attendee assigned to seat"
 msgstr "Attendee assigned to seat"
 
@@ -1329,7 +1329,7 @@ msgstr "Billing Address"
 msgid "Billing Settings"
 msgstr "Billing Settings"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:324
+#: src/components/routes/event/TablesAndSeats/index.tsx:321
 msgid "Blueprint zoom"
 msgstr "Blueprint zoom"
 
@@ -1720,7 +1720,7 @@ msgstr "City"
 msgid "Clear Search Text"
 msgstr "Clear Search Text"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:371
+#: src/components/routes/event/TablesAndSeats/index.tsx:367
 msgid "Click to assign"
 msgstr "Click to assign"
 
@@ -1943,8 +1943,8 @@ msgstr "Configure event details, location, checkout options, and email notificat
 msgid "Configure how attendee details are collected during checkout"
 msgstr "Configure how attendee details are collected during checkout"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:273
-#: src/components/routes/event/TablesAndSeats/index.tsx:280
+#: src/components/routes/event/TablesAndSeats/index.tsx:270
+#: src/components/routes/event/TablesAndSeats/index.tsx:277
 msgid "Configure tables"
 msgstr "Configure tables"
 
@@ -1952,7 +1952,7 @@ msgstr "Configure tables"
 msgid "Configure Taxes & Fees"
 msgstr "Configure Taxes & Fees"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:279
+#: src/components/routes/event/TablesAndSeats/index.tsx:276
 msgid "Configure the number of tables and seats per table to create the seating view."
 msgstr "Configure the number of tables and seats per table to create the seating view."
 
@@ -2232,23 +2232,23 @@ msgstr "Copy to clipboard"
 msgid "Copy URL"
 msgstr "Copy URL"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:240
+#: src/components/routes/event/TablesAndSeats/index.tsx:237
 msgid "Could not assign the attendee to this seat"
 msgstr "Could not assign the attendee to this seat"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:221
+#: src/components/routes/event/TablesAndSeats/index.tsx:218
 msgid "Could not remove the room blueprint"
 msgstr "Could not remove the room blueprint"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:256
+#: src/components/routes/event/TablesAndSeats/index.tsx:253
 msgid "Could not remove the seat assignment"
 msgstr "Could not remove the seat assignment"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:190
+#: src/components/routes/event/TablesAndSeats/index.tsx:187
 msgid "Could not save the room plan"
 msgstr "Could not save the room plan"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:207
+#: src/components/routes/event/TablesAndSeats/index.tsx:204
 msgid "Could not upload the room blueprint"
 msgstr "Could not upload the room blueprint"
 
@@ -2906,9 +2906,13 @@ msgstr "Draft"
 #~ msgid "Drag each table to its location, then save the table positions."
 #~ msgstr "Drag each table to its location, then save the table positions."
 
+#: src/components/routes/event/TablesAndSeats/index.tsx:326
+msgid "Drag tables into place, adjust their shared size, then save the table layout."
+msgstr "Drag tables into place, adjust their shared size, then save the table layout."
+
 #: src/components/routes/event/TablesAndSeats/index.tsx:329
-msgid "Drag tables into place. Select a table to resize it, then save the table layout."
-msgstr "Drag tables into place. Select a table to resize it, then save the table layout."
+#~ msgid "Drag tables into place. Select a table to resize it, then save the table layout."
+#~ msgstr "Drag tables into place. Select a table to resize it, then save the table layout."
 
 #: src/components/forms/QuestionForm/index.tsx:124
 msgid "Dropdown selection"
@@ -5618,7 +5622,7 @@ msgstr "No Search Results"
 msgid "No search results."
 msgstr "No search results."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:278
+#: src/components/routes/event/TablesAndSeats/index.tsx:275
 msgid "No tables configured"
 msgstr "No tables configured"
 
@@ -5630,7 +5634,7 @@ msgstr "No Taxes or Fees have been added."
 msgid "No Tickets Found"
 msgstr "No Tickets Found"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:416
+#: src/components/routes/event/TablesAndSeats/index.tsx:412
 msgid "No unseated attendees found"
 msgstr "No unseated attendees found"
 
@@ -5722,11 +5726,11 @@ msgid "Number Prefix"
 msgstr "Number Prefix"
 
 #: src/components/routes/event/TablesAndSeats/index.tsx:55
-#: src/components/routes/event/TablesAndSeats/index.tsx:288
+#: src/components/routes/event/TablesAndSeats/index.tsx:285
 msgid "occupied"
 msgstr "occupied"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:292
+#: src/components/routes/event/TablesAndSeats/index.tsx:289
 msgid "Occupied"
 msgstr "Occupied"
 
@@ -5868,11 +5872,11 @@ msgstr "Only show start date and time"
 msgid "Only visible with promo code"
 msgstr "Only visible with promo code"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:289
+#: src/components/routes/event/TablesAndSeats/index.tsx:286
 msgid "open"
 msgstr "open"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:293
+#: src/components/routes/event/TablesAndSeats/index.tsx:290
 msgid "Open"
 msgstr "Open"
 
@@ -6558,7 +6562,7 @@ msgstr "Phone"
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:263
+#: src/components/routes/event/TablesAndSeats/index.tsx:260
 msgid "Place tables on the room blueprint and assign attendees directly to chairs."
 msgstr "Place tables on the room blueprint and assign attendees directly to chairs."
 
@@ -7211,15 +7215,15 @@ msgstr "remove"
 msgid "Remove"
 msgstr "Remove"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:316
+#: src/components/routes/event/TablesAndSeats/index.tsx:313
 msgid "Remove blueprint"
 msgstr "Remove blueprint"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:412
+#: src/components/routes/event/TablesAndSeats/index.tsx:408
 msgid "Remove seat assignment"
 msgstr "Remove seat assignment"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:270
+#: src/components/routes/event/TablesAndSeats/index.tsx:267
 msgid "Replace blueprint"
 msgstr "Replace blueprint"
 
@@ -7393,19 +7397,19 @@ msgstr "Revoke Offer"
 msgid "Role"
 msgstr "Role"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:304
+#: src/components/routes/event/TablesAndSeats/index.tsx:301
 msgid "Room blueprint"
 msgstr "Room blueprint"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:219
+#: src/components/routes/event/TablesAndSeats/index.tsx:216
 msgid "Room blueprint removed"
 msgstr "Room blueprint removed"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:201
+#: src/components/routes/event/TablesAndSeats/index.tsx:198
 msgid "Room blueprint uploaded"
 msgstr "Room blueprint uploaded"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:189
+#: src/components/routes/event/TablesAndSeats/index.tsx:186
 msgid "Room plan saved"
 msgstr "Room plan saved"
 
@@ -7532,7 +7536,7 @@ msgstr "Save Settings"
 msgid "Save Social Links"
 msgstr "Save Social Links"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:315
+#: src/components/routes/event/TablesAndSeats/index.tsx:312
 msgid "Save table layout"
 msgstr "Save table layout"
 
@@ -7601,7 +7605,7 @@ msgstr "Search by event title or organizer..."
 msgid "Search by job name or exception..."
 msgstr "Search by job name or exception..."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:416
+#: src/components/routes/event/TablesAndSeats/index.tsx:412
 msgid "Search by name or email"
 msgstr "Search by name or email"
 
@@ -7671,7 +7675,7 @@ msgstr "Seat {seatNumber}, occupied by {attendeeName}"
 msgid "Seat {seatNumber}, open"
 msgstr "Seat {seatNumber}, open"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:253
+#: src/components/routes/event/TablesAndSeats/index.tsx:250
 msgid "Seat assignment removed"
 msgstr "Seat assignment removed"
 
@@ -8539,15 +8543,15 @@ msgid "Table"
 msgstr "Table"
 
 #: src/components/routes/event/TablesAndSeats/index.tsx:320
-msgid "Table {activeTable} size"
-msgstr "Table {activeTable} size"
+#~ msgid "Table {activeTable} size"
+#~ msgstr "Table {activeTable} size"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:406
+#: src/components/routes/event/TablesAndSeats/index.tsx:402
 msgid "Table {selectedTableNumber}, seat {selectedSeatNumber}"
 msgstr "Table {selectedTableNumber}, seat {selectedSeatNumber}"
 
 #: src/components/routes/event/TablesAndSeats/index.tsx:54
-#: src/components/routes/event/TablesAndSeats/index.tsx:364
+#: src/components/routes/event/TablesAndSeats/index.tsx:360
 msgid "Table {tableNumber}"
 msgstr "Table {tableNumber}"
 
@@ -8564,16 +8568,20 @@ msgstr "Table & Seat Management"
 msgid "Table number"
 msgstr "Table number"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:305
+#: src/components/routes/event/TablesAndSeats/index.tsx:302
 msgid "Table overview"
 msgstr "Table overview"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:287
+#: src/components/routes/event/TablesAndSeats/index.tsx:317
+msgid "Table size"
+msgstr "Table size"
+
+#: src/components/routes/event/TablesAndSeats/index.tsx:284
 msgid "tables"
 msgstr "tables"
 
 #: src/components/layouts/Event/index.tsx:120
-#: src/components/routes/event/TablesAndSeats/index.tsx:264
+#: src/components/routes/event/TablesAndSeats/index.tsx:261
 msgid "Tables & Seats"
 msgstr "Tables & Seats"
 
@@ -8712,7 +8720,7 @@ msgstr "That promo code is invalid"
 msgid "The background color of the page. When using cover image, this is applied as an overlay."
 msgstr "The background color of the page. When using cover image, this is applied as an overlay."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:202
+#: src/components/routes/event/TablesAndSeats/index.tsx:199
 msgid "The blueprint uploaded, but could not be attached to the room plan"
 msgstr "The blueprint uploaded, but could not be attached to the room plan"
 
@@ -9557,11 +9565,11 @@ msgstr "Upload a cover image for your organizer"
 msgid "Upload a logo for your organizer"
 msgstr "Upload a logo for your organizer"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:391
+#: src/components/routes/event/TablesAndSeats/index.tsx:387
 msgid "Upload a room blueprint to place the tables in their real locations. You can already assign attendees by clicking any green chair below."
 msgstr "Upload a room blueprint to place the tables in their real locations. You can already assign attendees by clicking any green chair below."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:270
+#: src/components/routes/event/TablesAndSeats/index.tsx:267
 msgid "Upload blueprint"
 msgstr "Upload blueprint"
 
@@ -9827,7 +9835,7 @@ msgstr "View and download reports across all your events. Only completed orders 
 msgid "View Answers"
 msgstr "View Answers"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:411
+#: src/components/routes/event/TablesAndSeats/index.tsx:407
 msgid "View attendee"
 msgstr "View attendee"
 

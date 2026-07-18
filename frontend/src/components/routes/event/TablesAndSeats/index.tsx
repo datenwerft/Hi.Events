@@ -87,7 +87,6 @@ const TablesAndSeats = () => {
     const [attendeeToAssign, setAttendeeToAssign] = useState<string | null>(null);
     const [positions, setPositions] = useState<EventTablePosition[]>([]);
     const [draggingTable, setDraggingTable] = useState<number>();
-    const [activeTable, setActiveTable] = useState(1);
     const [zoom, setZoom] = useState(100);
     const [blueprintBusy, setBlueprintBusy] = useState(false);
     const [viewMode, setViewMode] = useState<'blueprint' | 'tables'>('blueprint');
@@ -109,19 +108,19 @@ const TablesAndSeats = () => {
     useEffect(() => {
         if (!seating?.table_count) return;
         const saved = new Map((seating.table_positions || []).map(position => [position.table_number, position]));
+        const tableSize = seating.table_positions?.find(position => position.size)?.size || 100;
         setPositions(Array.from({length: seating.table_count}, (_, index) => {
             const tableNumber = index + 1;
             const columns = Math.ceil(Math.sqrt(seating.table_count));
             const rows = Math.ceil(seating.table_count / columns);
             const savedPosition = saved.get(tableNumber);
-            return savedPosition ? {...savedPosition, size: savedPosition.size || 100} : {
+            return savedPosition ? {...savedPosition, size: tableSize} : {
                 table_number: tableNumber,
                 x: ((index % columns) + 0.5) * (100 / columns),
                 y: (Math.floor(index / columns) + 0.5) * (100 / rows),
-                size: 100,
+                size: tableSize,
             };
         }));
-        setActiveTable(current => Math.min(current, seating.table_count));
     }, [seating?.table_count, seating?.table_positions]);
 
     useEffect(() => {
@@ -175,12 +174,10 @@ const TablesAndSeats = () => {
     }));
     const selectedTableNumber = selectedSeat?.tableNumber;
     const selectedSeatNumber = selectedSeat?.seatNumber;
-    const activeTableSize = positions.find(position => position.table_number === activeTable)?.size || 100;
+    const tableSize = positions[0]?.size || 100;
 
-    const resizeActiveTable = (size: number) => {
-        setPositions(current => current.map(position => position.table_number === activeTable
-            ? {...position, size}
-            : position));
+    const resizeTables = (size: number) => {
+        setPositions(current => current.map(position => ({...position, size})));
     };
 
     const saveLayout = (blueprintImageId: IdParam | null = seating?.blueprint?.id || null) => {
@@ -317,8 +314,8 @@ const TablesAndSeats = () => {
                                     </Group>
                                     <Group gap="lg" className={classes.layoutSliders}>
                                         <Stack gap={2} className={classes.sizeControl}>
-                                            <Text size="xs">{t`Table ${activeTable} size`} · {activeTableSize}%</Text>
-                                            <Slider min={50} max={200} value={activeTableSize} onChange={resizeActiveTable}/>
+                                            <Text size="xs">{t`Table size`} · {tableSize}%</Text>
+                                            <Slider min={50} max={200} value={tableSize} onChange={resizeTables}/>
                                         </Stack>
                                         <Stack gap={2} className={classes.zoomControl}>
                                             <Text size="xs"><IconZoomIn size={14}/> {t`Blueprint zoom`} · {zoom}%</Text>
@@ -326,7 +323,7 @@ const TablesAndSeats = () => {
                                         </Stack>
                                     </Group>
                                 </Group>
-                                <Text size="sm" c="dimmed" mb="sm">{t`Drag tables into place. Select a table to resize it, then save the table layout.`}</Text>
+                                <Text size="sm" c="dimmed" mb="sm">{t`Drag tables into place, adjust their shared size, then save the table layout.`}</Text>
                                 <div className={classes.roomViewport}>
                                     <div
                                         ref={canvasRef}
@@ -345,7 +342,7 @@ const TablesAndSeats = () => {
                                             return (
                                                 <div
                                                     key={position.table_number}
-                                                    className={`${classes.roomTable} ${activeTable === position.table_number ? classes.roomTableSelected : ''}`}
+                                                    className={classes.roomTable}
                                                     style={{
                                                         left: `${position.x}%`,
                                                         top: `${position.y}%`,
@@ -357,7 +354,6 @@ const TablesAndSeats = () => {
                                                         className={classes.roomTableTop}
                                                         onPointerDown={(event: ReactPointerEvent) => {
                                                             event.preventDefault();
-                                                            setActiveTable(position.table_number);
                                                             setDraggingTable(position.table_number);
                                                         }}
                                                     >
