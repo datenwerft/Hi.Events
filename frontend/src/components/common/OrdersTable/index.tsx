@@ -45,6 +45,8 @@ import {ColumnVisibilityToggle} from "../ColumnVisibilityToggle";
 import {CellContext} from "@tanstack/react-table";
 import {formatCurrency} from "../../../utilites/currency.ts";
 import {eventCheckoutUrl} from "../../../utilites/urlHelper.ts";
+import {useDeleteOrder} from "../../../mutations/useDeleteOrder.ts";
+import {confirmationDialog} from "../../../utilites/confirmationDialog.tsx";
 
 interface OrdersTableProps {
     event: Event,
@@ -60,6 +62,7 @@ export const OrdersTable = ({orders, event}: OrdersTableProps) => {
     const [emailPopoverId, setEmailPopoverId] = useState<IdParam | null>(null);
     const resendConfirmationMutation = useResendOrderConfirmation();
     const markAsPaidMutation = useMarkOrderAsPaid();
+    const deleteOrderMutation = useDeleteOrder();
     const clipboard = useClipboard({timeout: 2000});
 
     useUrlHash(/^#order-(\d+)$/, (matches => {
@@ -86,6 +89,23 @@ export const OrdersTable = ({orders, event}: OrdersTableProps) => {
             onError: () => showError(t`There was an error sending your message`)
         });
     }
+
+    const handleDeleteOrder = (order: Order) => {
+        const orderPublicId = order.public_id;
+
+        confirmationDialog(
+            t`Permanently delete cancelled order ${orderPublicId}? Its attendees, answers, check-ins, invoices, messages, and payment records will be deleted. This action cannot be undone.`,
+            () => {
+                deleteOrderMutation.mutate({eventId: event.id, orderId: order.id}, {
+                    onSuccess: () => showSuccess(t`Order permanently deleted`),
+                    onError: (error: {response?: {data?: {message?: string}}}) => showError(
+                        error?.response?.data?.message || t`Failed to permanently delete order`
+                    ),
+                });
+            },
+            {confirm: t`Permanently delete order`},
+        );
+    };
 
     const handleInvoiceDownload = async (invoice: Invoice) => {
         await withLoadingNotification(
@@ -183,16 +203,21 @@ export const OrdersTable = ({orders, event}: OrdersTableProps) => {
                             </Menu.Item>
                         )}
 
-                        {order.status !== 'CANCELLED' && (
-                            <>
-                                <Menu.Divider/>
-                                <Menu.Label>{t`Danger zone`}</Menu.Label>
+                        <Menu.Divider/>
+                        <Menu.Label>{t`Danger zone`}</Menu.Label>
+                        {order.status !== 'CANCELLED' ? (
                                 <Menu.Item color="red"
                                            onClick={() => handleModalClick(order.id, cancelModal)}
                                            leftSection={<IconTrash size={14}/>}>
                                     {t`Cancel order`}
                                 </Menu.Item>
-                            </>
+                        ) : (
+                            <Menu.Item color="red"
+                                       onClick={() => handleDeleteOrder(order)}
+                                       leftSection={<IconTrash size={14}/>}
+                                       disabled={deleteOrderMutation.isPending}>
+                                {t`Permanently delete order`}
+                            </Menu.Item>
                         )}
                     </Menu.Dropdown>
                 </Menu>

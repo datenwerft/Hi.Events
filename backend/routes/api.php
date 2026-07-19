@@ -116,6 +116,7 @@ use HiEvents\Http\Actions\Messages\GetMessageRecipientsAction;
 use HiEvents\Http\Actions\Messages\GetMessagesAction;
 use HiEvents\Http\Actions\Messages\SendMessageAction;
 use HiEvents\Http\Actions\Orders\CancelOrderAction;
+use HiEvents\Http\Actions\Orders\DeleteOrderAction;
 use HiEvents\Http\Actions\Orders\DownloadOrderInvoiceAction;
 use HiEvents\Http\Actions\Orders\EditOrderAction;
 use HiEvents\Http\Actions\Orders\ExportOrdersAction;
@@ -365,6 +366,7 @@ $router->middleware(['auth:api'])->group(
         $router->get('/events/{event_id}/orders', GetOrdersAction::class);
         $router->get('/events/{event_id}/orders/{order_id}', GetOrderAction::class);
         $router->put('/events/{event_id}/orders/{order_id}', EditOrderAction::class);
+        $router->delete('/events/{event_id}/orders/{order_id}', DeleteOrderAction::class);
         $router->post('/events/{event_id}/orders/{order_id}/message', MessageOrderAction::class);
         $router->post('/events/{event_id}/orders/{order_id}/refund', RefundOrderAction::class);
         $router->post('/events/{event_id}/orders/{order_id}/resend_confirmation', ResendOrderConfirmationAction::class);

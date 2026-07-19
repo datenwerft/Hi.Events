@@ -86,6 +86,10 @@ export const orderClient = {
         return response.data;
     },
 
+    delete: async (eventId: IdParam, orderId: IdParam) => {
+        await api.delete(`events/${eventId}/orders/${orderId}`);
+    },
+
     exportOrders: async (eventId: IdParam): Promise<Blob> => {
         const response = await api.post(`events/${eventId}/orders/export`, {}, {
             responseType: 'blob',

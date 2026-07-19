@@ -15,6 +15,8 @@ use Illuminate\Support\Collection;
  */
 interface OrderRepositoryInterface extends RepositoryInterface
 {
+    public function permanentlyDeleteById(int $orderId): bool;
+
     public function findByEventId(int $eventId, QueryParamsDTO $params): LengthAwarePaginator;
 
     public function findByOrganizerId(int $organizerId, int $accountId, QueryParamsDTO $params): LengthAwarePaginator;
