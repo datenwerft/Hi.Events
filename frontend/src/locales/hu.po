@@ -81,7 +81,7 @@ msgstr "{0} szervező"
 msgid "{0} tickets"
 msgstr "{0} jegy"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:163
+#: src/components/modals/ManageAttendeeModal/index.tsx:166
 msgid "{0} tickets belong to this order. Keep them at the same table."
 msgstr ""
 
@@ -131,8 +131,12 @@ msgid "{totalCount} ticket types"
 msgstr "{totalCount} jegytípus"
 
 #: src/components/modals/EventSeatingModal/index.tsx:72
-msgid "{totalSeats} seats total; {0} currently assigned."
-msgstr ""
+#~ msgid "{totalSeats} seats total; {0} currently assigned."
+#~ msgstr ""
+
+#: src/components/modals/EventSeatingModal/index.tsx:147
+msgid "{totalTables} tables and {totalSeats} seats total; {0} currently assigned."
+msgstr "Összesen {totalTables} asztal és {totalSeats} ülőhely; jelenleg {0} kiosztva."
 
 #: src/components/routes/organizer/Settings/Sections/BasicSettings/index.tsx:98
 msgid "+1 234 567 890"
@@ -466,11 +470,11 @@ msgstr "Aktív események"
 msgid "Add a description for this check-in list"
 msgstr "Adjon leírást ehhez a bejelentkezési listához"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:170
+#: src/components/modals/ManageAttendeeModal/index.tsx:173
 msgid "Add any notes about the attendee. These will not be visible to the attendee."
 msgstr "Adjon hozzá bármilyen megjegyzést a résztvevőhöz. Ezek nem lesznek láthatók a résztvevő számára."
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:172
+#: src/components/modals/ManageAttendeeModal/index.tsx:175
 msgid "Add any notes about the attendee..."
 msgstr "Adjon hozzá bármilyen megjegyzést a résztvevőhöz..."
 
@@ -506,6 +510,10 @@ msgstr "További jegyek hozzáadása"
 msgid "Add New"
 msgstr "Új hozzáadása"
 
+#: src/components/modals/EventSeatingModal/index.tsx:75
+msgid "Add one or more table types. Each type can have its own quantity, number of seats, and shape."
+msgstr "Adjon hozzá egy vagy több asztaltípust. Minden típushoz külön mennyiség, ülőhelyszám és forma állítható be."
+
 #: src/components/forms/QuestionForm/index.tsx:68
 msgid "Add Option"
 msgstr "Opció hozzáadása"
@@ -522,6 +530,10 @@ msgstr "Termék hozzáadása kategóriához"
 #: src/components/common/QuestionsTable/index.tsx:478
 msgid "Add Question"
 msgstr "Kérdés hozzáadása"
+
+#: src/components/modals/EventSeatingModal/index.tsx:140
+msgid "Add table type"
+msgstr "Asztaltípus hozzáadása"
 
 #: src/components/routes/account/ManageAccount/sections/TaxSettings/index.tsx:18
 msgid "Add Tax or Fee"
@@ -781,7 +793,7 @@ msgstr "Összeg"
 msgid "Amount Paid"
 msgstr "Fizetett összeg"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:207
+#: src/components/modals/CreateAttendeeModal/index.tsx:210
 msgid "Amount paid ({0})"
 msgstr "Fizetett összeg ({0})"
 
@@ -1049,7 +1061,7 @@ msgstr "Kérdezze meg egyszer megrendelésenként"
 msgid "Ask once per product"
 msgstr "Kérdezze meg egyszer termékenként"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:445
+#: src/components/routes/event/TablesAndSeats/index.tsx:464
 msgid "Assign attendee to this seat"
 msgstr ""
 
@@ -1076,12 +1088,12 @@ msgstr "Részvétel és bejelentkezési arányok minden eseményen"
 
 #: src/components/common/AttendeeTicket/index.tsx:114
 #: src/components/common/QuestionsTable/index.tsx:461
-#: src/components/routes/event/TablesAndSeats/index.tsx:444
+#: src/components/routes/event/TablesAndSeats/index.tsx:463
 #: src/components/routes/product-widget/CollectInformation/index.tsx:675
 msgid "Attendee"
 msgstr "Résztvevő"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:255
+#: src/components/routes/event/TablesAndSeats/index.tsx:268
 msgid "Attendee assigned to seat"
 msgstr ""
 
@@ -1094,7 +1106,7 @@ msgid "Attendee Created"
 msgstr "Résztvevő létrehozva"
 
 #: src/components/common/AttendeeTable/index.tsx:157
-#: src/components/modals/ManageAttendeeModal/index.tsx:186
+#: src/components/modals/ManageAttendeeModal/index.tsx:189
 msgid "Attendee Details"
 msgstr "Résztvevő adatai"
 
@@ -1126,7 +1138,7 @@ msgstr "Résztvevői információk gyűjtése"
 msgid "Attendee not found"
 msgstr "Résztvevő nem található"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:192
+#: src/components/modals/ManageAttendeeModal/index.tsx:195
 msgid "Attendee Notes"
 msgstr "Résztvevő megjegyzései"
 
@@ -1140,7 +1152,7 @@ msgstr "Résztvevő állapota"
 
 #: src/components/common/EmailTemplateEditor/EmailTemplateEditor.tsx:95
 #: src/components/common/EmailTemplateSettings/EmailTemplateSettingsBase.tsx:201
-#: src/components/modals/ManageAttendeeModal/index.tsx:211
+#: src/components/modals/ManageAttendeeModal/index.tsx:214
 msgid "Attendee Ticket"
 msgstr "Résztvevői jegy"
 
@@ -1332,7 +1344,7 @@ msgstr "Számlázási cím"
 msgid "Billing Settings"
 msgstr "Számlázási beállítások"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:353
+#: src/components/routes/event/TablesAndSeats/index.tsx:366
 msgid "Blueprint zoom"
 msgstr ""
 
@@ -1723,11 +1735,11 @@ msgstr "Város"
 msgid "Clear Search Text"
 msgstr "Keresési szöveg törlése"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:399
+#: src/components/routes/event/TablesAndSeats/index.tsx:414
 msgid "Click to assign"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:64
+#: src/components/routes/event/TablesAndSeats/index.tsx:73
 msgid "Click to assign seat {seatNumber}"
 msgstr ""
 
@@ -1945,8 +1957,8 @@ msgstr "Esemény részletek, helyszín, pénztári beállítások és e-mail ér
 msgid "Configure how attendee details are collected during checkout"
 msgstr "Állítsa be, hogyan gyűjtse a résztvevők adatait a pénztárnál"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:302
-#: src/components/routes/event/TablesAndSeats/index.tsx:309
+#: src/components/routes/event/TablesAndSeats/index.tsx:315
+#: src/components/routes/event/TablesAndSeats/index.tsx:322
 msgid "Configure tables"
 msgstr ""
 
@@ -1954,13 +1966,13 @@ msgstr ""
 msgid "Configure Taxes & Fees"
 msgstr "Adók és díjak beállítása"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:308
+#: src/components/routes/event/TablesAndSeats/index.tsx:321
 msgid "Configure the number of tables and seats per table to create the seating view."
 msgstr ""
 
 #: src/components/modals/EventSeatingModal/index.tsx:53
-msgid "Configure the table layout for this event. Set both values to zero to disable seating."
-msgstr ""
+#~ msgid "Configure the table layout for this event. Set both values to zero to disable seating."
+#~ msgstr ""
 
 #: src/components/routes/event/Reports/PromoCodesReport/index.tsx:35
 msgid "Configured Discount"
@@ -2234,23 +2246,23 @@ msgstr "Vágólapra másolás"
 msgid "Copy URL"
 msgstr "URL másolása"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:259
+#: src/components/routes/event/TablesAndSeats/index.tsx:272
 msgid "Could not assign the attendee to this seat"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:220
+#: src/components/routes/event/TablesAndSeats/index.tsx:233
 msgid "Could not remove the room blueprint"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:275
+#: src/components/routes/event/TablesAndSeats/index.tsx:288
 msgid "Could not remove the seat assignment"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:189
+#: src/components/routes/event/TablesAndSeats/index.tsx:202
 msgid "Could not save the room plan"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:206
+#: src/components/routes/event/TablesAndSeats/index.tsx:219
 msgid "Could not upload the room blueprint"
 msgstr ""
 
@@ -2330,7 +2342,7 @@ msgstr "szervező létrehozása"
 msgid "Create and configure tickets and merchandise for sale."
 msgstr "Jegyek és árucikkek létrehozása és konfigurálása értékesítéshez."
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:238
+#: src/components/modals/CreateAttendeeModal/index.tsx:241
 msgid "Create Attendee"
 msgstr "Résztvevő létrehozása"
 
@@ -2806,6 +2818,10 @@ msgstr "Részletek"
 msgid "Didn't receive the code?"
 msgstr "Nem kapta meg a kódot?"
 
+#: src/components/modals/EventSeatingModal/index.tsx:96
+msgid "Dinner tables"
+msgstr "Étkezőasztalok"
+
 #: src/components/forms/CapaciyAssigmentForm/index.tsx:27
 msgid "Disabling this capacity will track sales but not stop them when the limit is reached"
 msgstr "Ezen kapacitás letiltása nyomon követi az értékesítéseket, de nem állítja le őket, amikor a limit elérte a határt."
@@ -2908,7 +2924,7 @@ msgstr "Piszkozat"
 #~ msgid "Drag each table to its location, then save the table positions."
 #~ msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:358
+#: src/components/routes/event/TablesAndSeats/index.tsx:371
 msgid "Drag tables into place, adjust their shared size, then save the table layout."
 msgstr ""
 
@@ -2984,7 +3000,7 @@ msgstr "Korai madár"
 
 #: src/components/common/QuestionsTable/index.tsx:142
 #: src/components/common/TaxAndFeeList/index.tsx:70
-#: src/components/modals/ManageAttendeeModal/index.tsx:260
+#: src/components/modals/ManageAttendeeModal/index.tsx:263
 #: src/components/modals/ManageOrderModal/index.tsx:203
 #: src/components/routes/admin/Accounts/AccountDetail/index.tsx:268
 #: src/components/routes/product-widget/OrderSummaryAndProducts/index.tsx:236
@@ -3156,8 +3172,8 @@ msgstr "E-mail és értesítési beállítások"
 msgid "Email & Templates"
 msgstr "E-mail és sablonok"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:148
-#: src/components/modals/ManageAttendeeModal/index.tsx:122
+#: src/components/modals/CreateAttendeeModal/index.tsx:151
+#: src/components/modals/ManageAttendeeModal/index.tsx:125
 #: src/components/modals/ManageOrderModal/index.tsx:157
 msgid "Email address"
 msgstr "E-mail cím"
@@ -3302,7 +3318,7 @@ msgstr "Befejezett"
 
 #: src/components/common/LanguageSwitcher/index.tsx:18
 #: src/components/common/LanguageSwitcher/index.tsx:69
-#: src/components/modals/CreateAttendeeModal/index.tsx:187
+#: src/components/modals/CreateAttendeeModal/index.tsx:190
 msgid "English"
 msgstr "Angol"
 
@@ -3318,7 +3334,7 @@ msgstr "Adja meg a partner e-mail címét (opcionális)"
 msgid "Enter affiliate name"
 msgstr "Adja meg a partner nevét"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:212
+#: src/components/modals/CreateAttendeeModal/index.tsx:215
 msgid "Enter an amount excluding taxes and fees."
 msgstr "Adjon meg egy összeget adók és díjak nélkül."
 
@@ -3660,7 +3676,7 @@ msgstr "Lejárati dátum"
 #: src/components/routes/event/Affiliates/index.tsx:81
 #: src/components/routes/event/attendees.tsx:205
 #: src/components/routes/event/orders.tsx:142
-#: src/components/routes/event/TablesAndSeats/index.tsx:299
+#: src/components/routes/event/TablesAndSeats/index.tsx:312
 msgid "Export"
 msgstr "Exportálás"
 
@@ -3965,6 +3981,7 @@ msgstr "Díj pénzneme"
 msgid "Fee Handling"
 msgstr "Díjkezelés"
 
+#: src/components/common/InlineOrderSummary/index.tsx:138
 #: src/components/common/OrdersTable/index.tsx:359
 #: src/components/forms/ProductForm/index.tsx:409
 #: src/components/routes/organizer/Reports/RevenueSummaryReport/index.tsx:54
@@ -4042,8 +4059,8 @@ msgstr "Első résztvevő"
 msgid "First Invoice Number"
 msgstr "Első számla száma"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:134
-#: src/components/modals/ManageAttendeeModal/index.tsx:118
+#: src/components/modals/CreateAttendeeModal/index.tsx:137
+#: src/components/modals/ManageAttendeeModal/index.tsx:121
 #: src/components/modals/ManageOrderModal/index.tsx:144
 #: src/components/routes/product-widget/CollectInformation/index.tsx:479
 #: src/components/routes/product-widget/CollectInformation/index.tsx:695
@@ -4430,7 +4447,7 @@ msgstr "Honlaptervező"
 msgid "Homepage Preview"
 msgstr "Honlap előnézet"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:118
+#: src/components/modals/ManageAttendeeModal/index.tsx:121
 #: src/components/modals/ManageOrderModal/index.tsx:145
 msgid "Homer"
 msgstr "Homer"
@@ -4786,7 +4803,7 @@ msgstr "Feladat újrapróbálásra sorba állítva"
 msgid "John"
 msgstr "János"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:142
+#: src/components/modals/CreateAttendeeModal/index.tsx:145
 msgid "Johnson"
 msgstr "Johnson"
 
@@ -4825,7 +4842,7 @@ msgid "Label"
 msgstr "Címke"
 
 #: src/components/common/AttendeeDetails/index.tsx:58
-#: src/components/modals/CreateAttendeeModal/index.tsx:186
+#: src/components/modals/CreateAttendeeModal/index.tsx:189
 #: src/components/routes/profile/ManageProfile/index.tsx:196
 msgid "Language"
 msgstr "Nyelv"
@@ -4879,8 +4896,8 @@ msgstr "Utolsó 90 nap"
 msgid "Last login"
 msgstr "Utolsó bejelentkezés"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:141
-#: src/components/modals/ManageAttendeeModal/index.tsx:119
+#: src/components/modals/CreateAttendeeModal/index.tsx:144
+#: src/components/modals/ManageAttendeeModal/index.tsx:122
 #: src/components/modals/ManageOrderModal/index.tsx:150
 msgid "Last name"
 msgstr "Vezetéknév"
@@ -5094,7 +5111,7 @@ msgstr "Profil kezelése"
 msgid "Manage taxes and fees which can be applied to your products"
 msgstr "Kezelje az adókat és díjakat, amelyek alkalmazhatók a termékeire."
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:122
+#: src/components/modals/CreateAttendeeModal/index.tsx:125
 msgid "Manage tickets"
 msgstr "Jegyek kezelése"
 
@@ -5126,8 +5143,8 @@ msgstr "Manuális ajánlat"
 msgid "Manually add an Attendee"
 msgstr "Résztvevő manuális hozzáadása"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:113
-#: src/components/modals/CreateAttendeeModal/index.tsx:129
+#: src/components/modals/CreateAttendeeModal/index.tsx:116
+#: src/components/modals/CreateAttendeeModal/index.tsx:132
 msgid "Manually Add Attendee"
 msgstr "Résztvevő manuális hozzáadása"
 
@@ -5562,7 +5579,7 @@ msgstr "Fizetés nem szükséges"
 msgid "No popular events in the last 14 days"
 msgstr "Nincs népszerű esemény az elmúlt 14 napban"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:216
+#: src/components/modals/ManageAttendeeModal/index.tsx:219
 msgid "No product associated with this attendee."
 msgstr "Nincs termék ehhez a résztvevőhöz társítva."
 
@@ -5590,7 +5607,7 @@ msgstr "Még nincsenek termékek"
 msgid "No Promo Codes to show"
 msgstr "Nincs megjeleníthető promóciós kód"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:232
+#: src/components/modals/ManageAttendeeModal/index.tsx:235
 msgid "No questions answered by this attendee."
 msgstr "Ehhez a résztvevőhöz nem érkezett válasz."
 
@@ -5632,7 +5649,11 @@ msgstr "Nincs találat"
 msgid "No search results."
 msgstr "Nincs találat."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:307
+#: src/components/modals/EventSeatingModal/index.tsx:145
+msgid "No table types configured. Saving will disable seating."
+msgstr "Nincs asztaltípus beállítva. A mentés kikapcsolja az ülésrendet."
+
+#: src/components/routes/event/TablesAndSeats/index.tsx:320
 msgid "No tables configured"
 msgstr ""
 
@@ -5644,7 +5665,7 @@ msgstr "Nem adtak hozzá adókat vagy díjakat."
 msgid "No Tickets Found"
 msgstr "Nem találhatók jegyek"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:444
+#: src/components/routes/event/TablesAndSeats/index.tsx:463
 msgid "No unseated attendees found"
 msgstr ""
 
@@ -5706,7 +5727,7 @@ msgstr "Nincs bejelentkezve"
 msgid "Not Eligible"
 msgstr "Nem jogosult"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:169
+#: src/components/modals/ManageAttendeeModal/index.tsx:172
 #: src/components/modals/ManageOrderModal/index.tsx:164
 msgid "Notes"
 msgstr "Jegyzetek"
@@ -5727,7 +5748,7 @@ msgstr "Szervező értesítése új megrendelésekről"
 msgid "Number of days allowed for payment (leave blank to omit payment terms from invoices)"
 msgstr "Engedélyezett napok száma a fizetésre (hagyja üresen a fizetési feltételek kihagyásához a számlákról)"
 
-#: src/components/modals/EventSeatingModal/index.tsx:58
+#: src/components/modals/EventSeatingModal/index.tsx:110
 msgid "Number of tables"
 msgstr ""
 
@@ -5735,12 +5756,12 @@ msgstr ""
 msgid "Number Prefix"
 msgstr "Szám előtag"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:56
-#: src/components/routes/event/TablesAndSeats/index.tsx:317
+#: src/components/routes/event/TablesAndSeats/index.tsx:65
+#: src/components/routes/event/TablesAndSeats/index.tsx:330
 msgid "occupied"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:321
+#: src/components/routes/event/TablesAndSeats/index.tsx:334
 msgid "Occupied"
 msgstr ""
 
@@ -5882,11 +5903,11 @@ msgstr "Csak a kezdési dátum és időpont megjelenítése"
 msgid "Only visible with promo code"
 msgstr "Csak promóciós kóddal látható"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:318
+#: src/components/routes/event/TablesAndSeats/index.tsx:331
 msgid "open"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:322
+#: src/components/routes/event/TablesAndSeats/index.tsx:335
 msgid "Open"
 msgstr ""
 
@@ -5895,7 +5916,7 @@ msgstr ""
 msgid "Open Check-In Page"
 msgstr "Bejelentkezési oldal megnyitása"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:62
+#: src/components/routes/event/TablesAndSeats/index.tsx:71
 msgid "Open seat"
 msgstr ""
 
@@ -5917,8 +5938,8 @@ msgstr "Opció {i}"
 msgid "Optional additional information to appear on all invoices (e.g., payment terms, late payment fees, return policy)"
 msgstr "Opcionális további információk, amelyek megjelennek minden számlán (pl. fizetési feltételek, késedelmi díjak, visszatérítési szabályzat)."
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:175
-#: src/components/modals/ManageAttendeeModal/index.tsx:140
+#: src/components/modals/CreateAttendeeModal/index.tsx:178
+#: src/components/modals/ManageAttendeeModal/index.tsx:143
 msgid "Optional number shown on the attendee ticket."
 msgstr ""
 
@@ -5988,7 +6009,7 @@ msgid "Order Date"
 msgstr "Megrendelés dátuma"
 
 #: src/components/common/OrdersTable/index.tsx:277
-#: src/components/modals/ManageAttendeeModal/index.tsx:205
+#: src/components/modals/ManageAttendeeModal/index.tsx:208
 #: src/components/modals/ManageOrderModal/index.tsx:86
 #: src/components/routes/product-widget/OrderSummaryAndProducts/index.tsx:591
 msgid "Order Details"
@@ -6099,7 +6120,7 @@ msgstr "Megrendelés állapota"
 msgid "Order statuses"
 msgstr "Megrendelés állapotok"
 
-#: src/components/common/InlineOrderSummary/index.tsx:38
+#: src/components/common/InlineOrderSummary/index.tsx:52
 #: src/components/modals/ManageOrderModal/index.tsx:105
 msgid "Order Summary"
 msgstr "Megrendelés összefoglaló"
@@ -6306,7 +6327,7 @@ msgstr "Oldalmegtekintések"
 msgid "Page Views"
 msgstr "Oldal megtekintések"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:222
+#: src/components/modals/CreateAttendeeModal/index.tsx:225
 msgid "paid"
 msgstr "fizetett"
 
@@ -6385,11 +6406,11 @@ msgstr "Illessze be ezt oda, ahová a widgetet szeretné."
 msgid "Paste URL"
 msgstr "URL beillesztése"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:135
+#: src/components/modals/CreateAttendeeModal/index.tsx:138
 msgid "Patrick"
 msgstr "Patrik"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:149
+#: src/components/modals/CreateAttendeeModal/index.tsx:152
 msgid "patrick@acme.com"
 msgstr "patrick@acme.com"
 
@@ -6580,7 +6601,7 @@ msgstr "Telefon"
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:282
+#: src/components/routes/event/TablesAndSeats/index.tsx:295
 msgid "Place tables on the room blueprint and assign attendees directly to chairs."
 msgstr ""
 
@@ -6837,8 +6858,8 @@ msgstr "Nyomtatás PDF-be"
 #: src/components/common/AttendeeTable/index.tsx:253
 #: src/components/common/AttendeeTicket/index.tsx:121
 #: src/components/common/CheckIn/AttendeeList.tsx:96
-#: src/components/modals/CreateAttendeeModal/index.tsx:174
-#: src/components/modals/ManageAttendeeModal/index.tsx:139
+#: src/components/modals/CreateAttendeeModal/index.tsx:177
+#: src/components/modals/ManageAttendeeModal/index.tsx:142
 msgid "Printed Ticket Number"
 msgstr ""
 
@@ -6860,7 +6881,7 @@ msgstr "Rendelés feldolgozása"
 #: src/components/common/ProductsTable/SortableProduct/index.tsx:285
 #: src/components/common/ProductsTable/SortableProduct/index.tsx:482
 #: src/components/common/WaitlistTable/index.tsx:170
-#: src/components/modals/ManageAttendeeModal/index.tsx:127
+#: src/components/modals/ManageAttendeeModal/index.tsx:130
 #: src/components/modals/OfferWaitlistModal/index.tsx:161
 msgid "Product"
 msgstr "Termék"
@@ -7047,7 +7068,7 @@ msgstr "Kérdés címe"
 msgid "Questions"
 msgstr "Kérdések"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:223
+#: src/components/modals/ManageAttendeeModal/index.tsx:226
 #: src/components/modals/ManageOrderModal/index.tsx:111
 msgid "Questions & Answers"
 msgstr "Kérdések és válaszok"
@@ -7132,6 +7153,10 @@ msgstr "A címzettek a küldés után érhetők el"
 #: src/components/routes/event/EventDashboard/index.tsx:143
 msgid "Reconnect Stripe →"
 msgstr "Stripe újracsatlakoztatása →"
+
+#: src/components/modals/EventSeatingModal/index.tsx:68
+msgid "Rectangle"
+msgstr "Téglalap"
 
 #: src/components/routes/organizer/Settings/Sections/SocialLinks/index.tsx:80
 msgid "Reddit"
@@ -7243,15 +7268,19 @@ msgstr "eltávolítás"
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:345
+#: src/components/routes/event/TablesAndSeats/index.tsx:358
 msgid "Remove blueprint"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:440
+#: src/components/routes/event/TablesAndSeats/index.tsx:459
 msgid "Remove seat assignment"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:289
+#: src/components/modals/EventSeatingModal/index.tsx:87
+msgid "Remove table type"
+msgstr "Asztaltípus eltávolítása"
+
+#: src/components/routes/event/TablesAndSeats/index.tsx:302
 msgid "Replace blueprint"
 msgstr ""
 
@@ -7425,21 +7454,25 @@ msgstr "Ajánlat visszavonása"
 msgid "Role"
 msgstr "Szerep"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:333
+#: src/components/routes/event/TablesAndSeats/index.tsx:346
 msgid "Room blueprint"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:218
+#: src/components/routes/event/TablesAndSeats/index.tsx:231
 msgid "Room blueprint removed"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:200
+#: src/components/routes/event/TablesAndSeats/index.tsx:213
 msgid "Room blueprint uploaded"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:188
+#: src/components/routes/event/TablesAndSeats/index.tsx:201
 msgid "Room plan saved"
 msgstr ""
+
+#: src/components/modals/EventSeatingModal/index.tsx:66
+msgid "Round"
+msgstr "Kerek"
 
 #: src/components/forms/ProductForm/index.tsx:104
 #: src/components/forms/ProductForm/index.tsx:457
@@ -7536,7 +7569,7 @@ msgstr "San Francisco"
 msgid "Save"
 msgstr "Mentés"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:270
+#: src/components/modals/ManageAttendeeModal/index.tsx:273
 #: src/components/modals/ManageOrderModal/index.tsx:175
 #: src/components/routes/admin/Configurations/index.tsx:268
 #: src/components/routes/event/HomepageDesigner/index.tsx:293
@@ -7552,7 +7585,7 @@ msgstr "Konfiguráció mentése"
 msgid "Save Organizer"
 msgstr "Szervező mentése"
 
-#: src/components/modals/EventSeatingModal/index.tsx:77
+#: src/components/modals/EventSeatingModal/index.tsx:151
 msgid "Save seating configuration"
 msgstr ""
 
@@ -7564,7 +7597,7 @@ msgstr "Beállítások mentése"
 msgid "Save Social Links"
 msgstr "Közösségi linkek mentése"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:344
+#: src/components/routes/event/TablesAndSeats/index.tsx:357
 msgid "Save table layout"
 msgstr ""
 
@@ -7633,7 +7666,7 @@ msgstr "Keresés esemény cím vagy szervező alapján..."
 msgid "Search by job name or exception..."
 msgstr "Keresés feladat neve vagy kivétel alapján..."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:444
+#: src/components/routes/event/TablesAndSeats/index.tsx:463
 msgid "Search by name or email"
 msgstr ""
 
@@ -7695,28 +7728,28 @@ msgstr ""
 #~ msgid "Seat {seatNumber} is open"
 #~ msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:69
+#: src/components/routes/event/TablesAndSeats/index.tsx:78
 msgid "Seat {seatNumber}, occupied by {attendeeName}"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:69
+#: src/components/routes/event/TablesAndSeats/index.tsx:78
 msgid "Seat {seatNumber}, open"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:272
+#: src/components/routes/event/TablesAndSeats/index.tsx:285
 msgid "Seat assignment removed"
 msgstr ""
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:164
-#: src/components/modals/ManageAttendeeModal/index.tsx:155
+#: src/components/modals/CreateAttendeeModal/index.tsx:167
+#: src/components/modals/ManageAttendeeModal/index.tsx:158
 msgid "Seat number"
 msgstr ""
 
-#: src/components/modals/EventSeatingModal/index.tsx:40
+#: src/components/modals/EventSeatingModal/index.tsx:42
 msgid "Seating configuration saved"
 msgstr ""
 
-#: src/components/modals/EventSeatingModal/index.tsx:65
+#: src/components/modals/EventSeatingModal/index.tsx:118
 msgid "Seats per table"
 msgstr ""
 
@@ -7810,7 +7843,7 @@ msgstr "Eseménytípusok kiválasztása"
 msgid "Select organizer"
 msgstr "Szervező kiválasztása"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:126
+#: src/components/modals/ManageAttendeeModal/index.tsx:129
 msgid "Select Product"
 msgstr "Termék kiválasztása"
 
@@ -7847,7 +7880,7 @@ msgstr "Válassza ki az országot, ahol az ÁFA regisztrálva van"
 msgid "Select the messaging tier for this account. This controls message limits and link permissions."
 msgstr "Válassza ki az üzenetküldési szintet ehhez a fiókhoz. Ez szabályozza az üzenetkorlátokat és a link engedélyeket."
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:192
+#: src/components/modals/CreateAttendeeModal/index.tsx:195
 msgid "Select Ticket"
 msgstr "Jegy kiválasztása"
 
@@ -7921,7 +7954,7 @@ msgstr "Üzenet küldése"
 msgid "Send now"
 msgstr "Küldés most"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:234
+#: src/components/modals/CreateAttendeeModal/index.tsx:237
 msgid "Send order confirmation and ticket email"
 msgstr "Rendelés visszaigazoló és jegy e-mail küldése"
 
@@ -8127,7 +8160,7 @@ msgstr "Gyakori címmezőket mutat, beleértve az országot is."
 msgid "Signed Up"
 msgstr "Regisztrált"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:119
+#: src/components/modals/ManageAttendeeModal/index.tsx:122
 #: src/components/modals/ManageOrderModal/index.tsx:151
 msgid "Simpson"
 msgstr "Simpson"
@@ -8182,7 +8215,7 @@ msgstr "Elfogyott"
 
 #: src/components/common/ErrorDisplay/index.tsx:15
 #: src/components/routes/auth/AcceptInvitation/index.tsx:48
-#: src/components/routes/event/TablesAndSeats/index.tsx:240
+#: src/components/routes/event/TablesAndSeats/index.tsx:253
 #: src/components/routes/product-widget/CollectInformation/index.tsx:430
 #: src/components/routes/product-widget/Payment/PaymentMethods/Stripe/index.tsx:64
 msgid "Something went wrong"
@@ -8237,6 +8270,10 @@ msgstr "Spanyol"
 #: src/constants/eventCategories.ts:8
 msgid "Sports"
 msgstr "Sport"
+
+#: src/components/modals/EventSeatingModal/index.tsx:67
+msgid "Square"
+msgstr "Négyzet"
 
 #: src/components/forms/ProductForm/index.tsx:156
 msgid "Standard product with a fixed price"
@@ -8361,6 +8398,7 @@ msgstr "A tárgy itt fog megjelenni"
 msgid "Subject:"
 msgstr "Tárgy:"
 
+#: src/components/common/InlineOrderSummary/index.tsx:130
 #: src/components/common/OrderSummary/index.tsx:41
 msgid "Subtotal"
 msgstr "Részösszeg"
@@ -8388,7 +8426,7 @@ msgstr "E-mail cím sikeresen megerősítve"
 msgid "Successfully confirmed email change"
 msgstr "E-mail cím módosítás sikeresen megerősítve"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:98
+#: src/components/modals/CreateAttendeeModal/index.tsx:101
 msgid "Successfully created attendee"
 msgstr "Résztvevő sikeresen létrehozva"
 
@@ -8429,7 +8467,7 @@ msgstr "Sikeresen eltávolítva a várólistáról"
 msgid "Successfully Updated Address"
 msgstr "Cím sikeresen frissítve"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:104
+#: src/components/modals/ManageAttendeeModal/index.tsx:107
 msgid "Successfully updated attendee"
 msgstr "Résztvevő sikeresen frissítve"
 
@@ -8567,7 +8605,7 @@ msgstr "Póló"
 #: src/components/common/AttendeeDetails/index.tsx:52
 #: src/components/common/AttendeeTable/index.tsx:258
 #: src/components/common/CheckIn/AttendeeList.tsx:101
-#: src/components/routes/event/TablesAndSeats/index.tsx:236
+#: src/components/routes/event/TablesAndSeats/index.tsx:249
 msgid "Table"
 msgstr ""
 
@@ -8575,12 +8613,12 @@ msgstr ""
 #~ msgid "Table {activeTable} size"
 #~ msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:434
+#: src/components/routes/event/TablesAndSeats/index.tsx:453
 msgid "Table {selectedTableNumber}, seat {selectedSeatNumber}"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:55
-#: src/components/routes/event/TablesAndSeats/index.tsx:392
+#: src/components/routes/event/TablesAndSeats/index.tsx:63
+#: src/components/routes/event/TablesAndSeats/index.tsx:407
 msgid "Table {tableNumber}"
 msgstr ""
 
@@ -8588,29 +8626,37 @@ msgstr ""
 msgid "Table & Seat"
 msgstr ""
 
-#: src/components/modals/EventSeatingModal/index.tsx:50
+#: src/components/modals/EventSeatingModal/index.tsx:72
 msgid "Table & Seat Management"
 msgstr ""
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:157
-#: src/components/modals/ManageAttendeeModal/index.tsx:148
+#: src/components/modals/CreateAttendeeModal/index.tsx:160
+#: src/components/modals/ManageAttendeeModal/index.tsx:151
 msgid "Table number"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:334
+#: src/components/routes/event/TablesAndSeats/index.tsx:347
 msgid "Table overview"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:349
+#: src/components/modals/EventSeatingModal/index.tsx:103
+msgid "Table shape"
+msgstr "Asztal formája"
+
+#: src/components/routes/event/TablesAndSeats/index.tsx:362
 msgid "Table size"
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:316
+#: src/components/modals/EventSeatingModal/index.tsx:53
+msgid "Table type {typeNumber}"
+msgstr "{typeNumber}. asztaltípus"
+
+#: src/components/routes/event/TablesAndSeats/index.tsx:329
 msgid "tables"
 msgstr ""
 
 #: src/components/layouts/Event/index.tsx:120
-#: src/components/routes/event/TablesAndSeats/index.tsx:283
+#: src/components/routes/event/TablesAndSeats/index.tsx:296
 msgid "Tables & Seats"
 msgstr ""
 
@@ -8660,6 +8706,7 @@ msgstr "Adó vagy díj sikeresen törölve"
 msgid "Tax Summary"
 msgstr "Adó összefoglaló"
 
+#: src/components/common/InlineOrderSummary/index.tsx:171
 #: src/components/forms/ProductForm/index.tsx:406
 #: src/components/routes/organizer/Reports/RevenueSummaryReport/index.tsx:48
 msgid "Taxes"
@@ -8748,7 +8795,7 @@ msgstr "Ez a promóciós kód érvénytelen."
 msgid "The background color of the page. When using cover image, this is applied as an overlay."
 msgstr "Az oldal háttérszíne. Borítókép használatakor ez átfedésként kerül alkalmazásra."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:201
+#: src/components/routes/event/TablesAndSeats/index.tsx:214
 msgid "The blueprint uploaded, but could not be attached to the room plan"
 msgstr ""
 
@@ -8801,7 +8848,7 @@ msgstr "A keresett esemény jelenleg nem elérhető. Lehet, hogy eltávolított�
 msgid "The full order amount will be refunded to the customer's original payment method."
 msgstr "A teljes rendelési összeg visszatérítésre kerül a vásárló eredeti fizetési módjára."
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:188
+#: src/components/modals/CreateAttendeeModal/index.tsx:191
 msgid "The language the attendee will receive emails in."
 msgstr "Az a nyelv, amelyen a résztvevő e-maileket kap."
 
@@ -9103,7 +9150,6 @@ msgid "This will not be visible to customers, but helps you identify the affilia
 msgstr "Ez nem lesz látható az ügyfelek számára, de segít azonosítani a partnert."
 
 #: src/components/common/AttendeeTable/index.tsx:405
-#: src/components/common/InlineOrderSummary/index.tsx:78
 #: src/components/routes/my-tickets/index.tsx:85
 msgid "ticket"
 msgstr "jegy"
@@ -9111,7 +9157,7 @@ msgstr "jegy"
 #: src/components/common/ProductsTable/SortableProduct/index.tsx:276
 #: src/components/common/ProductsTable/SortableProduct/index.tsx:482
 #: src/components/forms/ProductForm/index.tsx:139
-#: src/components/modals/CreateAttendeeModal/index.tsx:193
+#: src/components/modals/CreateAttendeeModal/index.tsx:196
 msgid "Ticket"
 msgstr "Jegy"
 
@@ -9205,7 +9251,6 @@ msgstr "Jegy típusa"
 msgid "Ticketing & Sales"
 msgstr "Jegyértékesítés"
 
-#: src/components/common/InlineOrderSummary/index.tsx:78
 #: src/components/routes/my-tickets/index.tsx:85
 msgid "tickets"
 msgstr "jegyek"
@@ -9307,6 +9352,7 @@ msgid "Top Organizers (Last 14 Days)"
 msgstr "Legjobb szervezők (Elmúlt 14 nap)"
 
 #: src/components/common/AdminOrdersTable/index.tsx:81
+#: src/components/common/InlineOrderSummary/index.tsx:201
 #: src/components/common/OrderSummary/index.tsx:92
 msgid "Total"
 msgstr "Összesen"
@@ -9447,6 +9493,10 @@ msgstr "Típus"
 #: src/components/routes/organizer/Settings/Sections/DangerZoneSettings/index.tsx:105
 msgid "Type \"delete\" to confirm"
 msgstr "Írja be a \"törlés\" szót a megerősítéshez"
+
+#: src/components/modals/EventSeatingModal/index.tsx:95
+msgid "Type name"
+msgstr "Típus neve"
 
 #: src/components/common/Editor/Controls/InsertLiquidVariableControl.tsx:58
 #~ msgid "Type of ticket"
@@ -9594,11 +9644,11 @@ msgstr "Borítókép feltöltése a szervezőhöz"
 msgid "Upload a logo for your organizer"
 msgstr "Logó feltöltése a szervezőhöz"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:419
+#: src/components/routes/event/TablesAndSeats/index.tsx:434
 msgid "Upload a room blueprint to place the tables in their real locations. You can already assign attendees by clicking any green chair below."
 msgstr ""
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:289
+#: src/components/routes/event/TablesAndSeats/index.tsx:302
 msgid "Upload blueprint"
 msgstr ""
 
@@ -9851,7 +9901,7 @@ msgstr "Ellenőrzés..."
 msgid "Vietnamese"
 msgstr "Vietnámi"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:259
+#: src/components/modals/ManageAttendeeModal/index.tsx:262
 #: src/components/modals/ManageOrderModal/index.tsx:200
 msgid "View"
 msgstr "Megtekintés"
@@ -9868,7 +9918,7 @@ msgstr "Jelentések megtekintése és letöltése az összes eseményéhez. Csak
 msgid "View Answers"
 msgstr "Válaszok megtekintése"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:439
+#: src/components/routes/event/TablesAndSeats/index.tsx:458
 msgid "View attendee"
 msgstr ""
 
@@ -10330,7 +10380,7 @@ msgstr "Widget előnézet"
 msgid "Widget Settings"
 msgstr "Widget beállítások"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:238
+#: src/components/modals/CreateAttendeeModal/index.tsx:241
 msgid "Working"
 msgstr "Dolgozik"
 
@@ -10345,7 +10395,7 @@ msgstr "Dolgozik"
 #: src/components/modals/EditPromoCodeModal/index.tsx:84
 #: src/components/modals/EditQuestionModal/index.tsx:101
 #: src/components/modals/JoinWaitlistModal/index.tsx:188
-#: src/components/modals/ManageAttendeeModal/index.tsx:270
+#: src/components/modals/ManageAttendeeModal/index.tsx:273
 #: src/components/modals/ManageOrderModal/index.tsx:175
 #: src/components/routes/auth/Register/index.tsx:137
 msgid "Working..."
@@ -10487,7 +10537,7 @@ msgstr "Hozzá kell járulnia az üzenetek fogadásához"
 msgid "You must agree to the terms and conditions"
 msgstr "El kell fogadnia a feltételeket."
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:114
+#: src/components/modals/CreateAttendeeModal/index.tsx:117
 msgid "You must create a ticket before you can manually add an attendee."
 msgstr "Jegy létrehozása kötelező, mielőtt manuálisan hozzáadhatna egy résztvevőt."
 

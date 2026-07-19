@@ -603,12 +603,32 @@ export interface Attendee {
 export interface EventSeatingSettings {
     table_count: number;
     seats_per_table: number;
+    table_types: EventTableType[];
+    tables: EventSeatingTable[];
     total_seats: number;
     assigned_seats: number;
     assignments: EventSeatAssignment[];
     available_attendees: EventSeatingAttendee[];
     blueprint: EventSeatingBlueprint | null;
     table_positions: EventTablePosition[];
+}
+
+export type EventTableShape = 'round' | 'square' | 'rectangle';
+
+export interface EventTableType {
+    id: string;
+    name: string;
+    shape: EventTableShape;
+    table_count: number;
+    seats_per_table: number;
+}
+
+export interface EventSeatingTable {
+    table_number: number;
+    table_type_id: string;
+    type_name: string;
+    shape: EventTableShape;
+    seats_per_table: number;
 }
 
 export interface EventSeatingAttendee {

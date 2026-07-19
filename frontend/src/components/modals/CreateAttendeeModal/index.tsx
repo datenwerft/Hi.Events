@@ -48,6 +48,9 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
             locale: getClientLocale() as SupportedLocales,
         },
     });
+    const selectedSeatingTable = seating?.tables?.find(
+        table => table.table_number === Number(form.values.table_number),
+    );
 
     useEffect(() => {
         if (event?.product_categories) {
@@ -150,7 +153,7 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
                     required
                 />
 
-                {seating && seating.table_count > 0 && (
+                {seating && seating.tables.length > 0 && (
                     <InputGroup>
                         <NumberInput
                             {...form.getInputProps('table_number')}
@@ -163,7 +166,7 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
                             {...form.getInputProps('seat_number')}
                             label={t`Seat number`}
                             min={1}
-                            max={seating.seats_per_table}
+                            max={selectedSeatingTable?.seats_per_table || seating.seats_per_table}
                             allowDecimal={false}
                         />
                     </InputGroup>

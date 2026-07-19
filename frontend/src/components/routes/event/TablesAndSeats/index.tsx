@@ -19,7 +19,7 @@ import {IconArmchair, IconDownload, IconPhoto, IconSettings, IconTrash, IconZoom
 import {CSSProperties, PointerEvent as ReactPointerEvent, useEffect, useMemo, useRef, useState} from 'react';
 import {useParams} from 'react-router';
 import {useDisclosure} from '@mantine/hooks';
-import {EventSeatAssignment, EventTablePosition, IdParam} from '../../../../types';
+import {EventSeatAssignment, EventSeatingTable, EventTablePosition, EventTableShape, IdParam} from '../../../../types';
 import {useGetEventSeating} from '../../../../queries/useGetEventSeating';
 import {useUpdateEventSeatingLayout} from '../../../../mutations/useUpdateEventSeatingLayout';
 import {useAssignEventSeat} from '../../../../mutations/useAssignEventSeat';
@@ -33,6 +33,7 @@ import {ToolBar} from '../../../common/ToolBar';
 import {LoadingMask} from '../../../common/LoadingMask';
 import {EventSeatingModal} from '../../../modals/EventSeatingModal';
 import {ManageAttendeeModal} from '../../../modals/ManageAttendeeModal';
+import {getSeatPosition} from './tableGeometry';
 import classes from './TablesAndSeats.module.scss';
 
 interface SelectedSeat {
@@ -42,32 +43,40 @@ interface SelectedSeat {
 }
 
 interface TableGraphicProps {
-    tableNumber: number;
-    seatsPerTable: number;
+    table: EventSeatingTable;
     assignments: Map<number, EventSeatAssignment>;
     onSelectSeat: (seat: SelectedSeat) => void;
 }
 
-const TableGraphic = ({tableNumber, seatsPerTable, assignments, onSelectSeat}: TableGraphicProps) => (
-    <Paper className={classes.tableCard} withBorder radius="md">
+const tableShapeClasses: Record<EventTableShape, string> = {
+    round: classes.tableShapeRound,
+    square: classes.tableShapeSquare,
+    rectangle: classes.tableShapeRectangle,
+};
+
+const TableGraphic = ({table, assignments, onSelectSeat}: TableGraphicProps) => {
+    const tableNumber = table.table_number;
+
+    return <Paper className={classes.tableCard} withBorder radius="md">
         <div className={classes.tableGraphic}>
-            <div className={classes.tableTop}>
+            <div className={`${classes.tableTop} ${tableShapeClasses[table.shape]}`}>
                 <Text fw={700}>{t`Table ${tableNumber}`}</Text>
-                <Text size="xs" c="dimmed">{assignments.size}/{seatsPerTable} {t`occupied`}</Text>
+                <Text size="xs" c="dimmed">{table.type_name}</Text>
+                <Text size="xs" c="dimmed">{assignments.size}/{table.seats_per_table} {t`occupied`}</Text>
             </div>
-            {Array.from({length: seatsPerTable}, (_, index) => {
+            {Array.from({length: table.seats_per_table}, (_, index) => {
                 const seatNumber = index + 1;
                 const assignment = assignments.get(seatNumber);
-                const angle = ((Math.PI * 2) / seatsPerTable) * index - Math.PI / 2;
+                const seatPosition = getSeatPosition(table.shape, index, table.seats_per_table);
                 const attendeeName = assignment ? `${assignment.first_name} ${assignment.last_name}` : t`Open seat`;
                 return (
                     <Tooltip key={seatNumber} label={assignment ? `${attendeeName} · ${assignment.email}` : t`Click to assign seat ${seatNumber}`} withArrow>
                         <button
                             type="button"
                             className={`${classes.seat} ${assignment ? classes.occupied : classes.open}`}
-                            style={{left: `${50 + Math.cos(angle) * 43}%`, top: `${50 + Math.sin(angle) * 43}%`}}
+                            style={{left: `${seatPosition.x}%`, top: `${seatPosition.y}%`}}
                             aria-label={assignment ? t`Seat ${seatNumber}, occupied by ${attendeeName}` : t`Seat ${seatNumber}, open`}
-                            onClick={() => onSelectSeat({tableNumber, seatNumber, assignment})}
+                            onClick={() => onSelectSeat({tableNumber: table.table_number, seatNumber, assignment})}
                         >
                             {seatNumber}
                         </button>
@@ -75,8 +84,8 @@ const TableGraphic = ({tableNumber, seatsPerTable, assignments, onSelectSeat}: T
                 );
             })}
         </div>
-    </Paper>
-);
+    </Paper>;
+};
 
 const TablesAndSeats = () => {
     const {eventId} = useParams();
@@ -107,14 +116,18 @@ const TablesAndSeats = () => {
         return byTable;
     }, [seating?.assignments]);
 
+    const tablesByNumber = useMemo(() => new Map(
+        (seating?.tables || []).map(table => [table.table_number, table]),
+    ), [seating?.tables]);
+
     useEffect(() => {
-        if (!seating?.table_count) return;
+        if (!seating?.tables?.length) return;
         const saved = new Map((seating.table_positions || []).map(position => [position.table_number, position]));
         const tableSize = seating.table_positions?.find(position => position.size)?.size || 100;
-        setPositions(Array.from({length: seating.table_count}, (_, index) => {
-            const tableNumber = index + 1;
-            const columns = Math.ceil(Math.sqrt(seating.table_count));
-            const rows = Math.ceil(seating.table_count / columns);
+        setPositions(seating.tables.map((table, index) => {
+            const tableNumber = table.table_number;
+            const columns = Math.ceil(Math.sqrt(seating.tables.length));
+            const rows = Math.ceil(seating.tables.length / columns);
             const savedPosition = saved.get(tableNumber);
             return savedPosition ? {...savedPosition, size: tableSize} : {
                 table_number: tableNumber,
@@ -123,7 +136,7 @@ const TablesAndSeats = () => {
                 size: tableSize,
             };
         }));
-    }, [seating?.table_count, seating?.table_positions]);
+    }, [seating?.tables, seating?.table_positions]);
 
     useEffect(() => {
         if (!eventId || typeof window === 'undefined') return;
@@ -168,7 +181,7 @@ const TablesAndSeats = () => {
 
     if (seatingQuery.isLoading) return <LoadingMask/>;
 
-    const isConfigured = !!seating && seating.table_count > 0 && seating.seats_per_table > 0;
+    const isConfigured = !!seating?.tables?.length;
     const availableSeats = (seating?.total_seats || 0) - (seating?.assigned_seats || 0);
     const attendeeOptions = (seating?.available_attendees || []).map(attendee => ({
         value: String(attendee.attendee_id),
@@ -232,7 +245,7 @@ const TablesAndSeats = () => {
                 assignments: seating.assignments,
                 blueprint: seating.blueprint,
                 positions,
-                seatsPerTable: seating.seats_per_table,
+                tables: seating.tables,
                 tableLabel: t`Table`,
             });
             downloadBinary(blob, `event-${eventId}-seating-plan.pdf`);
@@ -371,6 +384,8 @@ const TablesAndSeats = () => {
                                         {positions.map(position => {
                                             const tableAssignments = assignmentsByTable.get(position.table_number) || new Map();
                                             const tableNumber = position.table_number;
+                                            const table = tablesByNumber.get(tableNumber);
+                                            if (!table) return null;
                                             return (
                                                 <div
                                                     key={position.table_number}
@@ -383,7 +398,7 @@ const TablesAndSeats = () => {
                                                 >
                                                     <button
                                                         type="button"
-                                                        className={classes.roomTableTop}
+                                                        className={`${classes.roomTableTop} ${tableShapeClasses[table.shape]}`}
                                                         onPointerDown={(event: ReactPointerEvent) => {
                                                             event.preventDefault();
                                                             setDraggingTable(position.table_number);
@@ -391,16 +406,16 @@ const TablesAndSeats = () => {
                                                     >
                                                         {t`Table ${tableNumber}`}
                                                     </button>
-                                                    {Array.from({length: seating.seats_per_table}, (_, index) => {
+                                                    {Array.from({length: table.seats_per_table}, (_, index) => {
                                                         const seatNumber = index + 1;
                                                         const assignment = tableAssignments.get(seatNumber);
-                                                        const angle = ((Math.PI * 2) / seating.seats_per_table) * index - Math.PI / 2;
+                                                        const seatPosition = getSeatPosition(table.shape, index, table.seats_per_table);
                                                         return (
                                                             <Tooltip key={seatNumber} label={assignment ? `${assignment.first_name} ${assignment.last_name}` : t`Click to assign`}>
                                                                 <button
                                                                     type="button"
                                                                     className={`${classes.roomSeat} ${assignment ? classes.occupied : classes.open}`}
-                                                                    style={{left: `${50 + Math.cos(angle) * 64}%`, top: `${50 + Math.sin(angle) * 64}%`}}
+                                                                    style={{left: `${seatPosition.x}%`, top: `${seatPosition.y}%`}}
                                                                     onPointerDown={event => event.stopPropagation()}
                                                                     onClick={() => setSelectedSeat({tableNumber: position.table_number, seatNumber, assignment})}
                                                                 >{seatNumber}</button>
@@ -419,10 +434,14 @@ const TablesAndSeats = () => {
                                     <Alert icon={<IconPhoto/>} color="blue" mt="lg">{t`Upload a room blueprint to place the tables in their real locations. You can already assign attendees by clicking any green chair below.`}</Alert>
                                 )}
                                 <SimpleGrid className={classes.tableGrid} cols={{base: 1, sm: 2, lg: 3, xl: 4}}>
-                                    {Array.from({length: seating.table_count}, (_, index) => {
-                                        const tableNumber = index + 1;
-                                        return <TableGraphic key={tableNumber} tableNumber={tableNumber} seatsPerTable={seating.seats_per_table} assignments={assignmentsByTable.get(tableNumber) || new Map()} onSelectSeat={setSelectedSeat}/>;
-                                    })}
+                                    {seating.tables.map(table => (
+                                        <TableGraphic
+                                            key={table.table_number}
+                                            table={table}
+                                            assignments={assignmentsByTable.get(table.table_number) || new Map()}
+                                            onSelectSeat={setSelectedSeat}
+                                        />
+                                    ))}
                                 </SimpleGrid>
                             </>
                         )}

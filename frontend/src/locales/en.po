@@ -81,7 +81,7 @@ msgstr "{0} organizers"
 msgid "{0} tickets"
 msgstr "{0} tickets"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:163
+#: src/components/modals/ManageAttendeeModal/index.tsx:166
 msgid "{0} tickets belong to this order. Keep them at the same table."
 msgstr "{0} tickets belong to this order. Keep them at the same table."
 
@@ -131,8 +131,12 @@ msgid "{totalCount} ticket types"
 msgstr "{totalCount} ticket types"
 
 #: src/components/modals/EventSeatingModal/index.tsx:72
-msgid "{totalSeats} seats total; {0} currently assigned."
-msgstr "{totalSeats} seats total; {0} currently assigned."
+#~ msgid "{totalSeats} seats total; {0} currently assigned."
+#~ msgstr "{totalSeats} seats total; {0} currently assigned."
+
+#: src/components/modals/EventSeatingModal/index.tsx:147
+msgid "{totalTables} tables and {totalSeats} seats total; {0} currently assigned."
+msgstr "{totalTables} tables and {totalSeats} seats total; {0} currently assigned."
 
 #: src/components/routes/organizer/Settings/Sections/BasicSettings/index.tsx:98
 msgid "+1 234 567 890"
@@ -466,11 +470,11 @@ msgstr "Active Events"
 msgid "Add a description for this check-in list"
 msgstr "Add a description for this check-in list"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:170
+#: src/components/modals/ManageAttendeeModal/index.tsx:173
 msgid "Add any notes about the attendee. These will not be visible to the attendee."
 msgstr "Add any notes about the attendee. These will not be visible to the attendee."
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:172
+#: src/components/modals/ManageAttendeeModal/index.tsx:175
 msgid "Add any notes about the attendee..."
 msgstr "Add any notes about the attendee..."
 
@@ -506,6 +510,10 @@ msgstr "Add More tickets"
 msgid "Add New"
 msgstr "Add New"
 
+#: src/components/modals/EventSeatingModal/index.tsx:75
+msgid "Add one or more table types. Each type can have its own quantity, number of seats, and shape."
+msgstr "Add one or more table types. Each type can have its own quantity, number of seats, and shape."
+
 #: src/components/forms/QuestionForm/index.tsx:68
 msgid "Add Option"
 msgstr "Add Option"
@@ -522,6 +530,10 @@ msgstr "Add Product to Category"
 #: src/components/common/QuestionsTable/index.tsx:478
 msgid "Add Question"
 msgstr "Add Question"
+
+#: src/components/modals/EventSeatingModal/index.tsx:140
+msgid "Add table type"
+msgstr "Add table type"
 
 #: src/components/routes/account/ManageAccount/sections/TaxSettings/index.tsx:18
 msgid "Add Tax or Fee"
@@ -781,7 +793,7 @@ msgstr "Amount"
 msgid "Amount Paid"
 msgstr "Amount Paid"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:207
+#: src/components/modals/CreateAttendeeModal/index.tsx:210
 msgid "Amount paid ({0})"
 msgstr "Amount paid ({0})"
 
@@ -1049,7 +1061,7 @@ msgstr "Ask once per order"
 msgid "Ask once per product"
 msgstr "Ask once per product"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:445
+#: src/components/routes/event/TablesAndSeats/index.tsx:464
 msgid "Assign attendee to this seat"
 msgstr "Assign attendee to this seat"
 
@@ -1076,12 +1088,12 @@ msgstr "Attendance and check-in rates across all events"
 
 #: src/components/common/AttendeeTicket/index.tsx:114
 #: src/components/common/QuestionsTable/index.tsx:461
-#: src/components/routes/event/TablesAndSeats/index.tsx:444
+#: src/components/routes/event/TablesAndSeats/index.tsx:463
 #: src/components/routes/product-widget/CollectInformation/index.tsx:675
 msgid "Attendee"
 msgstr "Attendee"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:255
+#: src/components/routes/event/TablesAndSeats/index.tsx:268
 msgid "Attendee assigned to seat"
 msgstr "Attendee assigned to seat"
 
@@ -1094,7 +1106,7 @@ msgid "Attendee Created"
 msgstr "Attendee Created"
 
 #: src/components/common/AttendeeTable/index.tsx:157
-#: src/components/modals/ManageAttendeeModal/index.tsx:186
+#: src/components/modals/ManageAttendeeModal/index.tsx:189
 msgid "Attendee Details"
 msgstr "Attendee Details"
 
@@ -1126,7 +1138,7 @@ msgstr "Attendee information collection"
 msgid "Attendee not found"
 msgstr "Attendee not found"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:192
+#: src/components/modals/ManageAttendeeModal/index.tsx:195
 msgid "Attendee Notes"
 msgstr "Attendee Notes"
 
@@ -1140,7 +1152,7 @@ msgstr "Attendee Status"
 
 #: src/components/common/EmailTemplateEditor/EmailTemplateEditor.tsx:95
 #: src/components/common/EmailTemplateSettings/EmailTemplateSettingsBase.tsx:201
-#: src/components/modals/ManageAttendeeModal/index.tsx:211
+#: src/components/modals/ManageAttendeeModal/index.tsx:214
 msgid "Attendee Ticket"
 msgstr "Attendee Ticket"
 
@@ -1332,7 +1344,7 @@ msgstr "Billing Address"
 msgid "Billing Settings"
 msgstr "Billing Settings"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:353
+#: src/components/routes/event/TablesAndSeats/index.tsx:366
 msgid "Blueprint zoom"
 msgstr "Blueprint zoom"
 
@@ -1723,11 +1735,11 @@ msgstr "City"
 msgid "Clear Search Text"
 msgstr "Clear Search Text"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:399
+#: src/components/routes/event/TablesAndSeats/index.tsx:414
 msgid "Click to assign"
 msgstr "Click to assign"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:64
+#: src/components/routes/event/TablesAndSeats/index.tsx:73
 msgid "Click to assign seat {seatNumber}"
 msgstr "Click to assign seat {seatNumber}"
 
@@ -1945,8 +1957,8 @@ msgstr "Configure event details, location, checkout options, and email notificat
 msgid "Configure how attendee details are collected during checkout"
 msgstr "Configure how attendee details are collected during checkout"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:302
-#: src/components/routes/event/TablesAndSeats/index.tsx:309
+#: src/components/routes/event/TablesAndSeats/index.tsx:315
+#: src/components/routes/event/TablesAndSeats/index.tsx:322
 msgid "Configure tables"
 msgstr "Configure tables"
 
@@ -1954,13 +1966,13 @@ msgstr "Configure tables"
 msgid "Configure Taxes & Fees"
 msgstr "Configure Taxes & Fees"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:308
+#: src/components/routes/event/TablesAndSeats/index.tsx:321
 msgid "Configure the number of tables and seats per table to create the seating view."
 msgstr "Configure the number of tables and seats per table to create the seating view."
 
 #: src/components/modals/EventSeatingModal/index.tsx:53
-msgid "Configure the table layout for this event. Set both values to zero to disable seating."
-msgstr "Configure the table layout for this event. Set both values to zero to disable seating."
+#~ msgid "Configure the table layout for this event. Set both values to zero to disable seating."
+#~ msgstr "Configure the table layout for this event. Set both values to zero to disable seating."
 
 #: src/components/routes/event/Reports/PromoCodesReport/index.tsx:35
 msgid "Configured Discount"
@@ -2234,23 +2246,23 @@ msgstr "Copy to clipboard"
 msgid "Copy URL"
 msgstr "Copy URL"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:259
+#: src/components/routes/event/TablesAndSeats/index.tsx:272
 msgid "Could not assign the attendee to this seat"
 msgstr "Could not assign the attendee to this seat"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:220
+#: src/components/routes/event/TablesAndSeats/index.tsx:233
 msgid "Could not remove the room blueprint"
 msgstr "Could not remove the room blueprint"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:275
+#: src/components/routes/event/TablesAndSeats/index.tsx:288
 msgid "Could not remove the seat assignment"
 msgstr "Could not remove the seat assignment"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:189
+#: src/components/routes/event/TablesAndSeats/index.tsx:202
 msgid "Could not save the room plan"
 msgstr "Could not save the room plan"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:206
+#: src/components/routes/event/TablesAndSeats/index.tsx:219
 msgid "Could not upload the room blueprint"
 msgstr "Could not upload the room blueprint"
 
@@ -2330,7 +2342,7 @@ msgstr "create an organizer"
 msgid "Create and configure tickets and merchandise for sale."
 msgstr "Create and configure tickets and merchandise for sale."
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:238
+#: src/components/modals/CreateAttendeeModal/index.tsx:241
 msgid "Create Attendee"
 msgstr "Create Attendee"
 
@@ -2806,6 +2818,10 @@ msgstr "Details"
 msgid "Didn't receive the code?"
 msgstr "Didn't receive the code?"
 
+#: src/components/modals/EventSeatingModal/index.tsx:96
+msgid "Dinner tables"
+msgstr "Dinner tables"
+
 #: src/components/forms/CapaciyAssigmentForm/index.tsx:27
 msgid "Disabling this capacity will track sales but not stop them when the limit is reached"
 msgstr "Disabling this capacity will track sales but not stop them when the limit is reached"
@@ -2908,7 +2924,7 @@ msgstr "Draft"
 #~ msgid "Drag each table to its location, then save the table positions."
 #~ msgstr "Drag each table to its location, then save the table positions."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:358
+#: src/components/routes/event/TablesAndSeats/index.tsx:371
 msgid "Drag tables into place, adjust their shared size, then save the table layout."
 msgstr "Drag tables into place, adjust their shared size, then save the table layout."
 
@@ -2984,7 +3000,7 @@ msgstr "Early bird"
 
 #: src/components/common/QuestionsTable/index.tsx:142
 #: src/components/common/TaxAndFeeList/index.tsx:70
-#: src/components/modals/ManageAttendeeModal/index.tsx:260
+#: src/components/modals/ManageAttendeeModal/index.tsx:263
 #: src/components/modals/ManageOrderModal/index.tsx:203
 #: src/components/routes/admin/Accounts/AccountDetail/index.tsx:268
 #: src/components/routes/product-widget/OrderSummaryAndProducts/index.tsx:236
@@ -3156,8 +3172,8 @@ msgstr "Email & Notification Settings"
 msgid "Email & Templates"
 msgstr "Email & Templates"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:148
-#: src/components/modals/ManageAttendeeModal/index.tsx:122
+#: src/components/modals/CreateAttendeeModal/index.tsx:151
+#: src/components/modals/ManageAttendeeModal/index.tsx:125
 #: src/components/modals/ManageOrderModal/index.tsx:157
 msgid "Email address"
 msgstr "Email address"
@@ -3302,7 +3318,7 @@ msgstr "Ended"
 
 #: src/components/common/LanguageSwitcher/index.tsx:18
 #: src/components/common/LanguageSwitcher/index.tsx:69
-#: src/components/modals/CreateAttendeeModal/index.tsx:187
+#: src/components/modals/CreateAttendeeModal/index.tsx:190
 msgid "English"
 msgstr "English"
 
@@ -3318,7 +3334,7 @@ msgstr "Enter affiliate email (optional)"
 msgid "Enter affiliate name"
 msgstr "Enter affiliate name"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:212
+#: src/components/modals/CreateAttendeeModal/index.tsx:215
 msgid "Enter an amount excluding taxes and fees."
 msgstr "Enter an amount excluding taxes and fees."
 
@@ -3660,7 +3676,7 @@ msgstr "Expiry Date"
 #: src/components/routes/event/Affiliates/index.tsx:81
 #: src/components/routes/event/attendees.tsx:205
 #: src/components/routes/event/orders.tsx:142
-#: src/components/routes/event/TablesAndSeats/index.tsx:299
+#: src/components/routes/event/TablesAndSeats/index.tsx:312
 msgid "Export"
 msgstr "Export"
 
@@ -3965,6 +3981,7 @@ msgstr "Fee Currency"
 msgid "Fee Handling"
 msgstr "Fee Handling"
 
+#: src/components/common/InlineOrderSummary/index.tsx:138
 #: src/components/common/OrdersTable/index.tsx:359
 #: src/components/forms/ProductForm/index.tsx:409
 #: src/components/routes/organizer/Reports/RevenueSummaryReport/index.tsx:54
@@ -4042,8 +4059,8 @@ msgstr "First attendee"
 msgid "First Invoice Number"
 msgstr "First Invoice Number"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:134
-#: src/components/modals/ManageAttendeeModal/index.tsx:118
+#: src/components/modals/CreateAttendeeModal/index.tsx:137
+#: src/components/modals/ManageAttendeeModal/index.tsx:121
 #: src/components/modals/ManageOrderModal/index.tsx:144
 #: src/components/routes/product-widget/CollectInformation/index.tsx:479
 #: src/components/routes/product-widget/CollectInformation/index.tsx:695
@@ -4430,7 +4447,7 @@ msgstr "Homepage Designer"
 msgid "Homepage Preview"
 msgstr "Homepage Preview"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:118
+#: src/components/modals/ManageAttendeeModal/index.tsx:121
 #: src/components/modals/ManageOrderModal/index.tsx:145
 msgid "Homer"
 msgstr "Homer"
@@ -4786,7 +4803,7 @@ msgstr "Job queued for retry"
 msgid "John"
 msgstr "John"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:142
+#: src/components/modals/CreateAttendeeModal/index.tsx:145
 msgid "Johnson"
 msgstr "Johnson"
 
@@ -4825,7 +4842,7 @@ msgid "Label"
 msgstr "Label"
 
 #: src/components/common/AttendeeDetails/index.tsx:58
-#: src/components/modals/CreateAttendeeModal/index.tsx:186
+#: src/components/modals/CreateAttendeeModal/index.tsx:189
 #: src/components/routes/profile/ManageProfile/index.tsx:196
 msgid "Language"
 msgstr "Language"
@@ -4879,8 +4896,8 @@ msgstr "Last 90 days"
 msgid "Last login"
 msgstr "Last login"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:141
-#: src/components/modals/ManageAttendeeModal/index.tsx:119
+#: src/components/modals/CreateAttendeeModal/index.tsx:144
+#: src/components/modals/ManageAttendeeModal/index.tsx:122
 #: src/components/modals/ManageOrderModal/index.tsx:150
 msgid "Last name"
 msgstr "Last name"
@@ -5094,7 +5111,7 @@ msgstr "Manage Profile"
 msgid "Manage taxes and fees which can be applied to your products"
 msgstr "Manage taxes and fees which can be applied to your products"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:122
+#: src/components/modals/CreateAttendeeModal/index.tsx:125
 msgid "Manage tickets"
 msgstr "Manage tickets"
 
@@ -5126,8 +5143,8 @@ msgstr "Manual offer"
 msgid "Manually add an Attendee"
 msgstr "Manually add an Attendee"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:113
-#: src/components/modals/CreateAttendeeModal/index.tsx:129
+#: src/components/modals/CreateAttendeeModal/index.tsx:116
+#: src/components/modals/CreateAttendeeModal/index.tsx:132
 msgid "Manually Add Attendee"
 msgstr "Manually Add Attendee"
 
@@ -5562,7 +5579,7 @@ msgstr "No Payment Required"
 msgid "No popular events in the last 14 days"
 msgstr "No popular events in the last 14 days"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:216
+#: src/components/modals/ManageAttendeeModal/index.tsx:219
 msgid "No product associated with this attendee."
 msgstr "No product associated with this attendee."
 
@@ -5590,7 +5607,7 @@ msgstr "No Products Yet"
 msgid "No Promo Codes to show"
 msgstr "No Promo Codes to show"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:232
+#: src/components/modals/ManageAttendeeModal/index.tsx:235
 msgid "No questions answered by this attendee."
 msgstr "No questions answered by this attendee."
 
@@ -5632,7 +5649,11 @@ msgstr "No Search Results"
 msgid "No search results."
 msgstr "No search results."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:307
+#: src/components/modals/EventSeatingModal/index.tsx:145
+msgid "No table types configured. Saving will disable seating."
+msgstr "No table types configured. Saving will disable seating."
+
+#: src/components/routes/event/TablesAndSeats/index.tsx:320
 msgid "No tables configured"
 msgstr "No tables configured"
 
@@ -5644,7 +5665,7 @@ msgstr "No Taxes or Fees have been added."
 msgid "No Tickets Found"
 msgstr "No Tickets Found"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:444
+#: src/components/routes/event/TablesAndSeats/index.tsx:463
 msgid "No unseated attendees found"
 msgstr "No unseated attendees found"
 
@@ -5706,7 +5727,7 @@ msgstr "Not Checked In"
 msgid "Not Eligible"
 msgstr "Not Eligible"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:169
+#: src/components/modals/ManageAttendeeModal/index.tsx:172
 #: src/components/modals/ManageOrderModal/index.tsx:164
 msgid "Notes"
 msgstr "Notes"
@@ -5727,7 +5748,7 @@ msgstr "Notify organizer of new orders"
 msgid "Number of days allowed for payment (leave blank to omit payment terms from invoices)"
 msgstr "Number of days allowed for payment (leave blank to omit payment terms from invoices)"
 
-#: src/components/modals/EventSeatingModal/index.tsx:58
+#: src/components/modals/EventSeatingModal/index.tsx:110
 msgid "Number of tables"
 msgstr "Number of tables"
 
@@ -5735,12 +5756,12 @@ msgstr "Number of tables"
 msgid "Number Prefix"
 msgstr "Number Prefix"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:56
-#: src/components/routes/event/TablesAndSeats/index.tsx:317
+#: src/components/routes/event/TablesAndSeats/index.tsx:65
+#: src/components/routes/event/TablesAndSeats/index.tsx:330
 msgid "occupied"
 msgstr "occupied"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:321
+#: src/components/routes/event/TablesAndSeats/index.tsx:334
 msgid "Occupied"
 msgstr "Occupied"
 
@@ -5882,11 +5903,11 @@ msgstr "Only show start date and time"
 msgid "Only visible with promo code"
 msgstr "Only visible with promo code"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:318
+#: src/components/routes/event/TablesAndSeats/index.tsx:331
 msgid "open"
 msgstr "open"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:322
+#: src/components/routes/event/TablesAndSeats/index.tsx:335
 msgid "Open"
 msgstr "Open"
 
@@ -5895,7 +5916,7 @@ msgstr "Open"
 msgid "Open Check-In Page"
 msgstr "Open Check-In Page"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:62
+#: src/components/routes/event/TablesAndSeats/index.tsx:71
 msgid "Open seat"
 msgstr "Open seat"
 
@@ -5917,8 +5938,8 @@ msgstr "Option {i}"
 msgid "Optional additional information to appear on all invoices (e.g., payment terms, late payment fees, return policy)"
 msgstr "Optional additional information to appear on all invoices (e.g., payment terms, late payment fees, return policy)"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:175
-#: src/components/modals/ManageAttendeeModal/index.tsx:140
+#: src/components/modals/CreateAttendeeModal/index.tsx:178
+#: src/components/modals/ManageAttendeeModal/index.tsx:143
 msgid "Optional number shown on the attendee ticket."
 msgstr "Optional number shown on the attendee ticket."
 
@@ -5988,7 +6009,7 @@ msgid "Order Date"
 msgstr "Order Date"
 
 #: src/components/common/OrdersTable/index.tsx:277
-#: src/components/modals/ManageAttendeeModal/index.tsx:205
+#: src/components/modals/ManageAttendeeModal/index.tsx:208
 #: src/components/modals/ManageOrderModal/index.tsx:86
 #: src/components/routes/product-widget/OrderSummaryAndProducts/index.tsx:591
 msgid "Order Details"
@@ -6099,7 +6120,7 @@ msgstr "Order Status"
 msgid "Order statuses"
 msgstr "Order statuses"
 
-#: src/components/common/InlineOrderSummary/index.tsx:38
+#: src/components/common/InlineOrderSummary/index.tsx:52
 #: src/components/modals/ManageOrderModal/index.tsx:105
 msgid "Order Summary"
 msgstr "Order Summary"
@@ -6306,7 +6327,7 @@ msgstr "Page views"
 msgid "Page Views"
 msgstr "Page Views"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:222
+#: src/components/modals/CreateAttendeeModal/index.tsx:225
 msgid "paid"
 msgstr "paid"
 
@@ -6385,11 +6406,11 @@ msgstr "Paste this where you want the widget to appear."
 msgid "Paste URL"
 msgstr "Paste URL"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:135
+#: src/components/modals/CreateAttendeeModal/index.tsx:138
 msgid "Patrick"
 msgstr "Patrick"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:149
+#: src/components/modals/CreateAttendeeModal/index.tsx:152
 msgid "patrick@acme.com"
 msgstr "patrick@acme.com"
 
@@ -6580,7 +6601,7 @@ msgstr "Phone"
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:282
+#: src/components/routes/event/TablesAndSeats/index.tsx:295
 msgid "Place tables on the room blueprint and assign attendees directly to chairs."
 msgstr "Place tables on the room blueprint and assign attendees directly to chairs."
 
@@ -6837,8 +6858,8 @@ msgstr "Print to PDF"
 #: src/components/common/AttendeeTable/index.tsx:253
 #: src/components/common/AttendeeTicket/index.tsx:121
 #: src/components/common/CheckIn/AttendeeList.tsx:96
-#: src/components/modals/CreateAttendeeModal/index.tsx:174
-#: src/components/modals/ManageAttendeeModal/index.tsx:139
+#: src/components/modals/CreateAttendeeModal/index.tsx:177
+#: src/components/modals/ManageAttendeeModal/index.tsx:142
 msgid "Printed Ticket Number"
 msgstr "Printed Ticket Number"
 
@@ -6860,7 +6881,7 @@ msgstr "Processing order"
 #: src/components/common/ProductsTable/SortableProduct/index.tsx:285
 #: src/components/common/ProductsTable/SortableProduct/index.tsx:482
 #: src/components/common/WaitlistTable/index.tsx:170
-#: src/components/modals/ManageAttendeeModal/index.tsx:127
+#: src/components/modals/ManageAttendeeModal/index.tsx:130
 #: src/components/modals/OfferWaitlistModal/index.tsx:161
 msgid "Product"
 msgstr "Product"
@@ -7047,7 +7068,7 @@ msgstr "Question Title"
 msgid "Questions"
 msgstr "Questions"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:223
+#: src/components/modals/ManageAttendeeModal/index.tsx:226
 #: src/components/modals/ManageOrderModal/index.tsx:111
 msgid "Questions & Answers"
 msgstr "Questions & Answers"
@@ -7132,6 +7153,10 @@ msgstr "Recipients are available after the message is sent"
 #: src/components/routes/event/EventDashboard/index.tsx:143
 msgid "Reconnect Stripe →"
 msgstr "Reconnect Stripe →"
+
+#: src/components/modals/EventSeatingModal/index.tsx:68
+msgid "Rectangle"
+msgstr "Rectangle"
 
 #: src/components/routes/organizer/Settings/Sections/SocialLinks/index.tsx:80
 msgid "Reddit"
@@ -7243,15 +7268,19 @@ msgstr "remove"
 msgid "Remove"
 msgstr "Remove"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:345
+#: src/components/routes/event/TablesAndSeats/index.tsx:358
 msgid "Remove blueprint"
 msgstr "Remove blueprint"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:440
+#: src/components/routes/event/TablesAndSeats/index.tsx:459
 msgid "Remove seat assignment"
 msgstr "Remove seat assignment"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:289
+#: src/components/modals/EventSeatingModal/index.tsx:87
+msgid "Remove table type"
+msgstr "Remove table type"
+
+#: src/components/routes/event/TablesAndSeats/index.tsx:302
 msgid "Replace blueprint"
 msgstr "Replace blueprint"
 
@@ -7425,21 +7454,25 @@ msgstr "Revoke Offer"
 msgid "Role"
 msgstr "Role"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:333
+#: src/components/routes/event/TablesAndSeats/index.tsx:346
 msgid "Room blueprint"
 msgstr "Room blueprint"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:218
+#: src/components/routes/event/TablesAndSeats/index.tsx:231
 msgid "Room blueprint removed"
 msgstr "Room blueprint removed"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:200
+#: src/components/routes/event/TablesAndSeats/index.tsx:213
 msgid "Room blueprint uploaded"
 msgstr "Room blueprint uploaded"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:188
+#: src/components/routes/event/TablesAndSeats/index.tsx:201
 msgid "Room plan saved"
 msgstr "Room plan saved"
+
+#: src/components/modals/EventSeatingModal/index.tsx:66
+msgid "Round"
+msgstr "Round"
 
 #: src/components/forms/ProductForm/index.tsx:104
 #: src/components/forms/ProductForm/index.tsx:457
@@ -7536,7 +7569,7 @@ msgstr "San Francisco"
 msgid "Save"
 msgstr "Save"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:270
+#: src/components/modals/ManageAttendeeModal/index.tsx:273
 #: src/components/modals/ManageOrderModal/index.tsx:175
 #: src/components/routes/admin/Configurations/index.tsx:268
 #: src/components/routes/event/HomepageDesigner/index.tsx:293
@@ -7552,7 +7585,7 @@ msgstr "Save Configuration"
 msgid "Save Organizer"
 msgstr "Save Organizer"
 
-#: src/components/modals/EventSeatingModal/index.tsx:77
+#: src/components/modals/EventSeatingModal/index.tsx:151
 msgid "Save seating configuration"
 msgstr "Save seating configuration"
 
@@ -7564,7 +7597,7 @@ msgstr "Save Settings"
 msgid "Save Social Links"
 msgstr "Save Social Links"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:344
+#: src/components/routes/event/TablesAndSeats/index.tsx:357
 msgid "Save table layout"
 msgstr "Save table layout"
 
@@ -7633,7 +7666,7 @@ msgstr "Search by event title or organizer..."
 msgid "Search by job name or exception..."
 msgstr "Search by job name or exception..."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:444
+#: src/components/routes/event/TablesAndSeats/index.tsx:463
 msgid "Search by name or email"
 msgstr "Search by name or email"
 
@@ -7695,28 +7728,28 @@ msgstr "Seat"
 #~ msgid "Seat {seatNumber} is open"
 #~ msgstr "Seat {seatNumber} is open"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:69
+#: src/components/routes/event/TablesAndSeats/index.tsx:78
 msgid "Seat {seatNumber}, occupied by {attendeeName}"
 msgstr "Seat {seatNumber}, occupied by {attendeeName}"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:69
+#: src/components/routes/event/TablesAndSeats/index.tsx:78
 msgid "Seat {seatNumber}, open"
 msgstr "Seat {seatNumber}, open"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:272
+#: src/components/routes/event/TablesAndSeats/index.tsx:285
 msgid "Seat assignment removed"
 msgstr "Seat assignment removed"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:164
-#: src/components/modals/ManageAttendeeModal/index.tsx:155
+#: src/components/modals/CreateAttendeeModal/index.tsx:167
+#: src/components/modals/ManageAttendeeModal/index.tsx:158
 msgid "Seat number"
 msgstr "Seat number"
 
-#: src/components/modals/EventSeatingModal/index.tsx:40
+#: src/components/modals/EventSeatingModal/index.tsx:42
 msgid "Seating configuration saved"
 msgstr "Seating configuration saved"
 
-#: src/components/modals/EventSeatingModal/index.tsx:65
+#: src/components/modals/EventSeatingModal/index.tsx:118
 msgid "Seats per table"
 msgstr "Seats per table"
 
@@ -7810,7 +7843,7 @@ msgstr "Select event types"
 msgid "Select organizer"
 msgstr "Select organizer"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:126
+#: src/components/modals/ManageAttendeeModal/index.tsx:129
 msgid "Select Product"
 msgstr "Select Product"
 
@@ -7847,7 +7880,7 @@ msgstr "Select the country where VAT is registered"
 msgid "Select the messaging tier for this account. This controls message limits and link permissions."
 msgstr "Select the messaging tier for this account. This controls message limits and link permissions."
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:192
+#: src/components/modals/CreateAttendeeModal/index.tsx:195
 msgid "Select Ticket"
 msgstr "Select Ticket"
 
@@ -7921,7 +7954,7 @@ msgstr "Send Message"
 msgid "Send now"
 msgstr "Send now"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:234
+#: src/components/modals/CreateAttendeeModal/index.tsx:237
 msgid "Send order confirmation and ticket email"
 msgstr "Send order confirmation and ticket email"
 
@@ -8127,7 +8160,7 @@ msgstr "Shows common address fields, including country"
 msgid "Signed Up"
 msgstr "Signed Up"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:119
+#: src/components/modals/ManageAttendeeModal/index.tsx:122
 #: src/components/modals/ManageOrderModal/index.tsx:151
 msgid "Simpson"
 msgstr "Simpson"
@@ -8182,7 +8215,7 @@ msgstr "Sold Out"
 
 #: src/components/common/ErrorDisplay/index.tsx:15
 #: src/components/routes/auth/AcceptInvitation/index.tsx:48
-#: src/components/routes/event/TablesAndSeats/index.tsx:240
+#: src/components/routes/event/TablesAndSeats/index.tsx:253
 #: src/components/routes/product-widget/CollectInformation/index.tsx:430
 #: src/components/routes/product-widget/Payment/PaymentMethods/Stripe/index.tsx:64
 msgid "Something went wrong"
@@ -8237,6 +8270,10 @@ msgstr "Spanish"
 #: src/constants/eventCategories.ts:8
 msgid "Sports"
 msgstr "Sports"
+
+#: src/components/modals/EventSeatingModal/index.tsx:67
+msgid "Square"
+msgstr "Square"
 
 #: src/components/forms/ProductForm/index.tsx:156
 msgid "Standard product with a fixed price"
@@ -8361,6 +8398,7 @@ msgstr "Subject will appear here"
 msgid "Subject:"
 msgstr "Subject:"
 
+#: src/components/common/InlineOrderSummary/index.tsx:130
 #: src/components/common/OrderSummary/index.tsx:41
 msgid "Subtotal"
 msgstr "Subtotal"
@@ -8388,7 +8426,7 @@ msgstr "Successfully confirmed email address"
 msgid "Successfully confirmed email change"
 msgstr "Successfully confirmed email change"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:98
+#: src/components/modals/CreateAttendeeModal/index.tsx:101
 msgid "Successfully created attendee"
 msgstr "Successfully created attendee"
 
@@ -8429,7 +8467,7 @@ msgstr "Successfully removed from waitlist"
 msgid "Successfully Updated Address"
 msgstr "Successfully Updated Address"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:104
+#: src/components/modals/ManageAttendeeModal/index.tsx:107
 msgid "Successfully updated attendee"
 msgstr "Successfully updated attendee"
 
@@ -8567,7 +8605,7 @@ msgstr "T-shirt"
 #: src/components/common/AttendeeDetails/index.tsx:52
 #: src/components/common/AttendeeTable/index.tsx:258
 #: src/components/common/CheckIn/AttendeeList.tsx:101
-#: src/components/routes/event/TablesAndSeats/index.tsx:236
+#: src/components/routes/event/TablesAndSeats/index.tsx:249
 msgid "Table"
 msgstr "Table"
 
@@ -8575,12 +8613,12 @@ msgstr "Table"
 #~ msgid "Table {activeTable} size"
 #~ msgstr "Table {activeTable} size"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:434
+#: src/components/routes/event/TablesAndSeats/index.tsx:453
 msgid "Table {selectedTableNumber}, seat {selectedSeatNumber}"
 msgstr "Table {selectedTableNumber}, seat {selectedSeatNumber}"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:55
-#: src/components/routes/event/TablesAndSeats/index.tsx:392
+#: src/components/routes/event/TablesAndSeats/index.tsx:63
+#: src/components/routes/event/TablesAndSeats/index.tsx:407
 msgid "Table {tableNumber}"
 msgstr "Table {tableNumber}"
 
@@ -8588,29 +8626,37 @@ msgstr "Table {tableNumber}"
 msgid "Table & Seat"
 msgstr "Table & Seat"
 
-#: src/components/modals/EventSeatingModal/index.tsx:50
+#: src/components/modals/EventSeatingModal/index.tsx:72
 msgid "Table & Seat Management"
 msgstr "Table & Seat Management"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:157
-#: src/components/modals/ManageAttendeeModal/index.tsx:148
+#: src/components/modals/CreateAttendeeModal/index.tsx:160
+#: src/components/modals/ManageAttendeeModal/index.tsx:151
 msgid "Table number"
 msgstr "Table number"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:334
+#: src/components/routes/event/TablesAndSeats/index.tsx:347
 msgid "Table overview"
 msgstr "Table overview"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:349
+#: src/components/modals/EventSeatingModal/index.tsx:103
+msgid "Table shape"
+msgstr "Table shape"
+
+#: src/components/routes/event/TablesAndSeats/index.tsx:362
 msgid "Table size"
 msgstr "Table size"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:316
+#: src/components/modals/EventSeatingModal/index.tsx:53
+msgid "Table type {typeNumber}"
+msgstr "Table type {typeNumber}"
+
+#: src/components/routes/event/TablesAndSeats/index.tsx:329
 msgid "tables"
 msgstr "tables"
 
 #: src/components/layouts/Event/index.tsx:120
-#: src/components/routes/event/TablesAndSeats/index.tsx:283
+#: src/components/routes/event/TablesAndSeats/index.tsx:296
 msgid "Tables & Seats"
 msgstr "Tables & Seats"
 
@@ -8660,6 +8706,7 @@ msgstr "Tax or Fee deleted successfully"
 msgid "Tax Summary"
 msgstr "Tax Summary"
 
+#: src/components/common/InlineOrderSummary/index.tsx:171
 #: src/components/forms/ProductForm/index.tsx:406
 #: src/components/routes/organizer/Reports/RevenueSummaryReport/index.tsx:48
 msgid "Taxes"
@@ -8748,7 +8795,7 @@ msgstr "That promo code is invalid"
 msgid "The background color of the page. When using cover image, this is applied as an overlay."
 msgstr "The background color of the page. When using cover image, this is applied as an overlay."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:201
+#: src/components/routes/event/TablesAndSeats/index.tsx:214
 msgid "The blueprint uploaded, but could not be attached to the room plan"
 msgstr "The blueprint uploaded, but could not be attached to the room plan"
 
@@ -8801,7 +8848,7 @@ msgstr "The event you're looking for is not available at the moment. It may have
 msgid "The full order amount will be refunded to the customer's original payment method."
 msgstr "The full order amount will be refunded to the customer's original payment method."
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:188
+#: src/components/modals/CreateAttendeeModal/index.tsx:191
 msgid "The language the attendee will receive emails in."
 msgstr "The language the attendee will receive emails in."
 
@@ -9103,7 +9150,6 @@ msgid "This will not be visible to customers, but helps you identify the affilia
 msgstr "This will not be visible to customers, but helps you identify the affiliate."
 
 #: src/components/common/AttendeeTable/index.tsx:405
-#: src/components/common/InlineOrderSummary/index.tsx:78
 #: src/components/routes/my-tickets/index.tsx:85
 msgid "ticket"
 msgstr "ticket"
@@ -9111,7 +9157,7 @@ msgstr "ticket"
 #: src/components/common/ProductsTable/SortableProduct/index.tsx:276
 #: src/components/common/ProductsTable/SortableProduct/index.tsx:482
 #: src/components/forms/ProductForm/index.tsx:139
-#: src/components/modals/CreateAttendeeModal/index.tsx:193
+#: src/components/modals/CreateAttendeeModal/index.tsx:196
 msgid "Ticket"
 msgstr "Ticket"
 
@@ -9205,7 +9251,6 @@ msgstr "Ticket Type"
 msgid "Ticketing & Sales"
 msgstr "Ticketing & Sales"
 
-#: src/components/common/InlineOrderSummary/index.tsx:78
 #: src/components/routes/my-tickets/index.tsx:85
 msgid "tickets"
 msgstr "tickets"
@@ -9307,6 +9352,7 @@ msgid "Top Organizers (Last 14 Days)"
 msgstr "Top Organizers (Last 14 Days)"
 
 #: src/components/common/AdminOrdersTable/index.tsx:81
+#: src/components/common/InlineOrderSummary/index.tsx:201
 #: src/components/common/OrderSummary/index.tsx:92
 msgid "Total"
 msgstr "Total"
@@ -9447,6 +9493,10 @@ msgstr "Type"
 #: src/components/routes/organizer/Settings/Sections/DangerZoneSettings/index.tsx:105
 msgid "Type \"delete\" to confirm"
 msgstr "Type \"delete\" to confirm"
+
+#: src/components/modals/EventSeatingModal/index.tsx:95
+msgid "Type name"
+msgstr "Type name"
 
 #: src/components/common/Editor/Controls/InsertLiquidVariableControl.tsx:58
 #~ msgid "Type of ticket"
@@ -9594,11 +9644,11 @@ msgstr "Upload a cover image for your organizer"
 msgid "Upload a logo for your organizer"
 msgstr "Upload a logo for your organizer"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:419
+#: src/components/routes/event/TablesAndSeats/index.tsx:434
 msgid "Upload a room blueprint to place the tables in their real locations. You can already assign attendees by clicking any green chair below."
 msgstr "Upload a room blueprint to place the tables in their real locations. You can already assign attendees by clicking any green chair below."
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:289
+#: src/components/routes/event/TablesAndSeats/index.tsx:302
 msgid "Upload blueprint"
 msgstr "Upload blueprint"
 
@@ -9851,7 +9901,7 @@ msgstr "Verifying..."
 msgid "Vietnamese"
 msgstr "Vietnamese"
 
-#: src/components/modals/ManageAttendeeModal/index.tsx:259
+#: src/components/modals/ManageAttendeeModal/index.tsx:262
 #: src/components/modals/ManageOrderModal/index.tsx:200
 msgid "View"
 msgstr "View"
@@ -9868,7 +9918,7 @@ msgstr "View and download reports across all your events. Only completed orders 
 msgid "View Answers"
 msgstr "View Answers"
 
-#: src/components/routes/event/TablesAndSeats/index.tsx:439
+#: src/components/routes/event/TablesAndSeats/index.tsx:458
 msgid "View attendee"
 msgstr "View attendee"
 
@@ -10330,7 +10380,7 @@ msgstr "Widget Preview"
 msgid "Widget Settings"
 msgstr "Widget Settings"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:238
+#: src/components/modals/CreateAttendeeModal/index.tsx:241
 msgid "Working"
 msgstr "Working"
 
@@ -10345,7 +10395,7 @@ msgstr "Working"
 #: src/components/modals/EditPromoCodeModal/index.tsx:84
 #: src/components/modals/EditQuestionModal/index.tsx:101
 #: src/components/modals/JoinWaitlistModal/index.tsx:188
-#: src/components/modals/ManageAttendeeModal/index.tsx:270
+#: src/components/modals/ManageAttendeeModal/index.tsx:273
 #: src/components/modals/ManageOrderModal/index.tsx:175
 #: src/components/routes/auth/Register/index.tsx:137
 msgid "Working..."
@@ -10487,7 +10537,7 @@ msgstr "You must agree to receive messages"
 msgid "You must agree to the terms and conditions"
 msgstr "You must agree to the terms and conditions"
 
-#: src/components/modals/CreateAttendeeModal/index.tsx:114
+#: src/components/modals/CreateAttendeeModal/index.tsx:117
 msgid "You must create a ticket before you can manually add an attendee."
 msgstr "You must create a ticket before you can manually add an attendee."
 

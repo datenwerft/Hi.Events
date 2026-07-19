@@ -1,11 +1,12 @@
 import {Document, Image, Page, StyleSheet, Text, View, pdf} from '@react-pdf/renderer';
-import {EventSeatAssignment, EventSeatingBlueprint, EventTablePosition} from '../../../../types';
+import {EventSeatAssignment, EventSeatingBlueprint, EventSeatingTable, EventTablePosition} from '../../../../types';
+import {getSeatPosition} from './tableGeometry';
 
 interface SeatingPlanPdfProps {
     assignments: EventSeatAssignment[];
     blueprint: EventSeatingBlueprint;
     positions: EventTablePosition[];
-    seatsPerTable: number;
+    tables: EventSeatingTable[];
     tableLabel: string;
 }
 
@@ -34,7 +35,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#ffffffeb',
         borderColor: '#868e96',
-        borderRadius: 999,
         borderStyle: 'solid',
         borderWidth: 1.5,
         justifyContent: 'center',
@@ -70,18 +70,22 @@ const getPageSize = (blueprint: EventSeatingBlueprint): [number, number] => {
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-const SeatingPlanPdf = ({assignments, blueprint, positions, seatsPerTable, tableLabel}: SeatingPlanPdfProps) => {
+const SeatingPlanPdf = ({assignments, blueprint, positions, tables, tableLabel}: SeatingPlanPdfProps) => {
     const [pageWidth, pageHeight] = getPageSize(blueprint);
     const assignedSeats = new Set(assignments.map(assignment => `${assignment.table_number}:${assignment.seat_number}`));
+    const tablesByNumber = new Map(tables.map(table => [table.table_number, table]));
 
     return (
         <Document>
             <Page size={[pageWidth, pageHeight]} style={styles.page}>
                 <Image src={blueprint.url} style={styles.blueprint}/>
                 {positions.map(position => {
+                    const table = tablesByNumber.get(position.table_number);
+                    if (!table) return null;
                     const scale = (position.size || 100) / 100;
                     const tableSize = TABLE_SIZE * scale;
-                    const tableTopSize = TABLE_TOP_SIZE * scale;
+                    const tableTopWidth = TABLE_TOP_SIZE * (table.shape === 'rectangle' ? 1.35 : 1) * scale;
+                    const tableTopHeight = TABLE_TOP_SIZE * (table.shape === 'rectangle' ? 0.72 : 1) * scale;
                     const seatSize = SEAT_SIZE * scale;
                     const tableLeft = pageWidth * (position.x / 100) - tableSize / 2;
                     const tableTop = pageHeight * (position.y / 100) - tableSize / 2;
@@ -95,20 +99,21 @@ const SeatingPlanPdf = ({assignments, blueprint, positions, seatsPerTable, table
                                 style={[
                                     styles.tableTop,
                                     {
-                                        height: tableTopSize,
-                                        left: (tableSize - tableTopSize) / 2,
-                                        top: (tableSize - tableTopSize) / 2,
-                                        width: tableTopSize,
+                                        borderRadius: table.shape === 'round' ? 999 : 4,
+                                        height: tableTopHeight,
+                                        left: (tableSize - tableTopWidth) / 2,
+                                        top: (tableSize - tableTopHeight) / 2,
+                                        width: tableTopWidth,
                                     },
                                 ]}
                             >
                                 <Text style={styles.tableLabel}>{tableLabel} {position.table_number}</Text>
                             </View>
-                            {Array.from({length: seatsPerTable}, (_, index) => {
+                            {Array.from({length: table.seats_per_table}, (_, index) => {
                                 const seatNumber = index + 1;
-                                const angle = ((Math.PI * 2) / seatsPerTable) * index - Math.PI / 2;
-                                const centerX = tableSize / 2 + Math.cos(angle) * tableSize * 0.41;
-                                const centerY = tableSize / 2 + Math.sin(angle) * tableSize * 0.41;
+                                const seatPosition = getSeatPosition(table.shape, index, table.seats_per_table);
+                                const centerX = tableSize * (seatPosition.x / 100);
+                                const centerY = tableSize * (seatPosition.y / 100);
                                 const isOccupied = assignedSeats.has(`${position.table_number}:${seatNumber}`);
 
                                 return (

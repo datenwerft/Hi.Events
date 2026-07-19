@@ -57,6 +57,9 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
     });
 
     const [activeTab, setActiveTab] = useState("view");
+    const selectedSeatingTable = seating?.tables?.find(
+        table => table.table_number === Number(form.values.table_number),
+    );
 
     useEffect(() => {
         if (attendee) {
@@ -140,7 +143,7 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
                 description={t`Optional number shown on the attendee ticket.`}
                 maxLength={100}
             />
-            {seating && seating.table_count > 0 && (
+            {seating && seating.tables.length > 0 && (
                 <>
                     <InputGroup>
                         <NumberInput
@@ -154,7 +157,7 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
                             {...form.getInputProps('seat_number')}
                             label={t`Seat number`}
                             min={1}
-                            max={seating.seats_per_table}
+                            max={selectedSeatingTable?.seats_per_table || seating.seats_per_table}
                             allowDecimal={false}
                         />
                     </InputGroup>

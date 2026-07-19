@@ -52,7 +52,6 @@
   align-items: center;
   background: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
   border: 2px solid light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-3));
-  border-radius: 50%;
   display: flex;
   flex-direction: column;
   height: 54%;
@@ -61,6 +60,22 @@
   position: absolute;
   top: 23%;
   width: 54%;
+}
+
+.tableShapeRound {
+  border-radius: 50%;
+}
+
+.tableShapeSquare {
+  border-radius: 8px;
+}
+
+.tableTop.tableShapeRectangle {
+  border-radius: 8px;
+  height: 42%;
+  left: 15%;
+  top: 29%;
+  width: 70%;
 }
 
 .seat {
@@ -150,7 +165,6 @@
   align-items: center;
   background: light-dark(rgba(255, 255, 255, 0.92), rgba(37, 38, 43, 0.92));
   border: 2px solid light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-2));
-  border-radius: 50%;
   cursor: grab;
   display: flex;
   font-size: 11px;
@@ -166,6 +180,14 @@
   &:active {
     cursor: grabbing;
   }
+}
+
+.roomTableTop.tableShapeRectangle {
+  border-radius: 6px;
+  height: 46px;
+  left: 16px;
+  top: 32px;
+  width: 78px;
 }
 
 .roomSeat {

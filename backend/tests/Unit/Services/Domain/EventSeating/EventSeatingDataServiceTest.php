@@ -11,13 +11,17 @@ use Tests\TestCase;
 
 class EventSeatingDataServiceTest extends TestCase
 {
-    public function testItReturnsLayoutAndAttendeeAssignments(): void
+    public function test_it_returns_layout_and_attendee_assignments(): void
     {
         $settingsQuery = Mockery::mock(Builder::class);
         $settingsQuery->shouldReceive('where')->with('event_id', 42)->andReturnSelf();
-        $settingsQuery->shouldReceive('first')->andReturn((object)[
+        $settingsQuery->shouldReceive('first')->andReturn((object) [
             'table_count' => 2,
             'seats_per_table' => 4,
+            'table_types' => json_encode([
+                ['id' => 'round', 'name' => 'Rounds', 'shape' => 'round', 'table_count' => 1, 'seats_per_table' => 4],
+                ['id' => 'long', 'name' => 'Long tables', 'shape' => 'rectangle', 'table_count' => 2, 'seats_per_table' => 6],
+            ]),
             'blueprint_image_id' => null,
             'table_positions' => '[{"table_number":1,"x":25,"y":50,"size":125}]',
         ]);
@@ -32,7 +36,7 @@ class EventSeatingDataServiceTest extends TestCase
         $attendeesQuery->shouldReceive('orderBy')->with('table_number')->andReturnSelf();
         $attendeesQuery->shouldReceive('orderBy')->with('seat_number')->andReturnSelf();
         $attendeesQuery->shouldReceive('get')->andReturn(new Collection([
-            (object)[
+            (object) [
                 'id' => 7,
                 'first_name' => 'Jane',
                 'last_name' => 'Attendee',
@@ -52,7 +56,7 @@ class EventSeatingDataServiceTest extends TestCase
         $availableAttendeesQuery->shouldReceive('orderBy')->with('last_name')->andReturnSelf();
         $availableAttendeesQuery->shouldReceive('orderBy')->with('first_name')->andReturnSelf();
         $availableAttendeesQuery->shouldReceive('get')->andReturn(new Collection([
-            (object)[
+            (object) [
                 'id' => 8,
                 'first_name' => 'Open',
                 'last_name' => 'Guest',
@@ -69,11 +73,15 @@ class EventSeatingDataServiceTest extends TestCase
             ->twice()
             ->andReturn($attendeesQuery, $availableAttendeesQuery);
 
-        $result = (new EventSeatingDataService())->get(42);
+        $result = (new EventSeatingDataService)->get(42);
 
-        $this->assertSame(2, $result['table_count']);
-        $this->assertSame(4, $result['seats_per_table']);
-        $this->assertSame(8, $result['total_seats']);
+        $this->assertSame(3, $result['table_count']);
+        $this->assertSame(6, $result['seats_per_table']);
+        $this->assertSame(16, $result['total_seats']);
+        $this->assertSame('round', $result['tables'][0]['shape']);
+        $this->assertSame(4, $result['tables'][0]['seats_per_table']);
+        $this->assertSame('rectangle', $result['tables'][1]['shape']);
+        $this->assertSame(6, $result['tables'][2]['seats_per_table']);
         $this->assertSame(1, $result['assigned_seats']);
         $this->assertSame([
             'attendee_id' => 7,

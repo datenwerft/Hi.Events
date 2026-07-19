@@ -10,8 +10,12 @@ class UpdateEventSeatingRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'table_count' => ['required', 'integer', 'min:0', 'max:500'],
-            'seats_per_table' => ['required', 'integer', 'min:0', 'max:500'],
+            'table_types' => ['present', 'array', 'max:50'],
+            'table_types.*.id' => ['required', 'string', 'max:64', 'distinct'],
+            'table_types.*.name' => ['required', 'string', 'max:100'],
+            'table_types.*.shape' => ['required', 'string', 'in:round,square,rectangle'],
+            'table_types.*.table_count' => ['required', 'integer', 'min:1', 'max:500'],
+            'table_types.*.seats_per_table' => ['required', 'integer', 'min:1', 'max:500'],
         ];
     }
 
@@ -20,17 +24,18 @@ class UpdateEventSeatingRequest extends BaseRequest
         return [
             static function (Validator $validator): void {
                 $data = $validator->getData();
-                if (!array_key_exists('table_count', $data) || !array_key_exists('seats_per_table', $data)) {
+                if (! isset($data['table_types']) || ! is_array($data['table_types'])) {
                     return;
                 }
 
-                $tableCount = (int)$data['table_count'];
-                $seatsPerTable = (int)$data['seats_per_table'];
-
-                if (($tableCount === 0) !== ($seatsPerTable === 0)) {
+                $tableCount = array_sum(array_map(
+                    static fn (mixed $type): int => is_array($type) ? (int) ($type['table_count'] ?? 0) : 0,
+                    $data['table_types'],
+                ));
+                if ($tableCount > 500) {
                     $validator->errors()->add(
-                        'seats_per_table',
-                        __('Tables and seats per table must either both be zero or both be greater than zero.')
+                        'table_types',
+                        __('The seating configuration cannot contain more than 500 tables.')
                     );
                 }
             },

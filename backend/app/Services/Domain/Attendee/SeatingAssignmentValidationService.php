@@ -2,11 +2,19 @@
 
 namespace HiEvents\Services\Domain\Attendee;
 
+use HiEvents\Services\Domain\EventSeating\EventSeatingTableService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class SeatingAssignmentValidationService
 {
+    private readonly EventSeatingTableService $tableService;
+
+    public function __construct(?EventSeatingTableService $tableService = null)
+    {
+        $this->tableService = $tableService ?? new EventSeatingTableService;
+    }
+
     /**
      * @throws ValidationException
      */
@@ -29,19 +37,27 @@ class SeatingAssignmentValidationService
 
         $settings = DB::table('event_seating_settings')->where('event_id', $eventId)->first();
 
-        if (!$settings || $settings->table_count === 0 || $settings->seats_per_table === 0) {
+        $tableTypes = $this->tableService->normalize(
+            $settings?->table_types ?? [],
+            (int) ($settings?->table_count ?? 0),
+            (int) ($settings?->seats_per_table ?? 0),
+        );
+        $tables = $this->tableService->expand($tableTypes);
+        $table = collect($tables)->firstWhere('table_number', $tableNumber);
+
+        if (! $settings || $tables === []) {
             throw ValidationException::withMessages([
                 'table_number' => __('Configure event seating before assigning attendees.'),
             ]);
         }
 
-        if ($tableNumber > $settings->table_count) {
+        if (! $table) {
             throw ValidationException::withMessages([
                 'table_number' => __('The selected table does not exist.'),
             ]);
         }
 
-        if ($seatNumber > $settings->seats_per_table) {
+        if ($seatNumber > $table['seats_per_table']) {
             throw ValidationException::withMessages([
                 'seat_number' => __('The selected seat does not exist at this table.'),
             ]);
@@ -53,7 +69,7 @@ class SeatingAssignmentValidationService
             ->where('table_number', $tableNumber)
             ->where('seat_number', $seatNumber)
             ->whereNull('deleted_at')
-            ->when($excludeAttendeeId, fn($query) => $query->where('id', '!=', $excludeAttendeeId))
+            ->when($excludeAttendeeId, fn ($query) => $query->where('id', '!=', $excludeAttendeeId))
             ->exists();
 
         if ($occupied) {

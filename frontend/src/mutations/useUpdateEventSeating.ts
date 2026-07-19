@@ -1,6 +1,6 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {eventSeatingClient} from '../api/event-seating.client';
-import {EventSeatingSettings, IdParam} from '../types';
+import {EventTableType, IdParam} from '../types';
 import {GET_EVENT_SEATING_QUERY_KEY} from '../queries/useGetEventSeating';
 
 export const useUpdateEventSeating = () => {
@@ -9,7 +9,7 @@ export const useUpdateEventSeating = () => {
     return useMutation({
         mutationFn: ({eventId, settings}: {
             eventId: IdParam;
-            settings: Pick<EventSeatingSettings, 'table_count' | 'seats_per_table'>;
+            settings: {table_types: EventTableType[]};
         }) => eventSeatingClient.update(eventId, settings),
         onSuccess: (_data, variables) => queryClient.invalidateQueries({
             queryKey: [GET_EVENT_SEATING_QUERY_KEY, variables.eventId],
