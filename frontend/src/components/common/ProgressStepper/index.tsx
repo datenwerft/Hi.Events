@@ -16,7 +16,7 @@ export const ProgressStepper = ({isPaymentRequired, currentStep}: ProgressSteppe
     const steps: Step[] = isPaymentRequired
         ? [
             {label: t`Details`, key: 'details'},
-            {label: t`Payment`, key: 'payment'},
+            {label: t`Registration`, key: 'payment'},
             {label: t`Summary`, key: 'summary'},
         ]
         : [

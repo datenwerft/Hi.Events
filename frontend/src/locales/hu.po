@@ -7192,6 +7192,10 @@ msgstr "Regionális beállítások"
 msgid "Register"
 msgstr "Regisztráció"
 
+#: src/components/common/ProgressStepper/index.tsx:19
+msgid "Registration"
+msgstr "Regisztráció"
+
 #: src/components/layouts/EventHomepage/index.tsx:643
 msgid "Register Ticket"
 msgstr "Jegy regisztrálása"

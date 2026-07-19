@@ -7192,6 +7192,10 @@ msgstr "地區設定"
 msgid "Register"
 msgstr "註冊"
 
+#: src/components/common/ProgressStepper/index.tsx:19
+msgid "Registration"
+msgstr "登記"
+
 #: src/components/layouts/EventHomepage/index.tsx:643
 msgid "Register Ticket"
 msgstr "登記門票"

@@ -7192,6 +7192,10 @@ msgstr "Regionale Einstellungen"
 msgid "Register"
 msgstr "Registrieren"
 
+#: src/components/common/ProgressStepper/index.tsx:19
+msgid "Registration"
+msgstr "Registrierung"
+
 #: src/components/layouts/EventHomepage/index.tsx:643
 msgid "Register Ticket"
 msgstr "Ticket registrieren"

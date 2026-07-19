@@ -7188,6 +7188,10 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+#: src/components/common/ProgressStepper/index.tsx:19
+msgid "Registration"
+msgstr "Регистрация"
+
 #: src/components/layouts/EventHomepage/index.tsx:643
 msgid "Register Ticket"
 msgstr "Зарегистрировать билет"

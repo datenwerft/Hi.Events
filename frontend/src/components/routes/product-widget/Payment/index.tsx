@@ -5,9 +5,8 @@ import {CheckoutContent} from "../../../layouts/Checkout/CheckoutContent";
 import {StripePaymentMethod} from "./PaymentMethods/Stripe";
 import {OfflinePaymentMethod} from "./PaymentMethods/Offline";
 import {Event} from "../../../../types.ts";
-import {Button, Group, Text} from "@mantine/core";
-import {IconBuildingBank, IconLock, IconWallet} from "@tabler/icons-react";
-import {formatCurrency} from "../../../../utilites/currency.ts";
+import {Button, Text} from "@mantine/core";
+import {IconBuildingBank, IconWallet} from "@tabler/icons-react";
 import {t, Trans} from "@lingui/macro";
 import {useGetOrderPublic} from "../../../../queries/useGetOrderPublic.ts";
 import {
@@ -141,12 +140,7 @@ const Payment = () => {
                         loading={isLoading || isPaymentLoading}
                         onClick={handleSubmit}
                     >
-                        {order?.is_payment_required ? (
-                            <Group gap={8} wrap="nowrap">
-                                <IconLock size={16}/>
-                                <Text fw={600}>{t`Pay`} {formatCurrency(order.total_gross, order.currency)}</Text>
-                            </Group>
-                        ) : t`Complete Payment`}
+                        {t`Register`}
                     </Button>
                     {getConfig('VITE_TOS_URL') && (
                         <p className={classes.tosNotice}>
