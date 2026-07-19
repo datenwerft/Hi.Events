@@ -6434,6 +6434,10 @@ msgstr "付款失败"
 msgid "Payment Instructions"
 msgstr "支付说明"
 
+#: src/components/routes/product-widget/Payment/PaymentMethods/Offline/index.tsx:14
+msgid "Instructions"
+msgstr "说明"
+
 #: src/components/routes/product-widget/Payment/index.tsx:115
 msgid "Payment method"
 msgstr "付款方式"

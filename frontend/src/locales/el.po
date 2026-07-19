@@ -6434,6 +6434,10 @@ msgstr "Η Πληρωμή Απέτυχε"
 msgid "Payment Instructions"
 msgstr "Οδηγίες Πληρωμής"
 
+#: src/components/routes/product-widget/Payment/PaymentMethods/Offline/index.tsx:14
+msgid "Instructions"
+msgstr "Οδηγίες"
+
 #: src/components/routes/product-widget/Payment/index.tsx:115
 msgid "Payment method"
 msgstr "Μέθοδος πληρωμής"

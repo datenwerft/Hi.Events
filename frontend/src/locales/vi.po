@@ -6434,6 +6434,10 @@ msgstr "Thanh toán thất bại"
 msgid "Payment Instructions"
 msgstr "Hướng dẫn thanh toán"
 
+#: src/components/routes/product-widget/Payment/PaymentMethods/Offline/index.tsx:14
+msgid "Instructions"
+msgstr "Hướng dẫn"
+
 #: src/components/routes/product-widget/Payment/index.tsx:115
 msgid "Payment method"
 msgstr "Phương thức thanh toán"

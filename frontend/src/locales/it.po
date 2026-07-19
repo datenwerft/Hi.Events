@@ -6434,6 +6434,10 @@ msgstr "Pagamento Fallito"
 msgid "Payment Instructions"
 msgstr "Istruzioni di Pagamento"
 
+#: src/components/routes/product-widget/Payment/PaymentMethods/Offline/index.tsx:14
+msgid "Instructions"
+msgstr "Istruzioni"
+
 #: src/components/routes/product-widget/Payment/index.tsx:115
 msgid "Payment method"
 msgstr "Metodo di pagamento"

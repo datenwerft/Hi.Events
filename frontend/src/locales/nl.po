@@ -6435,6 +6435,10 @@ msgstr "Betaling mislukt"
 msgid "Payment Instructions"
 msgstr "Betalingsinstructies"
 
+#: src/components/routes/product-widget/Payment/PaymentMethods/Offline/index.tsx:14
+msgid "Instructions"
+msgstr "Instructies"
+
 #: src/components/routes/product-widget/Payment/index.tsx:115
 msgid "Payment method"
 msgstr "Betaalmethode"

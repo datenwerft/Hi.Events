@@ -11,7 +11,7 @@ export const OfflinePaymentMethod = ({event}: OfflinePaymentMethodProps) => {
 
     return (
         <div>
-            <h2>{t`Payment Instructions`}</h2>
+            <h2>{t`Instructions`}</h2>
             <Card>
                 <div
                     dangerouslySetInnerHTML={{

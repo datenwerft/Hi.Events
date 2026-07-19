@@ -6434,6 +6434,10 @@ msgstr "Ödeme Başarısız"
 msgid "Payment Instructions"
 msgstr "Ödeme Talimatları"
 
+#: src/components/routes/product-widget/Payment/PaymentMethods/Offline/index.tsx:14
+msgid "Instructions"
+msgstr "Talimatlar"
+
 #: src/components/routes/product-widget/Payment/index.tsx:115
 msgid "Payment method"
 msgstr "Ödeme yöntemi"
