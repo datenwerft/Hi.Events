@@ -37,6 +37,9 @@ const Checkout = () => {
     const orderIsCompleted = order?.status === 'COMPLETED';
     const orderIsReserved = order?.status === 'RESERVED';
     const orderIsAwaitingOfflinePayment = order?.status === 'AWAITING_OFFLINE_PAYMENT';
+    const isRegistrationOnly = !!order?.is_payment_required
+        && !!event?.settings?.payment_providers?.includes('OFFLINE')
+        && !event?.settings?.payment_providers?.includes('STRIPE');
     const isMobile = useMediaQuery('(max-width: 768px)');
     const [isExpired, setIsExpired] = useState(false);
     const orderHasAttendees = order?.attendees && order.attendees.length > 0;
@@ -207,7 +210,7 @@ const Checkout = () => {
 
                                     {orderIsReserved && (
                                         <ProgressStepper
-                                            isPaymentRequired={!!order.is_payment_required}
+                                            isPaymentRequired={!!order.is_payment_required && !isRegistrationOnly}
                                             currentStep={currentStep}
                                         />
                                     )}

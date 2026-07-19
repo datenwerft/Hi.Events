@@ -73,6 +73,9 @@ export const CollectInformation = () => {
     const orderQuestions = questions?.filter(question => question.belongs_to === "ORDER");
     const products = productCategories?.flatMap(category => category.products);
     const requireBillingAddress = event?.settings?.require_billing_address;
+    const isRegistrationOnly = !!order?.is_payment_required
+        && !!event?.settings?.payment_providers?.includes('OFFLINE')
+        && !event?.settings?.payment_providers?.includes('STRIPE');
     const isPerOrderCollection = event?.settings?.attendee_details_collection_method === 'PER_ORDER';
     const allowCopyToAllAttendees = event?.settings?.allow_copy_details_to_all_attendees ?? true;
     const [copyOption, setCopyOption] = useState<'none' | 'first' | 'all'>('none');
@@ -214,12 +217,29 @@ export const CollectInformation = () => {
     }, [form.values.order.first_name, form.values.order.last_name, form.values.order.email]);
 
     const mutation = useMutation({
-        mutationFn: (orderData: FinaliseOrderPayload) => orderClientPublic.finaliseOrder(Number(eventId), String(orderShortId), orderData),
+        mutationFn: async (orderData: FinaliseOrderPayload) => {
+            const finalisedOrder = await orderClientPublic.finaliseOrder(
+                Number(eventId),
+                String(orderShortId),
+                orderData
+            );
+
+            if (isRegistrationOnly) {
+                await orderClientPublic.transitionToOfflinePayment(eventId, orderShortId);
+            }
+
+            return finalisedOrder;
+        },
 
         onSuccess: (data) => {
-            const nextPage = order?.is_payment_required ? 'payment' : 'summary';
+            const nextPage = order?.is_payment_required && !isRegistrationOnly ? 'payment' : 'summary';
             if (nextPage === 'summary') {
-                trackEvent(AnalyticsEvents.PURCHASE_COMPLETED_FREE);
+                if (isRegistrationOnly) {
+                    const totalCents = Math.round((order?.total_gross || 0) * 100);
+                    trackEvent(AnalyticsEvents.PURCHASE_COMPLETED_OFFLINE, {value: totalCents});
+                } else {
+                    trackEvent(AnalyticsEvents.PURCHASE_COMPLETED_FREE);
+                }
             }
             navigate(eventCheckoutPath(eventId, data.data.short_id, nextPage));
         },
@@ -738,10 +758,14 @@ export const CollectInformation = () => {
                         className={classes.continueButton}
                         loading={mutation.isPending}
                         type="submit"
-                        rightSection={order?.is_payment_required ? <IconArrowRight size={18}/> : undefined}
-                        leftSection={!order?.is_payment_required ? <IconCheck size={18}/> : undefined}
+                        rightSection={order?.is_payment_required && !isRegistrationOnly ? <IconArrowRight size={18}/> : undefined}
+                        leftSection={!order?.is_payment_required || isRegistrationOnly ? <IconCheck size={18}/> : undefined}
                     >
-                        {order?.is_payment_required ? t`Continue to Registration` : t`Complete Order`}
+                        {isRegistrationOnly
+                            ? t`Register`
+                            : order?.is_payment_required
+                                ? t`Continue to Registration`
+                                : t`Complete Order`}
                     </Button>
                     {!!getConfig('VITE_TOS_URL') && (
                         <p className={classes.tosNotice}>
