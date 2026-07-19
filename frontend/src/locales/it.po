@@ -4201,8 +4201,8 @@ msgid "Get started"
 msgstr "Iniziare"
 
 #: src/components/layouts/EventHomepage/index.tsx:643
-msgid "Get Tickets"
-msgstr "Ottieni i biglietti"
+msgid "Register Ticket"
+msgstr "Registra biglietto"
 
 #: src/components/routes/event/EventDashboard/index.tsx:169
 msgid "Get your event ready"

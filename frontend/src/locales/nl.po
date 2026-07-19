@@ -4202,8 +4202,8 @@ msgid "Get started"
 msgstr "Aan de slag"
 
 #: src/components/layouts/EventHomepage/index.tsx:643
-msgid "Get Tickets"
-msgstr "Koop Tickets"
+msgid "Register Ticket"
+msgstr "Ticket registreren"
 
 #: src/components/routes/event/EventDashboard/index.tsx:169
 msgid "Get your event ready"

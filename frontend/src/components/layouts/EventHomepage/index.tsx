@@ -640,7 +640,7 @@ const EventHomepage = ({...loaderData}: EventHomepageProps) => {
                             onClick={scrollToTickets}
                         >
                             <IconTicket size={18}/>
-                            {t`Get Tickets`}
+                            {t`Register Ticket`}
                         </button>
                     )}
 
