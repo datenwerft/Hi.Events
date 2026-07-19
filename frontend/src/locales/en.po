@@ -2142,8 +2142,8 @@ msgid "Continue to next step"
 msgstr "Continue to next step"
 
 #: src/components/routes/product-widget/CollectInformation/index.tsx:744
-msgid "Continue to Payment"
-msgstr "Continue to Payment"
+msgid "Continue to Registration"
+msgstr "Continue to Registration"
 
 #: src/components/routes/event/Settings/Sections/PlatformFeesSettings/index.tsx:47
 msgid "Control how platform fees are handled for this event"

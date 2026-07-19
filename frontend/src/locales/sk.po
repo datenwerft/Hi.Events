@@ -2142,8 +2142,8 @@ msgid "Continue to next step"
 msgstr "Pokračovať na ďalší krok"
 
 #: src/components/routes/product-widget/CollectInformation/index.tsx:744
-msgid "Continue to Payment"
-msgstr "Pokračovať k platbe"
+msgid "Continue to Registration"
+msgstr "Pokračovať k registrácii"
 
 #: src/components/routes/event/Settings/Sections/PlatformFeesSettings/index.tsx:47
 msgid "Control how platform fees are handled for this event"
