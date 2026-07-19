@@ -51,7 +51,10 @@ jobs:
         id: metadata
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/datenwerft/hi-events
+          # Use a package owned by this repository. The historical hi-events
+          # package was created outside GitHub Actions and does not grant this
+          # repository's GITHUB_TOKEN permission to upload its layers.
+          images: ghcr.io/datenwerft/hi-events-islatoalps
           tags: |
             type=ref,event=tag
             type=sha,prefix=isla-sha-
