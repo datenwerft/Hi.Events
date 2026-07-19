@@ -15,7 +15,7 @@ import {
     Tooltip,
 } from '@mantine/core';
 import {t} from '@lingui/macro';
-import {IconArmchair, IconPhoto, IconSettings, IconTrash, IconZoomIn} from '@tabler/icons-react';
+import {IconArmchair, IconDownload, IconPhoto, IconSettings, IconTrash, IconZoomIn} from '@tabler/icons-react';
 import {CSSProperties, PointerEvent as ReactPointerEvent, useEffect, useMemo, useRef, useState} from 'react';
 import {useParams} from 'react-router';
 import {useDisclosure} from '@mantine/hooks';
@@ -26,6 +26,7 @@ import {useAssignEventSeat} from '../../../../mutations/useAssignEventSeat';
 import {useUploadImage} from '../../../../mutations/useUploadImage';
 import {imageClient} from '../../../../api/image.client';
 import {showError, showSuccess} from '../../../../utilites/notifications';
+import {downloadBinary} from '../../../../utilites/download';
 import {PageBody} from '../../../common/PageBody';
 import {PageTitle} from '../../../common/PageTitle';
 import {ToolBar} from '../../../common/ToolBar';
@@ -89,6 +90,7 @@ const TablesAndSeats = () => {
     const [draggingTable, setDraggingTable] = useState<number>();
     const [zoom, setZoom] = useState(100);
     const [blueprintBusy, setBlueprintBusy] = useState(false);
+    const [exportBusy, setExportBusy] = useState(false);
     const [viewMode, setViewMode] = useState<'blueprint' | 'tables'>('blueprint');
     const [preferencesEventId, setPreferencesEventId] = useState<string>();
     const canvasRef = useRef<HTMLDivElement>(null);
@@ -221,6 +223,26 @@ const TablesAndSeats = () => {
         }
     };
 
+    const exportPdf = async () => {
+        if (!seating?.blueprint || !eventId) return;
+        setExportBusy(true);
+        try {
+            const {createSeatingPlanPdf} = await import('./SeatingPlanPdf');
+            const blob = await createSeatingPlanPdf({
+                assignments: seating.assignments,
+                blueprint: seating.blueprint,
+                positions,
+                seatsPerTable: seating.seats_per_table,
+                tableLabel: t`Table`,
+            });
+            downloadBinary(blob, `event-${eventId}-seating-plan.pdf`);
+        } catch {
+            showError(t`Something went wrong`);
+        } finally {
+            setExportBusy(false);
+        }
+    };
+
     const assignSelectedSeat = () => {
         if (!eventId || !selectedSeat || !attendeeToAssign) return;
         assignmentMutation.mutate({
@@ -266,6 +288,16 @@ const TablesAndSeats = () => {
                             <FileButton onChange={uploadBlueprint} accept="image/png,image/jpeg,image/webp">
                                 {props => <Button {...props} variant="light" loading={blueprintBusy} leftSection={<IconPhoto size={18}/>}>{seating?.blueprint ? t`Replace blueprint` : t`Upload blueprint`}</Button>}
                             </FileButton>
+                        )}
+                        {isConfigured && seating?.blueprint && (
+                            <Button
+                                variant="light"
+                                loading={exportBusy}
+                                leftSection={<IconDownload size={18}/>}
+                                onClick={exportPdf}
+                            >
+                                {t`Export`}
+                            </Button>
                         )}
                         <Button color="green" size="sm" onClick={configurationModal.open} rightSection={<IconSettings size={18}/>}>{t`Configure tables`}</Button>
                     </Group>
