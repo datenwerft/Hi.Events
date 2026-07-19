@@ -49,6 +49,7 @@ class SeatingAssignmentValidationService
 
         $occupied = DB::table('attendees')
             ->where('event_id', $eventId)
+            ->where('status', '!=', 'CANCELLED')
             ->where('table_number', $tableNumber)
             ->where('seat_number', $seatNumber)
             ->whereNull('deleted_at')

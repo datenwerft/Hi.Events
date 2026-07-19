@@ -41,6 +41,7 @@ class EventSeatingDataService
                 'seat_number',
             ])
             ->where('event_id', $eventId)
+            ->where('status', '!=', 'CANCELLED')
             ->whereNull('deleted_at')
             ->whereNotNull('table_number')
             ->whereNotNull('seat_number')

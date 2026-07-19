@@ -83,6 +83,8 @@ class OrderCancelService
         $this->attendeeRepository->updateWhere(
             attributes: [
                 'status' => AttendeeStatus::CANCELLED->name,
+                'table_number' => null,
+                'seat_number' => null,
             ],
             where: [
                 'order_id' => $order->getId(),

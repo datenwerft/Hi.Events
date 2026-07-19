@@ -25,6 +25,7 @@ class EventSeatingDataServiceTest extends TestCase
         $attendeesQuery = Mockery::mock(Builder::class);
         $attendeesQuery->shouldReceive('select')->once()->andReturnSelf();
         $attendeesQuery->shouldReceive('where')->with('event_id', 42)->andReturnSelf();
+        $attendeesQuery->shouldReceive('where')->with('status', '!=', 'CANCELLED')->andReturnSelf();
         $attendeesQuery->shouldReceive('whereNull')->with('deleted_at')->andReturnSelf();
         $attendeesQuery->shouldReceive('whereNotNull')->with('table_number')->andReturnSelf();
         $attendeesQuery->shouldReceive('whereNotNull')->with('seat_number')->andReturnSelf();

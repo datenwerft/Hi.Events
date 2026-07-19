@@ -94,7 +94,14 @@ class OrderCancelServiceTest extends TestCase
             ])
             ->andReturn($attendees);
 
-        $this->attendeeRepository->shouldReceive('updateWhere')->once();
+        $this->attendeeRepository->shouldReceive('updateWhere')->once()->with(
+            [
+                'status' => AttendeeStatus::CANCELLED->name,
+                'table_number' => null,
+                'seat_number' => null,
+            ],
+            ['order_id' => 1],
+        );
 
         $this->productQuantityService->shouldReceive('decreaseQuantitySold')->twice();
 
@@ -185,7 +192,14 @@ class OrderCancelServiceTest extends TestCase
             ])
             ->andReturn($attendees);
 
-        $this->attendeeRepository->shouldReceive('updateWhere')->once();
+        $this->attendeeRepository->shouldReceive('updateWhere')->once()->with(
+            [
+                'status' => AttendeeStatus::CANCELLED->name,
+                'table_number' => null,
+                'seat_number' => null,
+            ],
+            ['order_id' => 1],
+        );
 
         $this->productQuantityService->shouldReceive('decreaseQuantitySold')->twice();
 

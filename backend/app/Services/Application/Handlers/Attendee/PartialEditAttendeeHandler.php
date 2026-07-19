@@ -72,16 +72,23 @@ class PartialEditAttendeeHandler
             );
         }
 
+        $attributes = [
+            'status' => $data->status
+                ? strtoupper($data->status)
+                : $attendee->getStatus(),
+            'first_name' => $data->first_name ?? $attendee->getFirstName(),
+            'last_name' => $data->last_name ?? $attendee->getLastName(),
+            'email' => $data->email ?? $attendee->getEmail(),
+        ];
+
+        if ($statusIsUpdated && $data->status === AttendeeStatus::CANCELLED->name) {
+            $attributes['table_number'] = null;
+            $attributes['seat_number'] = null;
+        }
+
         return $this->attendeeRepository->updateByIdWhere(
             id: $data->attendee_id,
-            attributes: [
-                'status' => $data->status
-                    ? strtoupper($data->status)
-                    : $attendee->getStatus(),
-                'first_name' => $data->first_name ?? $attendee->getFirstName(),
-                'last_name' => $data->last_name ?? $attendee->getLastName(),
-                'email' => $data->email ?? $attendee->getEmail(),
-            ],
+            attributes: $attributes,
             where: [
                 'event_id' => $data->event_id,
             ]);
