@@ -13,6 +13,8 @@ use Illuminate\Support\Collection;
  */
 interface AttendeeRepositoryInterface extends RepositoryInterface
 {
+    public function permanentlyDeleteById(int $attendeeId): bool;
+
     public function findByEventId(int $eventId, QueryParamsDTO $params): LengthAwarePaginator;
 
     public function findByEventIdForExport(int $eventId): Collection;

@@ -43,6 +43,9 @@ export const attendeesClient = {
         );
         return response.data;
     },
+    delete: async (eventId: IdParam, attendeeId: IdParam) => {
+        return await api.delete(`events/${eventId}/attendees/${attendeeId}`);
+    },
     all: async (eventId: IdParam, queryFilters: QueryFilters) => {
         const response = await api.get<GenericPaginatedResponse<Attendee>>(
             `/events/${eventId}/attendees` + queryParamsHelper.buildQueryString(queryFilters)

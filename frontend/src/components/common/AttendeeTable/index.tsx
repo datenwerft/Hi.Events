@@ -28,6 +28,7 @@ import {showError, showSuccess} from "../../../utilites/notifications.tsx";
 import {t, Trans} from "@lingui/macro";
 import {confirmationDialog} from "../../../utilites/confirmationDialog.tsx";
 import {useResendAttendeeTicket} from "../../../mutations/useResendAttendeeTicket.ts";
+import {useDeleteAttendee} from "../../../mutations/useDeleteAttendee.ts";
 import {ManageAttendeeModal} from "../../modals/ManageAttendeeModal";
 import {ManageOrderModal} from "../../modals/ManageOrderModal";
 import {ActionMenu} from '../ActionMenu';
@@ -56,6 +57,7 @@ export const AttendeeTable = ({attendees, openCreateModal}: AttendeeTableProps) 
     const {data: checkInLists} = useGetEventCheckInLists(eventId);
     const modifyMutation = useModifyAttendee();
     const resendTicketMutation = useResendAttendeeTicket();
+    const deleteAttendeeMutation = useDeleteAttendee();
     const clipboard = useClipboard({timeout: 2000});
 
     const hasCheckInLists = checkInLists?.data && checkInLists.data.length > 0;
@@ -103,6 +105,24 @@ export const AttendeeTable = ({attendees, openCreateModal}: AttendeeTableProps) 
                 onError: () => showError(t`Failed to cancel attendee`),
             });
         })
+    };
+
+    const handleDelete = (attendee: Attendee) => {
+        confirmationDialog(
+            t`Permanently delete this cancelled attendee? Their check-ins and answers will be deleted. This action cannot be undone.`,
+            () => {
+                deleteAttendeeMutation.mutate({
+                    attendeeId: attendee.id,
+                    eventId: eventId,
+                }, {
+                    onSuccess: () => showSuccess(t`Attendee permanently deleted`),
+                    onError: (error: any) => showError(
+                        error?.response?.data?.message || t`Failed to permanently delete attendee`
+                    ),
+                });
+            },
+            {confirm: t`Permanently delete`},
+        );
     };
 
     const getCheckInCount = (attendee: Attendee) => {
@@ -386,6 +406,13 @@ export const AttendeeTable = ({attendees, openCreateModal}: AttendeeTableProps) 
                                             icon: <IconTrash size={14}/>,
                                             onClick: () => handleCancel(info.row.original),
                                             color: info.row.original.status === 'CANCELLED' ? 'green' : 'red',
+                                        },
+                                        {
+                                            label: t`Permanently delete`,
+                                            icon: <IconTrash size={14}/>,
+                                            onClick: () => handleDelete(info.row.original),
+                                            color: 'red',
+                                            visible: info.row.original.status === 'CANCELLED',
                                         },
                                     ],
                                 },
