@@ -3,7 +3,9 @@
 namespace HiEvents\Resources\Attendee;
 
 use HiEvents\DomainObjects\AttendeeDomainObject;
+use HiEvents\DomainObjects\Enums\QuestionBelongsTo;
 use HiEvents\Resources\Product\ProductMinimalResourcePublic;
+use HiEvents\Resources\Question\QuestionAnswerViewResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -29,6 +31,13 @@ class AttendeeResourcePublic extends JsonResource
             'product_id' => $this->getProductId(),
             'product_price_id' => $this->getProductPriceId(),
             'product' => $this->when((bool)$this->getProduct(), fn() => new ProductMinimalResourcePublic($this->getProduct())),
+            'question_answers' => $this->when(
+                $this->getQuestionAndAnswerViews() !== null,
+                fn() => QuestionAnswerViewResource::collection(
+                    $this->getQuestionAndAnswerViews()
+                        ?->filter(fn($qav) => $qav->getBelongsTo() === QuestionBelongsTo::PRODUCT->name)
+                )
+            ),
             'locale' => $this->getLocale(),
         ];
     }
