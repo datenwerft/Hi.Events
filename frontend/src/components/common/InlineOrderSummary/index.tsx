@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Collapse, Popover} from "@mantine/core";
-import {IconCalendarEvent, IconChevronDown, IconInfoCircle, IconShieldCheck, IconTag} from "@tabler/icons-react";
+import {IconCalendarEvent, IconChevronDown, IconInfoCircle, IconTag} from "@tabler/icons-react";
 import {t} from "@lingui/macro";
 import classNames from "classnames";
 import {Event, Order} from "../../../types.ts";
@@ -12,14 +12,12 @@ interface InlineOrderSummaryProps {
     event: Event;
     order: Order;
     defaultExpanded?: boolean;
-    showBuyerProtection?: boolean;
 }
 
 export const InlineOrderSummary = ({
     event,
     order,
     defaultExpanded = true,
-    showBuyerProtection = true,
 }: InlineOrderSummaryProps) => {
     const [expanded, setExpanded] = useState(defaultExpanded);
 
@@ -207,18 +205,6 @@ export const InlineOrderSummary = ({
                             </span>
                         </div>
                     </div>
-
-                    {showBuyerProtection && order.is_payment_required && (
-                        <div className={classes.buyerProtection}>
-                            <IconShieldCheck size={20} className={classes.buyerProtectionIcon}/>
-                            <div className={classes.buyerProtectionText}>
-                                <span className={classes.buyerProtectionTitle}>{t`Secure Checkout`}</span>
-                                <span className={classes.buyerProtectionSubtitle}>
-                                    {t`Your payment is protected with bank-level encryption`}
-                                </span>
-                            </div>
-                        </div>
-                    )}
                 </div>
             </Collapse>
         </div>

@@ -583,7 +583,6 @@ export const OrderSummaryAndProducts = () => {
                 <InlineOrderSummary
                     event={event}
                     order={order}
-                    showBuyerProtection={false}
                     defaultExpanded={false}
                 />
 
