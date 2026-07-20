@@ -43,6 +43,7 @@ class PartialEditAttendeeHandlerTest extends TestCase
         $order = (new OrderDomainObject())
             ->setId(11)
             ->setEventId(42)
+            ->setStatus('COMPLETED')
             ->setCreatedAt('2026-07-19 10:00:00');
 
         $attendeeRepository = Mockery::mock(AttendeeRepositoryInterface::class);

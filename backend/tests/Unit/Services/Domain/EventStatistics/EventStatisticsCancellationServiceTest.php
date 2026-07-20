@@ -79,6 +79,12 @@ class EventStatisticsCancellationServiceTest extends TestCase
         $order->shouldReceive('getOrderItems')->andReturn($orderItems);
         $order->shouldReceive('getTicketOrderItems')->andReturn($ticketOrderItems);
         $order->shouldReceive('getStatisticsDecrementedAt')->andReturnNull();
+        $order->shouldReceive('isOrderCompleted')->andReturnTrue();
+        $order->shouldReceive('getTotalGross')->andReturn(450.0);
+        $order->shouldReceive('getTotalRefunded')->andReturn(0.0);
+        $order->shouldReceive('getTotalBeforeAdditions')->andReturn(400.0);
+        $order->shouldReceive('getTotalTax')->andReturn(30.0);
+        $order->shouldReceive('getTotalFee')->andReturn(20.0);
 
         // Mock order repository to return order with relations
         $this->orderRepository
@@ -96,6 +102,10 @@ class EventStatisticsCancellationServiceTest extends TestCase
         $eventStatistics->shouldReceive('getId')->andReturn(1);
         $eventStatistics->shouldReceive('getAttendeesRegistered')->andReturn(10);
         $eventStatistics->shouldReceive('getProductsSold')->andReturn(15);
+        $eventStatistics->shouldReceive('getSalesTotalGross')->andReturn(2000.0);
+        $eventStatistics->shouldReceive('getSalesTotalBeforeAdditions')->andReturn(1800.0);
+        $eventStatistics->shouldReceive('getTotalTax')->andReturn(120.0);
+        $eventStatistics->shouldReceive('getTotalFee')->andReturn(80.0);
         $eventStatistics->shouldReceive('getOrdersCreated')->andReturn(5);
         $eventStatistics->shouldReceive('getOrdersCancelled')->andReturn(2);
         $eventStatistics->shouldReceive('getVersion')->andReturn(5);
@@ -104,6 +114,10 @@ class EventStatisticsCancellationServiceTest extends TestCase
         $eventDailyStatistic = Mockery::mock(EventDailyStatisticDomainObject::class);
         $eventDailyStatistic->shouldReceive('getAttendeesRegistered')->andReturn(8);
         $eventDailyStatistic->shouldReceive('getProductsSold')->andReturn(12);
+        $eventDailyStatistic->shouldReceive('getSalesTotalGross')->andReturn(1500.0);
+        $eventDailyStatistic->shouldReceive('getSalesTotalBeforeAdditions')->andReturn(1350.0);
+        $eventDailyStatistic->shouldReceive('getTotalTax')->andReturn(90.0);
+        $eventDailyStatistic->shouldReceive('getTotalFee')->andReturn(60.0);
         $eventDailyStatistic->shouldReceive('getOrdersCreated')->andReturn(4);
         $eventDailyStatistic->shouldReceive('getOrdersCancelled')->andReturn(1);
         $eventDailyStatistic->shouldReceive('getVersion')->andReturn(3);
@@ -148,6 +162,10 @@ class EventStatisticsCancellationServiceTest extends TestCase
                 [
                     'attendees_registered' => 8,   // 10 - 2 (2 active attendees)
                     'products_sold' => 12,          // 15 - 3 (full order quantities)
+                    'sales_total_gross' => 1550.0,
+                    'sales_total_before_additions' => 1400.0,
+                    'total_tax' => 90.0,
+                    'total_fee' => 60.0,
                     'orders_created' => 4,          // 5 - 1
                     'orders_cancelled' => 3,        // 2 + 1
                     'version' => 6,                 // 5 + 1
@@ -176,6 +194,10 @@ class EventStatisticsCancellationServiceTest extends TestCase
                 [
                     'attendees_registered' => 6,   // 8 - 2 (2 active attendees)
                     'products_sold' => 9,           // 12 - 3 (full order quantities)
+                    'sales_total_gross' => 1050.0,
+                    'sales_total_before_additions' => 950.0,
+                    'total_tax' => 60.0,
+                    'total_fee' => 40.0,
                     'orders_created' => 3,          // 4 - 1
                     'orders_cancelled' => 2,        // 1 + 1
                     'version' => 4,                 // 3 + 1
@@ -247,6 +269,34 @@ class EventStatisticsCancellationServiceTest extends TestCase
         $this->orderRepository->shouldNotReceive('updateFromArray');
 
         // Execute
+        $this->service->decrementForCancelledOrder($order);
+
+        $this->assertTrue(true);
+    }
+
+    public function testSkipsDecrementForOrderThatWasNotCompleted(): void
+    {
+        $order = Mockery::mock(OrderDomainObject::class);
+        $order->shouldReceive('getId')->andReturn(123);
+        $order->shouldReceive('getEventId')->andReturn(1);
+        $order->shouldReceive('getStatus')->andReturn('RESERVED');
+        $order->shouldReceive('getStatisticsDecrementedAt')->andReturnNull();
+        $order->shouldReceive('isOrderCompleted')->andReturnFalse();
+
+        $this->orderRepository
+            ->shouldReceive('loadRelation')
+            ->with(OrderItemDomainObject::class)
+            ->andReturnSelf();
+        $this->orderRepository
+            ->shouldReceive('findById')
+            ->with(123)
+            ->andReturn($order);
+
+        $this->logger->shouldReceive('info')->once();
+        $this->retrier->shouldNotReceive('retry');
+        $this->eventStatisticsRepository->shouldNotReceive('updateWhere');
+        $this->eventDailyStatisticRepository->shouldNotReceive('updateWhere');
+
         $this->service->decrementForCancelledOrder($order);
 
         $this->assertTrue(true);

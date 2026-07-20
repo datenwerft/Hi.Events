@@ -59,6 +59,18 @@ class EventStatisticsCancellationService
             return;
         }
 
+        if (!$order->isOrderCompleted()) {
+            $this->logger->info(
+                'Skipping statistics decrement for an order that was not included in sales statistics',
+                [
+                    'order_id' => $order->getId(),
+                    'event_id' => $order->getEventId(),
+                    'order_status' => $order->getStatus(),
+                ]
+            );
+            return;
+        }
+
         $this->retrier->retry(
             callableAction: function (int $attempt) use ($order): void {
                 $this->databaseManager->transaction(function () use ($order, $attempt): void {
@@ -187,6 +199,10 @@ class EventStatisticsCancellationService
         $updates = [
             'attendees_registered' => max(0, $eventStatistics->getAttendeesRegistered() - $counts['attendees_registered']),
             'products_sold' => max(0, $eventStatistics->getProductsSold() - $counts['products_sold']),
+            'sales_total_gross' => max(0, $eventStatistics->getSalesTotalGross() - $this->getRemainingGross($order)),
+            'sales_total_before_additions' => max(0, $eventStatistics->getSalesTotalBeforeAdditions() - $this->getRemainingBeforeAdditions($order)),
+            'total_tax' => max(0, $eventStatistics->getTotalTax() - $this->getRemainingTax($order)),
+            'total_fee' => max(0, $eventStatistics->getTotalFee() - $this->getRemainingFee($order)),
             'orders_created' => max(0, $eventStatistics->getOrdersCreated() - 1),
             'orders_cancelled' => ($eventStatistics->getOrdersCancelled() ?? 0) + 1,
             'version' => $eventStatistics->getVersion() + 1,
@@ -297,6 +313,10 @@ class EventStatisticsCancellationService
         $updates = [
             'attendees_registered' => max(0, $eventDailyStatistic->getAttendeesRegistered() - $counts['attendees_registered']),
             'products_sold' => max(0, $eventDailyStatistic->getProductsSold() - $counts['products_sold']),
+            'sales_total_gross' => max(0, $eventDailyStatistic->getSalesTotalGross() - $this->getRemainingGross($order)),
+            'sales_total_before_additions' => max(0, $eventDailyStatistic->getSalesTotalBeforeAdditions() - $this->getRemainingBeforeAdditions($order)),
+            'total_tax' => max(0, $eventDailyStatistic->getTotalTax() - $this->getRemainingTax($order)),
+            'total_fee' => max(0, $eventDailyStatistic->getTotalFee() - $this->getRemainingFee($order)),
             'orders_created' => max(0, $eventDailyStatistic->getOrdersCreated() - 1),
             'orders_cancelled' => ($eventDailyStatistic->getOrdersCancelled() ?? 0) + 1,
             'version' => $eventDailyStatistic->getVersion() + 1,
@@ -410,5 +430,31 @@ class EventStatisticsCancellationService
                 'decremented_at' => now()->toIso8601String(),
             ]
         );
+    }
+
+    private function getRemainingGross(OrderDomainObject $order): float
+    {
+        return max(0, $order->getTotalGross() - $order->getTotalRefunded());
+    }
+
+    private function getRemainingBeforeAdditions(OrderDomainObject $order): float
+    {
+        return $order->getTotalGross() > 0
+            ? $order->getTotalBeforeAdditions() * ($this->getRemainingGross($order) / $order->getTotalGross())
+            : $order->getTotalBeforeAdditions();
+    }
+
+    private function getRemainingTax(OrderDomainObject $order): float
+    {
+        return $order->getTotalGross() > 0
+            ? $order->getTotalTax() * ($this->getRemainingGross($order) / $order->getTotalGross())
+            : $order->getTotalTax();
+    }
+
+    private function getRemainingFee(OrderDomainObject $order): float
+    {
+        return $order->getTotalGross() > 0
+            ? $order->getTotalFee() * ($this->getRemainingGross($order) / $order->getTotalGross())
+            : $order->getTotalFee();
     }
 }

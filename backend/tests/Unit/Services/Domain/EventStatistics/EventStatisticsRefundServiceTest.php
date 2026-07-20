@@ -53,6 +53,7 @@ class EventStatisticsRefundServiceTest extends TestCase
         $order->shouldReceive('getTotalGross')->andReturn(100.00);
         $order->shouldReceive('getTotalTax')->andReturn(8.00);
         $order->shouldReceive('getTotalFee')->andReturn(2.00);
+        $order->shouldReceive('getStatisticsDecrementedAt')->andReturnNull();
 
         // Create refund amount (full refund)
         $refundAmount = MoneyValue::fromFloat(100.00, $currency);
@@ -143,6 +144,7 @@ class EventStatisticsRefundServiceTest extends TestCase
         $order->shouldReceive('getTotalGross')->andReturn(100.00);
         $order->shouldReceive('getTotalTax')->andReturn(8.00);
         $order->shouldReceive('getTotalFee')->andReturn(2.00);
+        $order->shouldReceive('getStatisticsDecrementedAt')->andReturnNull();
 
         // Create refund amount (50% partial refund)
         $refundAmount = MoneyValue::fromFloat(50.00, $currency);
@@ -265,6 +267,7 @@ class EventStatisticsRefundServiceTest extends TestCase
         $order->shouldReceive('getTotalGross')->andReturn(100.00);
         $order->shouldReceive('getTotalTax')->andReturn(8.00);
         $order->shouldReceive('getTotalFee')->andReturn(2.00);
+        $order->shouldReceive('getStatisticsDecrementedAt')->andReturnNull();
 
         // Create refund amount
         $refundAmount = MoneyValue::fromFloat(50.00, $currency);

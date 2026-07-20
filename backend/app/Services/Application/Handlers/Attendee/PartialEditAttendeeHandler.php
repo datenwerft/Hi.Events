@@ -141,12 +141,22 @@ class PartialEditAttendeeHandler
             return;
         }
 
-        if ($data->status === AttendeeStatus::CANCELLED->name) {
+        if (!$order->isOrderCompleted()) {
+            return;
+        }
+
+        if (
+            $data->status === AttendeeStatus::CANCELLED->name
+            && $attendee->getStatus() === AttendeeStatus::ACTIVE->name
+        ) {
             $this->eventStatisticsCancellationService->decrementForCancelledAttendee(
                 eventId: $attendee->getEventId(),
                 orderDate: $order->getCreatedAt()
             );
-        } elseif ($data->status === AttendeeStatus::ACTIVE->name) {
+        } elseif (
+            $data->status === AttendeeStatus::ACTIVE->name
+            && $attendee->getStatus() === AttendeeStatus::CANCELLED->name
+        ) {
             $this->eventStatisticsReactivationService->incrementForReactivatedAttendee(
                 eventId: $attendee->getEventId(),
                 orderDate: $order->getCreatedAt()

@@ -44,15 +44,21 @@ class EventStatisticsRefundService
             throw new ResourceNotFoundException("Event statistics not found for event {$order->getEventId()}");
         }
 
-        // Calculate the proportion of the refund to the total order amount
+        $statisticsAlreadyDecremented = $order->getStatisticsDecrementedAt() !== null;
         $refundProportion = $refundAmount->toFloat() / $order->getTotalGross();
 
         // Adjust the total_tax and total_fee based on the refund proportion
-        $adjustedTotalTax = $eventStatistics->getTotalTax() - ($order->getTotalTax() * $refundProportion);
-        $adjustedTotalFee = $eventStatistics->getTotalFee() - ($order->getTotalFee() * $refundProportion);
+        $adjustedTotalTax = $statisticsAlreadyDecremented
+            ? $eventStatistics->getTotalTax()
+            : $eventStatistics->getTotalTax() - ($order->getTotalTax() * $refundProportion);
+        $adjustedTotalFee = $statisticsAlreadyDecremented
+            ? $eventStatistics->getTotalFee()
+            : $eventStatistics->getTotalFee() - ($order->getTotalFee() * $refundProportion);
 
         $updates = [
-            'sales_total_gross' => $eventStatistics->getSalesTotalGross() - $refundAmount->toFloat(),
+            'sales_total_gross' => $statisticsAlreadyDecremented
+                ? $eventStatistics->getSalesTotalGross()
+                : $eventStatistics->getSalesTotalGross() - $refundAmount->toFloat(),
             'total_refunded' => $eventStatistics->getTotalRefunded() + $refundAmount->toFloat(),
             'total_tax' => max(0, $adjustedTotalTax),
             'total_fee' => max(0, $adjustedTotalFee),
@@ -104,15 +110,21 @@ class EventStatisticsRefundService
             return;
         }
 
-        // Calculate the proportion of the refund to the total order amount
+        $statisticsAlreadyDecremented = $order->getStatisticsDecrementedAt() !== null;
         $refundProportion = $refundAmount->toFloat() / $order->getTotalGross();
 
         // Adjust the total_tax and total_fee based on the refund proportion
-        $adjustedTotalTax = $eventDailyStatistic->getTotalTax() - ($order->getTotalTax() * $refundProportion);
-        $adjustedTotalFee = $eventDailyStatistic->getTotalFee() - ($order->getTotalFee() * $refundProportion);
+        $adjustedTotalTax = $statisticsAlreadyDecremented
+            ? $eventDailyStatistic->getTotalTax()
+            : $eventDailyStatistic->getTotalTax() - ($order->getTotalTax() * $refundProportion);
+        $adjustedTotalFee = $statisticsAlreadyDecremented
+            ? $eventDailyStatistic->getTotalFee()
+            : $eventDailyStatistic->getTotalFee() - ($order->getTotalFee() * $refundProportion);
 
         $updates = [
-            'sales_total_gross' => $eventDailyStatistic->getSalesTotalGross() - $refundAmount->toFloat(),
+            'sales_total_gross' => $statisticsAlreadyDecremented
+                ? $eventDailyStatistic->getSalesTotalGross()
+                : $eventDailyStatistic->getSalesTotalGross() - $refundAmount->toFloat(),
             'total_refunded' => $eventDailyStatistic->getTotalRefunded() + $refundAmount->toFloat(),
             'total_tax' => max(0, $adjustedTotalTax),
             'total_fee' => max(0, $adjustedTotalFee),
