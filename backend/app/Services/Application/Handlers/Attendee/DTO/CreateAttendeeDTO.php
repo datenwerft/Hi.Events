@@ -24,6 +24,7 @@ class CreateAttendeeDTO extends BaseDTO
         public readonly ?string      $printed_ticket_number = null,
         public readonly ?int         $table_number = null,
         public readonly ?int         $seat_number = null,
+        public readonly array        $question_answers = [],
     )
     {
     }

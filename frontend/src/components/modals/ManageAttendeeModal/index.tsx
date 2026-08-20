@@ -12,7 +12,6 @@ import {IconEdit, IconNotebook, IconQuestionMark, IconReceipt, IconTicket, IconU
 import {LoadingMask} from "../../common/LoadingMask";
 import {AttendeeDetails} from "../../common/AttendeeDetails";
 import {OrderDetails} from "../../common/OrderDetails";
-import {QuestionList} from "../../common/QuestionAndAnswerList";
 import {AttendeeTicket} from "../../common/AttendeeTicket";
 import {getInitials} from "../../../utilites/helpers.ts";
 import {t} from "@lingui/macro";
@@ -20,13 +19,22 @@ import classes from './ManageAttendeeModal.module.scss';
 import {useEffect, useState} from "react";
 import {showSuccess} from "../../../utilites/notifications.tsx";
 import {ProductSelector} from "../../common/ProductSelector";
-import {GenericModalProps, IdParam, ProductCategory, ProductType, QuestionAnswer} from "../../../types.ts";
+import {GenericModalProps, IdParam, ProductCategory, ProductType} from "../../../types.ts";
 import {InputGroup} from "../../common/InputGroup";
 import {InputLabelWithHelp} from "../../common/InputLabelWithHelp";
 import {EditAttendeeRequest} from "../../../api/attendee.client.ts";
 import {AttendeeStatusBadge} from "../../common/AttendeeStatusBadge";
 import {SideDrawer} from "../../common/SideDrawer";
 import {useGetEventSeating} from "../../../queries/useGetEventSeating.ts";
+import {useGetEventQuestions} from "../../../queries/useGetEventQuestions.ts";
+import {useUpsertAttendeeQuestionAnswers} from "../../../mutations/useUpsertAttendeeQuestionAnswers.ts";
+import {AttendeeQuestionInputs} from "../../common/AttendeeQuestionInputs";
+import {
+    AttendeeQuestionFormValue,
+    buildAttendeeQuestionFormValues,
+    getApplicableAttendeeQuestions,
+    serializeAttendeeQuestionAnswers,
+} from "../../../utilites/attendeeQuestionHelper.ts";
 
 interface ManageAttendeeModalProps extends GenericModalProps {
     onClose: () => void;
@@ -39,8 +47,10 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
     const {data: order} = useGetOrder(eventId, attendee?.order_id);
     const {data: event} = useGetEvent(eventId);
     const {data: seating} = useGetEventSeating(eventId);
+    const {data: questions} = useGetEventQuestions(eventId);
     const errorHandler = useFormErrorResponseHandler();
     const mutation = useUpdateAttendee();
+    const questionMutation = useUpsertAttendeeQuestionAnswers();
 
     const form = useForm<EditAttendeeRequest>({
         initialValues: {
@@ -55,6 +65,11 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
             product_price_id: "",
         },
     });
+
+    const questionForm = useForm<{question_answers: AttendeeQuestionFormValue[]}>({
+        initialValues: {question_answers: []},
+    });
+    const applicableQuestions = getApplicableAttendeeQuestions(questions, attendee?.product_id);
 
     const [activeTab, setActiveTab] = useState("view");
     const selectedSeatingTable = seating?.tables?.find(
@@ -76,6 +91,14 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
             });
         }
     }, [attendee]);
+
+    useEffect(() => {
+        if (attendee && questions) {
+            questionForm.setValues({
+                question_answers: buildAttendeeQuestionFormValues(applicableQuestions, attendee.question_answers),
+            });
+        }
+    }, [attendee, questions]);
 
     useEffect(() => {
         if (!form.values.product_id) {
@@ -112,8 +135,22 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
         );
     };
 
+    const handleQuestionSubmit = (values: {question_answers: AttendeeQuestionFormValue[]}) => {
+        questionMutation.mutate({
+            attendeeId,
+            eventId,
+            questionAnswers: serializeAttendeeQuestionAnswers(values.question_answers, applicableQuestions),
+        }, {
+            onSuccess: () => {
+                showSuccess(t`Answer updated successfully.`);
+                refetchAttendee();
+            },
+            onError: (error) => errorHandler(questionForm, error),
+        });
+    };
+
     const fullName = `${attendee.first_name} ${attendee.last_name}`;
-    const hasQuestions = attendee.question_answers && attendee.question_answers.length > 0;
+    const hasQuestions = applicableQuestions.length > 0;
 
     const detailsTab = (
         <div>
@@ -226,10 +263,12 @@ export const ManageAttendeeModal = ({onClose, attendeeId}: ManageAttendeeModalPr
                     title: t`Questions & Answers`,
                     count: hasQuestions ? attendee?.question_answers?.length : undefined,
                     content: hasQuestions ? (
-                        <QuestionList
-                            onEditAnswer={refetchAttendee}
-                            questions={attendee.question_answers as QuestionAnswer[]}
-                        />
+                        <form onSubmit={questionForm.onSubmit(handleQuestionSubmit)}>
+                            <AttendeeQuestionInputs questions={applicableQuestions} form={questionForm}/>
+                            <Button type="submit" mt="md" loading={questionMutation.isPending}>
+                                {t`Save`}
+                            </Button>
+                        </form>
                     ) : (
                         <Text c="dimmed" ta="center" py="xl">
                             {t`No questions answered by this attendee.`}

@@ -974,7 +974,7 @@ export interface QuestionAnswer {
     product_title?: string;
     question_id: number;
     title: string;
-    answer: string[] | string;
+    answer: string[] | string | Record<string, unknown>;
     text_answer: string;
     order_id: number;
     belongs_to: string;

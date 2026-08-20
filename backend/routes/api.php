@@ -42,6 +42,7 @@ use HiEvents\Http\Actions\Affiliates\GetAffiliatesAction;
 use HiEvents\Http\Actions\Affiliates\UpdateAffiliateAction;
 use HiEvents\Http\Actions\Attendees\CheckInAttendeeAction;
 use HiEvents\Http\Actions\Attendees\CreateAttendeeAction;
+use HiEvents\Http\Actions\Attendees\UpsertAttendeeQuestionAnswersAction;
 use HiEvents\Http\Actions\Attendees\DeleteAttendeeAction;
 use HiEvents\Http\Actions\Attendees\EditAttendeeAction;
 use HiEvents\Http\Actions\Attendees\ExportAttendeesAction;
@@ -357,6 +358,7 @@ $router->middleware(['auth:api'])->group(
         $router->get('/events/{event_id}/attendees/{attendee_id}', GetAttendeeAction::class);
         $router->put('/events/{event_id}/attendees/{attendee_id}', EditAttendeeAction::class);
         $router->patch('/events/{event_id}/attendees/{attendee_id}', PartialEditAttendeeAction::class);
+        $router->put('/events/{event_id}/attendees/{attendee_id}/question-answers', UpsertAttendeeQuestionAnswersAction::class);
         $router->delete('/events/{event_id}/attendees/{attendee_id}', DeleteAttendeeAction::class);
         $router->post('/events/{event_id}/attendees/export', ExportAttendeesAction::class);
         $router->post('/events/{event_id}/attendees/{attendee_public_id}/resend-ticket', ResendAttendeeTicketAction::class);

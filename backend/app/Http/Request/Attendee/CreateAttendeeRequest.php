@@ -26,6 +26,9 @@ class CreateAttendeeRequest extends BaseRequest
             'printed_ticket_number' => ['nullable', 'string', 'max:100'],
             'table_number' => ['nullable', 'integer', 'min:1', 'max:500', 'required_with:seat_number'],
             'seat_number' => ['nullable', 'integer', 'min:1', 'max:500', 'required_with:table_number'],
+            'question_answers' => ['array'],
+            'question_answers.*.question_id' => ['required', 'integer', 'distinct'],
+            'question_answers.*.answer' => ['present', 'nullable'],
         ];
     }
 }

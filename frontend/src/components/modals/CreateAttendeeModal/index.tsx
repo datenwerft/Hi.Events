@@ -22,6 +22,16 @@ import {
 import {ProductSelector} from "../../common/ProductSelector";
 import {getProductsFromEvent} from "../../../utilites/helpers.ts";
 import {useGetEventSeating} from "../../../queries/useGetEventSeating.ts";
+import {useGetEventQuestions} from "../../../queries/useGetEventQuestions.ts";
+import {AttendeeQuestionInputs} from "../../common/AttendeeQuestionInputs";
+import {
+    AttendeeQuestionFormValue,
+    buildAttendeeQuestionFormValues,
+    getApplicableAttendeeQuestions,
+    serializeAttendeeQuestionAnswers,
+} from "../../../utilites/attendeeQuestionHelper.ts";
+
+type CreateAttendeeFormValues = Omit<CreateAttendeeRequest, 'question_answers'> & {question_answers: AttendeeQuestionFormValue[]};
 
 export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
     const {eventId} = useParams();
@@ -32,8 +42,9 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
     const navigate = useNavigate();
     const eventProducts = getProductsFromEvent(event);
     const eventHasProducts = eventProducts && eventProducts?.length > 0;
+    const {data: questions} = useGetEventQuestions(eventId);
 
-    const form = useForm<CreateAttendeeRequest>({
+    const form = useForm<CreateAttendeeFormValues>({
         initialValues: {
             product_id: undefined,
             email: '',
@@ -46,8 +57,10 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
             send_confirmation_email: true,
             taxes_and_fees: [],
             locale: getClientLocale() as SupportedLocales,
+            question_answers: [],
         },
     });
+    const applicableQuestions = getApplicableAttendeeQuestions(questions, form.values.product_id);
     const selectedSeatingTable = seating?.tables?.find(
         table => table.table_number === Number(form.values.table_number),
     );
@@ -82,6 +95,10 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
     }, [form.values.product_id]);
 
     useEffect(() => {
+        form.setFieldValue('question_answers', buildAttendeeQuestionFormValues(applicableQuestions));
+    }, [form.values.product_id, questions]);
+
+    useEffect(() => {
         if (form.values.product_price_id && !form.values.amount_paid) {
             form.setFieldValue(
                 'amount_paid',
@@ -92,10 +109,13 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
         }
     }, [form.values.product_price_id]);
 
-    const handleSubmit = (values: CreateAttendeeRequest) => {
+    const handleSubmit = (values: CreateAttendeeFormValues) => {
         mutation.mutate({
             eventId: eventId,
-            attendeeData: values,
+            attendeeData: {
+                ...values,
+                question_answers: serializeAttendeeQuestionAnswers(values.question_answers, applicableQuestions),
+            },
         }, {
             onSuccess: () => {
                 showSuccess(t`Successfully created attendee`);
@@ -201,6 +221,8 @@ export const CreateAttendeeModal = ({onClose}: GenericModalProps) => {
                     showTierSelector={true}
                     includedProductTypes={[ProductType.Ticket]}
                 />
+
+                <AttendeeQuestionInputs questions={applicableQuestions} form={form}/>
 
                 <NumberInput
                     required

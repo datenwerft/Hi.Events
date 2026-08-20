@@ -17,11 +17,17 @@ export interface EditAttendeeRequest {
     status?: string;
 }
 
+export interface AttendeeQuestionAnswerRequest {
+    question_id: IdParam;
+    answer: unknown;
+}
+
 export interface CreateAttendeeRequest extends EditAttendeeRequest {
     amount_paid: number,
     send_confirmation_email: boolean,
     taxes_and_fees: TaxAndFee[],
     locale: SupportedLocales,
+    question_answers: AttendeeQuestionAnswerRequest[],
 }
 
 export const attendeesClient = {
@@ -36,6 +42,11 @@ export const attendeesClient = {
             `events/${eventId}/attendees/${attendeeId}`, attendee
         );
         return response.data;
+    },
+    upsertQuestionAnswers: async (eventId: IdParam, attendeeId: IdParam, questionAnswers: AttendeeQuestionAnswerRequest[]) => {
+        await api.put(`events/${eventId}/attendees/${attendeeId}/question-answers`, {
+            question_answers: questionAnswers,
+        });
     },
     modify: async (eventId: IdParam, attendeeId: IdParam, attendee: Partial<EditAttendeeRequest>) => {
         const response = await api.patch<GenericDataResponse<Attendee>>(

@@ -29,6 +29,7 @@ use HiEvents\Services\Application\Handlers\Attendee\DTO\CreateAttendeeDTO;
 use HiEvents\Services\Application\Handlers\Attendee\DTO\CreateAttendeeTaxAndFeeDTO;
 use HiEvents\Services\Domain\Order\OrderManagementService;
 use HiEvents\Services\Domain\Product\ProductQuantityUpdateService;
+use HiEvents\Services\Domain\Question\AttendeeQuestionAnswerService;
 use HiEvents\Services\Domain\Tax\TaxAndFeeRollupService;
 use HiEvents\Services\Infrastructure\DomainEvents\DomainEventDispatcherService;
 use HiEvents\Services\Infrastructure\DomainEvents\Enums\DomainEventType;
@@ -51,6 +52,7 @@ class CreateAttendeeHandler
         private readonly TaxAndFeeRollupService       $taxAndFeeRollupService,
         private readonly OrderManagementService       $orderManagementService,
         private readonly DomainEventDispatcherService $domainEventDispatcherService,
+        private readonly AttendeeQuestionAnswerService $attendeeQuestionAnswerService,
     )
     {
     }
@@ -99,6 +101,12 @@ class CreateAttendeeHandler
             $orderItem = $this->createOrderItem($attendeeDTO, $order, $product, $productPriceId);
 
             $attendee = $this->createAttendee($order, $attendeeDTO);
+
+            $this->attendeeQuestionAnswerService->upsertProductAnswers(
+                attendee: $attendee,
+                eventId: $attendeeDTO->event_id,
+                answers: $attendeeDTO->question_answers,
+            );
 
             $this->orderManagementService->updateOrderTotals($order, collect([$orderItem]));
 
