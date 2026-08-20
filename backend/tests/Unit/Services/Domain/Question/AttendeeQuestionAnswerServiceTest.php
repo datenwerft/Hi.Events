@@ -48,7 +48,7 @@ class AttendeeQuestionAnswerServiceTest extends TestCase
             ->andReturn(collect([$existingAnswer]));
         $answerRepository->shouldReceive('updateWhere')
             ->once()
-            ->with(['answer' => 'Vegan'], ['id' => 10]);
+            ->with(['answer' => '"Vegan"'], ['id' => 10]);
         $answerRepository->shouldReceive('create')
             ->once()
             ->with([

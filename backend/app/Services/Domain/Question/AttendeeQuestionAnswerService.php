@@ -71,7 +71,7 @@ class AttendeeQuestionAnswerService
 
             if ($existingAnswer) {
                 $this->questionAnswerRepository->updateWhere(
-                    [QuestionAnswerDomainObjectAbstract::ANSWER => $answer],
+                    [QuestionAnswerDomainObjectAbstract::ANSWER => json_encode($answer, JSON_THROW_ON_ERROR)],
                     [QuestionAnswerDomainObjectAbstract::ID => $existingAnswer->getId()],
                 );
 
